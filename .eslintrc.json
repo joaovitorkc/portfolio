@@ -1,0 +1,6 @@
+{
+  "extends": ["@catsuc/eslint-config/next", "next/core-web-vitals"],
+  "rules": {
+    "camelcase": "warn"
+  }
+}
