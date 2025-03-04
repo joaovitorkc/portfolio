@@ -1,7 +1,7 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Download } from "lucide-react"
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Download } from 'lucide-react';
 
 export default function About() {
   return (
@@ -11,18 +11,24 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="flex justify-center">
             <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-primary">
-              <Image src="/profile-image.png" alt="Profile Image" fill className="object-cover object-center" />
+              <Image
+                src="/profile-image.png"
+                alt="Profile Image"
+                fill
+                className="object-cover object-center"
+              />
             </div>
           </div>
           <div>
             <h3 className="text-2xl font-semibold mb-4">Full Stack Developer</h3>
             <p className="text-muted-foreground mb-6">
-              I'm a passionate developer working as a mid-level (pleno) developer at Wi Consultoria since 2023. I
-              specialize in web technologies and enjoy building user-friendly applications.
+              {`I'm a passionate developer working as a mid-level (pleno) developer at Wi Consultoria
+              since 2023. I specialize in web technologies and enjoy building user-friendly
+              applications.`}
             </p>
             <p className="text-muted-foreground mb-6">
-              When I'm not coding, you can find me exploring new technologies and expanding my knowledge in computer
-              science.
+              {`When I'm not coding, you can find me exploring new technologies and expanding my
+              knowledge in computer science.`}
             </p>
             <Button className="gap-2">
               <Download className="h-4 w-4" />
@@ -56,6 +62,5 @@ export default function About() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

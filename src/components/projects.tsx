@@ -1,21 +1,27 @@
-import Link from "next/link"
-import Image from "next/image"
-import { ExternalLink, Github } from "lucide-react"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import Link from 'next/link';
+import Image from 'next/image';
+import { ExternalLink, Github } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 const projects = [
   {
-    title: "CAC Wiki",
-    description:
-      "Projeto educativo escolar simples com foco em biologia.", 
-    image: "/project-1.jpg?height=300&width=600",
-    tags: ["HTML", "CSS", "JavaScript"],
-    demoLink: "https://joaovitorkc.github.io/cac-wiki2.0/",
-    githubLink: "https://github.com/joaovitorkc/cac-wiki2.0",
-  }
-]
+    title: 'CAC Wiki',
+    description: 'Projeto educativo escolar simples com foco em biologia.',
+    image: '/project-1.jpg?height=300&width=600',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    demoLink: 'https://joaovitorkc.github.io/cac-wiki2.0/',
+    githubLink: 'https://github.com/joaovitorkc/cac-wiki2.0',
+  },
+];
 
 export default function Projects() {
   return (
@@ -26,7 +32,12 @@ export default function Projects() {
           {projects.map((project, index) => (
             <Card key={index} className="overflow-hidden flex flex-col h-full">
               <div className="relative h-48 w-full">
-                <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-top" />
+                <Image
+                  src={project.image || '/placeholder.svg'}
+                  alt={project.title}
+                  fill
+                  className="object-top"
+                />
               </div>
               <CardHeader>
                 <CardTitle>{project.title}</CardTitle>
@@ -63,6 +74,5 @@ export default function Projects() {
         </div> */}
       </div>
     </section>
-  )
+  );
 }
-

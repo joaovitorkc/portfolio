@@ -1,13 +1,22 @@
-import type React from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Code2, Server, Workflow } from "lucide-react"
+import type React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Code2, Server, Workflow } from 'lucide-react';
 
-const languagesSkills = ["JavaScript", "TypeScript", "Python", "C#", "PHP"]
+const languagesSkills = ['JavaScript', 'TypeScript', 'Python', 'C#', 'PHP'];
 
-const backendSkills = ["Node.js", "Express", "Fastify", "Prisma", "PostgreSQL", "Redis", "Nginx"]
+const backendSkills = ['Node.js', 'Express', 'Fastify', 'Prisma', 'PostgreSQL', 'Redis', 'Nginx'];
 
-const otherSkills = ["React", "Next.js", "Git/GitHub", "Docker", "AWS", "CI/CD", "RESTful APIs", "GraphQL"]
+const otherSkills = [
+  'React',
+  'Next.js',
+  'Git/GitHub',
+  'Docker',
+  'AWS',
+  'CI/CD',
+  'RESTful APIs',
+  'GraphQL',
+];
 
 export default function Skills() {
   return (
@@ -33,10 +42,18 @@ export default function Skills() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-function SkillCard({ title, icon, skills }: { title: string; icon: React.ReactNode; skills: string[] }) {
+function SkillCard({
+  title,
+  icon,
+  skills,
+}: {
+  title: string;
+  icon: React.ReactNode;
+  skills: string[];
+}) {
   return (
     <Card className="flex flex-col items-center text-center">
       <CardHeader>
@@ -51,6 +68,5 @@ function SkillCard({ title, icon, skills }: { title: string; icon: React.ReactNo
         ))}
       </CardContent>
     </Card>
-  )
+  );
 }
-

@@ -1,34 +1,34 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useState } from "react"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "@/components/ui/card"
-import { useToast } from "@/components/ui/use-toast"
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent } from '@/components/ui/card';
+import { useToast } from '@/components/ui/use-toast';
 
 export default function Contact() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     toast({
-      title: "Message sent!",
+      title: 'Message sent!',
       description: "Thank you for your message. I'll get back to you soon.",
-    })
+    });
 
-    setIsSubmitting(false)
-    e.currentTarget.reset()
-  }
+    setIsSubmitting(false);
+    e.currentTarget.reset();
+  };
 
   return (
     <section id="contact" className="py-20">
@@ -38,8 +38,8 @@ export default function Contact() {
           <div>
             <h3 className="text-2xl font-semibold mb-6">Get In Touch</h3>
             <p className="text-muted-foreground mb-8">
-              Have a project in mind or want to discuss a potential collaboration? Feel free to reach out to me using
-              the contact form or through any of the channels below.
+              Have a project in mind or want to discuss a potential collaboration? Feel free to
+              reach out to me using the contact form or through any of the channels below.
             </p>
 
             <div className="space-y-4">
@@ -101,10 +101,16 @@ export default function Contact() {
                 <label htmlFor="message" className="text-sm font-medium">
                   Message
                 </label>
-                <Textarea id="message" name="message" placeholder="Your message" rows={5} required />
+                <Textarea
+                  id="message"
+                  name="message"
+                  placeholder="Your message"
+                  rows={5}
+                  required
+                />
               </div>
               <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? 'Sending...' : 'Send Message'}
                 <Send className="h-4 w-4" />
               </Button>
             </form>
@@ -112,6 +118,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

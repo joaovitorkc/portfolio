@@ -1,18 +1,18 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, X } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Button } from "@/components/ui/button"
-import { LanguageToggle } from "./lang-toggle"
+import { useState } from 'react';
+import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Button } from '@/components/ui/button';
+import { LanguageToggle } from './lang-toggle';
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -32,13 +32,19 @@ export default function Header() {
           <Link href="#about" className="text-sm font-medium transition-colors hover:text-primary">
             About
           </Link>
-          <Link href="#projects" className="text-sm font-medium transition-colors hover:text-primary">
+          <Link
+            href="#projects"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
             Projects
           </Link>
           <Link href="#skills" className="text-sm font-medium transition-colors hover:text-primary">
             Skills
           </Link>
-          <Link href="#contact" className="text-sm font-medium transition-colors hover:text-primary">
+          <Link
+            href="#contact"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
             Contact
           </Link>
           <ThemeToggle />
@@ -86,6 +92,5 @@ export default function Header() {
         )}
       </div>
     </header>
-  )
+  );
 }
-
