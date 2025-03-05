@@ -21,6 +21,13 @@ const projects = [
     demoLink: 'https://joaovitorkc.github.io/cac-wiki2.0/',
     githubLink: 'https://github.com/joaovitorkc/cac-wiki2.0',
   },
+  {
+    title: 'Wi Consultoria',
+    description: 'Landing page para a empresa Wi Consultoria.',
+    image: '/project-2.jpg?height=300&width=600',
+    tags: ['Next.js', 'Tailwind CSS', 'TypeScript'],
+    demoLink: 'https://wiconsultoria.com.br',
+  },
 ];
 
 export default function Projects() {
@@ -36,7 +43,7 @@ export default function Projects() {
                   src={project.image || '/placeholder.svg'}
                   alt={project.title}
                   fill
-                  className="object-top"
+                  className="object-cover"
                 />
               </div>
               <CardHeader>
@@ -51,14 +58,14 @@ export default function Projects() {
                 ))}
               </CardContent>
               <CardFooter className="mt-auto flex gap-2">
-                <Button asChild variant="outline" size="sm">
-                  <Link href={project.demoLink} className="flex items-center gap-1">
+                <Button asChild={!!project?.demoLink} variant="outline" size="sm" disabled={!project?.demoLink}>
+                  <Link href={project?.demoLink ? project.demoLink : '#'} className="flex items-center gap-1" target="_blank">
                     <ExternalLink className="h-4 w-4" />
                     Demo
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="sm">
-                  <Link href={project.githubLink} className="flex items-center gap-1">
+                <Button asChild={!!project?.githubLink} variant="outline" size="sm" disabled={!project?.githubLink}>
+                  <Link href={project?.githubLink ? project.githubLink : '#'} className="flex items-center gap-1" target="_blank">
                     <Github className="h-4 w-4" />
                     Code
                   </Link>

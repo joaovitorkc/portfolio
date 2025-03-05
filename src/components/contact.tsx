@@ -1,33 +1,52 @@
 'use client';
 
+// @ts-ignore
 import type React from 'react';
 
+// @ts-ignore
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+// @ts-ignore
+import { useForm, ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
+
+const schema = z.object({
+  name: z.string().min(3, { message: "Please enter your name" }),
+  email: z.string().email({ message: "Please enter a valid email" }),
+  subject: z.string().min(3, { message: "Please enter a subject" }),
+  message: z.string().min(5, { message: "Please enter a message" }),
+});
 
 export default function Contact() {
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    const x = new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    toast({
-      title: 'Message sent!',
-      description: "Thank you for your message. I'll get back to you soon.",
+    toast.promise(x, {
+      loading: 'Sending message...',
+      success: 'Message sent!',
+      error: (error) => error.message,
     });
 
-    setIsSubmitting(false);
-    e.currentTarget.reset();
+    form.reset();
   };
 
   return (
@@ -76,44 +95,89 @@ export default function Contact() {
           </div>
 
           <div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Name
-                  </label>
-                  <Input id="name" name="name" placeholder="Your name" required />
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSubmit)} className="py-20">
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }: { field: ControllerRenderProps<FieldValues, "name"> }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            maxLength={64}
+                            {...field}
+                            placeholder="Your name"
+                            onChange={(event: any) => field.onChange(event.target.value.toUpperCase())}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }: { field: ControllerRenderProps<FieldValues, "name"> }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            maxLength={64}
+                            {...field}
+                            placeholder="Your email"
+                            onChange={(event: any) => field.onChange(event.target.value.toUpperCase())}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email
-                  </label>
-                  <Input id="email" name="email" type="email" placeholder="Your email" required />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">
-                  Subject
-                </label>
-                <Input id="subject" name="subject" placeholder="Subject" required />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Your message"
-                  rows={5}
-                  required
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }: { field: ControllerRenderProps<FieldValues, "name"> }) => (
+                    <FormItem>
+                      <FormLabel>Subject</FormLabel>
+                      <FormControl>
+                        <Input
+                          maxLength={64}
+                          {...field}
+                          placeholder="Subject"
+                          onChange={(event: any) => field.onChange(event.target.value.toUpperCase())}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-                <Send className="h-4 w-4" />
-              </Button>
-            </form>
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }: { field: ControllerRenderProps<FieldValues, "name"> }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          maxLength={1024}
+                          {...field}
+                          placeholder="Your message"
+                          rows={5}
+                          onChange={(event: any) => field.onChange(event.target.value.toUpperCase())}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="w-full gap-2 mt-2" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  <Send className="h-4 w-4" />
+                </Button>
+              </form>
+            </Form>
           </div>
         </div>
       </div>
