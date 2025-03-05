@@ -4,7 +4,6 @@
 import type React from 'react';
 
 // @ts-ignore
-import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,19 +13,17 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 // @ts-ignore
-import { useForm, ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
 
 const schema = z.object({
-  name: z.string().min(3, { message: "Please enter your name" }),
-  email: z.string().email({ message: "Please enter a valid email" }),
-  subject: z.string().min(3, { message: "Please enter a subject" }),
-  message: z.string().min(5, { message: "Please enter a message" }),
+  name: z.string().min(3, { message: 'Please enter your name' }),
+  email: z.string().email({ message: 'Please enter a valid email' }),
+  subject: z.string().min(3, { message: 'Please enter a subject' }),
+  message: z.string().min(5, { message: 'Please enter a message' }),
 });
 
 export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -37,7 +34,7 @@ export default function Contact() {
     },
   });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async () => {
     const x = new Promise((resolve) => setTimeout(resolve, 1000));
 
     toast.promise(x, {
@@ -101,7 +98,7 @@ export default function Contact() {
                   <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }: { field: ControllerRenderProps<FieldValues, "name"> }) => (
+                    render={({ field }) => (
                       <FormItem>
                         <FormLabel>Name</FormLabel>
                         <FormControl>
@@ -109,7 +106,9 @@ export default function Contact() {
                             maxLength={64}
                             {...field}
                             placeholder="Your name"
-                            onChange={(event: any) => field.onChange(event.target.value.toUpperCase())}
+                            onChange={(event: any) =>
+                              field.onChange(event.target.value.toUpperCase())
+                            }
                           />
                         </FormControl>
                         <FormMessage />
@@ -119,7 +118,7 @@ export default function Contact() {
                   <FormField
                     control={form.control}
                     name="email"
-                    render={({ field }: { field: ControllerRenderProps<FieldValues, "name"> }) => (
+                    render={({ field }) => (
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
@@ -127,7 +126,9 @@ export default function Contact() {
                             maxLength={64}
                             {...field}
                             placeholder="Your email"
-                            onChange={(event: any) => field.onChange(event.target.value.toUpperCase())}
+                            onChange={(event: any) =>
+                              field.onChange(event.target.value.toUpperCase())
+                            }
                           />
                         </FormControl>
                         <FormMessage />
@@ -138,7 +139,7 @@ export default function Contact() {
                 <FormField
                   control={form.control}
                   name="subject"
-                  render={({ field }: { field: ControllerRenderProps<FieldValues, "name"> }) => (
+                  render={({ field }) => (
                     <FormItem>
                       <FormLabel>Subject</FormLabel>
                       <FormControl>
@@ -146,7 +147,9 @@ export default function Contact() {
                           maxLength={64}
                           {...field}
                           placeholder="Subject"
-                          onChange={(event: any) => field.onChange(event.target.value.toUpperCase())}
+                          onChange={(event: any) =>
+                            field.onChange(event.target.value.toUpperCase())
+                          }
                         />
                       </FormControl>
                       <FormMessage />
@@ -156,7 +159,7 @@ export default function Contact() {
                 <FormField
                   control={form.control}
                   name="message"
-                  render={({ field }: { field: ControllerRenderProps<FieldValues, "name"> }) => (
+                  render={({ field }) => (
                     <FormItem>
                       <FormLabel>Message</FormLabel>
                       <FormControl>
@@ -165,15 +168,17 @@ export default function Contact() {
                           {...field}
                           placeholder="Your message"
                           rows={5}
-                          onChange={(event: any) => field.onChange(event.target.value.toUpperCase())}
+                          onChange={(event: any) =>
+                            field.onChange(event.target.value.toUpperCase())
+                          }
                         />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full gap-2 mt-2" disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                <Button type="submit" className="w-full gap-2 mt-2">
+                  {'Send Message'}
                   <Send className="h-4 w-4" />
                 </Button>
               </form>

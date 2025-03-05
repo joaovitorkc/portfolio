@@ -58,14 +58,32 @@ export default function Projects() {
                 ))}
               </CardContent>
               <CardFooter className="mt-auto flex gap-2">
-                <Button asChild={!!project?.demoLink} variant="outline" size="sm" disabled={!project?.demoLink}>
-                  <Link href={project?.demoLink ? project.demoLink : '#'} className="flex items-center gap-1" target="_blank">
+                <Button
+                  asChild={!!project?.demoLink}
+                  variant="outline"
+                  size="sm"
+                  disabled={!project?.demoLink}
+                >
+                  <Link
+                    href={project?.demoLink ? project.demoLink : '#'}
+                    className="flex items-center gap-1"
+                    target="_blank"
+                  >
                     <ExternalLink className="h-4 w-4" />
                     Demo
                   </Link>
                 </Button>
-                <Button asChild={!!project?.githubLink} variant="outline" size="sm" disabled={!project?.githubLink}>
-                  <Link href={project?.githubLink ? project.githubLink : '#'} className="flex items-center gap-1" target="_blank">
+                <Button
+                  asChild={!!project?.githubLink}
+                  variant="outline"
+                  size="sm"
+                  disabled={!project?.githubLink}
+                >
+                  <Link
+                    href={project?.githubLink ? project.githubLink : '#'}
+                    className="flex items-center gap-1"
+                    target="_blank"
+                  >
                     <Github className="h-4 w-4" />
                     Code
                   </Link>
