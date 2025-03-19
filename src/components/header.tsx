@@ -6,8 +6,10 @@ import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { LanguageToggle } from './lang-toggle';
+import { useTranslations } from 'next-intl';
 
 export default function Header() {
+  const t = useTranslations('nav');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -24,28 +26,28 @@ export default function Header() {
         {/* Mobile menu button */}
         <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          <span className="sr-only">Toggle menu</span>
+          <span className="sr-only">{t('title')}</span>
         </Button>
 
         {/* Desktop navigation */}
         <nav className="hidden md:flex items-center gap-6">
           <Link href="#about" className="text-sm font-medium transition-colors hover:text-primary">
-            About
+            {t('about')}
           </Link>
           <Link
             href="#projects"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            Projects
+            {t('projects')}
           </Link>
           <Link href="#skills" className="text-sm font-medium transition-colors hover:text-primary">
-            Skills
+            {t('skills')}
           </Link>
           <Link
             href="#contact"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            Contact
+            {t('contact')}
           </Link>
           <ThemeToggle />
           <LanguageToggle />
@@ -60,28 +62,28 @@ export default function Header() {
                 className="py-2 text-sm font-medium transition-colors hover:text-primary"
                 onClick={toggleMenu}
               >
-                About
+                {t('about')}
               </Link>
               <Link
                 href="#projects"
                 className="py-2 text-sm font-medium transition-colors hover:text-primary"
                 onClick={toggleMenu}
               >
-                Projects
+                {t('projects')}
               </Link>
               <Link
                 href="#skills"
                 className="py-2 text-sm font-medium transition-colors hover:text-primary"
                 onClick={toggleMenu}
               >
-                Skills
+                {t('skills')}
               </Link>
               <Link
                 href="#contact"
                 className="py-2 text-sm font-medium transition-colors hover:text-primary"
                 onClick={toggleMenu}
               >
-                Contact
+                {t('contact')}
               </Link>
               <div className="py-2">
                 <ThemeToggle />

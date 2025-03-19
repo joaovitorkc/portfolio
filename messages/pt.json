@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "title": "Alterar menu",
+    "about": "Sobre",
+    "projects": "Projetos",
+    "skills": "Habilidades",
+    "contact": "Contato",
+    "theme": {
+      "title": "Alternar tema",
+      "light": "Claro",
+      "dark": "Escuro",
+      "system": "Sistema"
+    },
+    "language": {
+      "title": "Alternar idioma",
+      "english": "Inglês",
+      "portuguese": "Português"
+    }
+  },
+  "hero": {
+    "greeting": "Olá, eu sou",
+    "description": "Desenvolvedor Full Stack especializado em criar experiências digitais excepcionais",
+    "viewWork": "Ver Meus Projetos",
+    "contact": "Entre em Contato"
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "role": "Desenvolvedor Full Stack",
+    "description1": "Sou um desenvolvedor apaixonado trabalhando como desenvolvedor pleno na Wi Consultoria desde 2023. Sou especializado em tecnologias web e gosto de criar aplicações amigáveis.",
+    "description2": "Quando não estou programando, você pode me encontrar explorando novas tecnologias e expandindo meu conhecimento em ciência da computação.",
+    "downloadResume": "Baixar Currículo",
+    "education": {
+      "title": "Educação",
+      "degree": "Ciência da Computação",
+      "university": "UniFavip Wyden, 2025-Presente"
+    },
+    "experience": {
+      "title": "Experiência",
+      "role": "Desenvolvedor Pleno",
+      "company": "Wi Consultoria, 2023-Presente"
+    },
+    "location": {
+      "title": "Localização",
+      "place": "Caruaru, Pernambuco",
+      "country": "Brasil"
+    }
+  },
+  "projects": {
+    "title": "Alguns dos Meus Projetos",
+    "demo": "Demo",
+    "code": "Código",
+    "cacWiki": {
+      "title": "CAC Wiki",
+      "description": "Projeto educativo escolar simples com foco em biologia."
+    },
+    "wiConsultoria": {
+      "title": "Wi Consultoria",
+      "description": "Landing page para a empresa Wi Consultoria."
+    }
+  },
+  "skills": {
+    "title": "Minhas Habilidades",
+    "categories": {
+      "languages": "Linguagens",
+      "backend": "Backend & Bancos de Dados",
+      "frameworks": "Frameworks & Ferramentas"
+    }
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "getInTouch": "Fale Comigo",
+    "description": "Tem um projeto em mente ou quer discutir uma possível colaboração? Sinta-se à vontade para entrar em contato comigo usando o formulário de contato ou através de qualquer um dos canais abaixo.",
+    "email": "Email",
+    "phone": "Telefone",
+    "location": {
+      "title": "Localização",
+      "place": "Caruaru, Pernambuco, Brasil"
+    },
+    "form": {
+      "validation": {
+        "name": "Por favor, insira seu nome",
+        "email": "Por favor, insira um email válido",
+        "subject": "Por favor, insira um assunto",
+        "message": "Por favor, insira uma mensagem"
+      },
+      "name": "Nome",
+      "namePlaceholder": "Seu nome",
+      "email": "Email",
+      "emailPlaceholder": "Seu email",
+      "subject": "Assunto",
+      "subjectPlaceholder": "Assunto da mensagem",
+      "message": "Mensagem",
+      "messagePlaceholder": "Sua mensagem",
+      "send": "Enviar Mensagem",
+      "sending": "Enviando mensagem...",
+      "success": "Mensagem enviada com sucesso!"
+    }
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  }
+}
+

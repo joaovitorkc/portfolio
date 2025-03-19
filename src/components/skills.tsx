@@ -2,6 +2,7 @@ import type React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Code2, Server, Workflow } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const languagesSkills = ['JavaScript', 'TypeScript', 'Python', 'C#', 'PHP'];
 
@@ -19,23 +20,24 @@ const otherSkills = [
 ];
 
 export default function Skills() {
+  const t = useTranslations('skills');
   return (
     <section id="skills" className="py-20 bg-muted/50">
       <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-12">My Skills</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">{t('title')}</h2>
         <div className="grid md:grid-cols-3 gap-6">
           <SkillCard
-            title="Languages"
+            title={t('categories.languages')}
             icon={<Code2 className="h-8 w-8 mb-4 text-primary" />}
             skills={languagesSkills}
           />
           <SkillCard
-            title="Backend & Databases"
+            title={t('categories.backend')}
             icon={<Server className="h-8 w-8 mb-4 text-primary" />}
             skills={backendSkills}
           />
           <SkillCard
-            title="Frameworks & Tools"
+            title={t('categories.frameworks')}
             icon={<Workflow className="h-8 w-8 mb-4 text-primary" />}
             skills={otherSkills}
           />

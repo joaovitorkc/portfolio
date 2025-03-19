@@ -11,30 +11,33 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-
-const projects = [
-  {
-    title: 'CAC Wiki',
-    description: 'Projeto educativo escolar simples com foco em biologia.',
-    image: '/project-1.jpg?height=300&width=600',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    demoLink: 'https://joaovitorkc.github.io/cac-wiki2.0/',
-    githubLink: 'https://github.com/joaovitorkc/cac-wiki2.0',
-  },
-  {
-    title: 'Wi Consultoria',
-    description: 'Landing page para a empresa Wi Consultoria.',
-    image: '/project-2.jpg?height=300&width=600',
-    tags: ['Next.js', 'Tailwind CSS', 'TypeScript'],
-    demoLink: 'https://wiconsultoria.com.br',
-  },
-];
+import { useTranslations } from 'next-intl';
 
 export default function Projects() {
+  const t = useTranslations('projects');
+
+  const projects = [
+    {
+      title: t('cacWiki.title'),
+      description: t('cacWiki.description'),
+      image: '/project-1.jpg?height=300&width=600',
+      tags: ['HTML', 'CSS', 'JavaScript'],
+      demoLink: 'https://joaovitorkc.github.io/cac-wiki2.0/',
+      githubLink: 'https://github.com/joaovitorkc/cac-wiki2.0',
+    },
+    {
+      title: t('wiConsultoria.title'),
+      description: t('wiConsultoria.description'),
+      image: '/project-2.jpg?height=300&width=600',
+      tags: ['Next.js', 'Tailwind CSS', 'TypeScript'],
+      demoLink: 'https://wiconsultoria.com.br',
+    },
+  ];
+
   return (
     <section id="projects" className="py-20">
       <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-12">Some of my Projects</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">{t('title')}</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <Card key={index} className="overflow-hidden flex flex-col h-full">
@@ -70,7 +73,7 @@ export default function Projects() {
                     target="_blank"
                   >
                     <ExternalLink className="h-4 w-4" />
-                    Demo
+                    {t('demo')}
                   </Link>
                 </Button>
                 <Button
@@ -85,7 +88,7 @@ export default function Projects() {
                     target="_blank"
                   >
                     <Github className="h-4 w-4" />
-                    Code
+                    {t('code')}
                   </Link>
                 </Button>
               </CardFooter>

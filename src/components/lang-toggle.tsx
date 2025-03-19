@@ -1,6 +1,5 @@
 'use client';
 import { Globe } from 'lucide-react';
-// import { useLanguage } from "@/hooks/useLanguage"
 
 import { Button } from '@/components/ui/button';
 import {
@@ -9,13 +8,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
 
 export function LanguageToggle() {
-  const [currentLanguage, setCurrentLanguage] = useState('en');
+  const router = useRouter();
+  const pathname = usePathname();
+  const t = useTranslations('nav.language');
 
-  const toggleLanguage = () => {
-    setCurrentLanguage(currentLanguage === 'en' ? 'pt' : 'en');
+  const toggleLanguage = (locale: 'en' | 'pt') => {
+    const segments = pathname.split('/');
+    segments[1] = locale;
+    router.push(segments.join('/'));
   };
 
   return (
@@ -23,13 +27,12 @@ export function LanguageToggle() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
           <Globe className="h-[1.2rem] w-[1.2rem]" />
-          <span className="sr-only">Toggle language</span>
+          <span className="sr-only">{t('title')}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={toggleLanguage}>
-          {currentLanguage === 'en' ? 'English' : 'English'}
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => toggleLanguage('en')}>{t('english')}</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => toggleLanguage('pt')}>{t('portuguese')}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
