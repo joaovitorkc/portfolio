@@ -11,8 +11,22 @@ import { routing } from '@/i18n/routing';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'João Vitor | Portfolio',
-  description: 'Personal portfolio website showcasing my projects and skills',
+  title: 'João Vitor | Full-Stack Developer',
+  description: 'Meu site pessoal mostrando meus projetos e habilidades.',
+  openGraph: {
+    title: 'João Vitor | Full-Stack Developer',
+    description: 'Meu site pessoal mostrando meus projetos e habilidades.',
+    url: 'https://wi-consultoria.com',
+    type: 'website',
+    images: [
+      {
+        url: '/open-graph-image.png',
+        width: 1200,
+        height: 628,
+        alt: 'João Vitor | Full-Stack Developer',
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({
@@ -28,7 +42,43 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-PT" suppressHydrationWarning>
+      <head>
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="keywords"
+          content="
+            joaovitorkc,
+            joaovitor,
+            full-stack developer,
+            full stack developer,
+            developer,
+            portfolio,
+            personal portfolio,
+            portfolio website,
+            personal website,
+            nextjs,
+            typescript,
+            tailwindcss,
+            react,
+            next.js,
+           desenvolvedor full stack,
+           desenvolvedor pleno,
+           desenvolvedor web,
+           desenvolvedor,
+           desenvolvedor de software,
+           desenvolvedor de aplicações,
+           desenvolvedor de sistemas,
+           desenvolvedor de plataformas,
+           desenvolvedor de aplicativos,
+           desenvolvedor de soluções,
+           desenvolvedor de tecnologia,
+           desenvolvedor de softwares,
+           desenvolvedor de aplicações web            
+           "
+        />
+      </head>
       <body className={inter.className}>
         <NextIntlClientProvider>
           <ThemeProvider

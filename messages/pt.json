@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "João Vitor | Portfolio",
+    "description": "Meu site pessoal mostrando meus projetos e habilidades."
+  },
   "nav": {
     "title": "Alterar menu",
     "about": "Sobre",
@@ -100,4 +104,3 @@
     "rights": "Todos os direitos reservados."
   }
 }
-

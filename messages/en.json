@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "João Vitor | Portfolio",
+    "description": "Personal portfolio website showcasing my projects and skills."
+  },
   "nav": {
     "title": "Toggle menu",
     "about": "About",
