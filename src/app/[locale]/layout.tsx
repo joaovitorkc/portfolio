@@ -18,7 +18,7 @@ export const metadata = {
   openGraph: {
     title: 'João Vitor | Full-Stack Developer',
     description: 'Meu site pessoal mostrando meus projetos e habilidades.',
-    url: 'https://wi-consultoria.com',
+    url: 'https://joaovitorkc.com',
     type: 'website',
     images: [
       {
