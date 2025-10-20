@@ -1,11 +1,25 @@
+'use client';
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
 
 export default function About() {
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1];
   const t = useTranslations('about');
+
+  const handleDownload = () => {
+    const link = document.createElement('a')
+    const fileName = lang === 'en' ? 'resume' : 'curriculo'
+    link.href = `/${fileName}.pdf`
+    link.download = `joaovitorkc-${fileName}.pdf`
+    link.click()
+  }
+
   return (
     <section id="about" className="py-20 bg-muted/50">
       <div className="container">
@@ -25,7 +39,7 @@ export default function About() {
             <h3 className="text-2xl font-semibold mb-4">{t('role')}</h3>
             <p className="text-muted-foreground mb-6">{t('description1')}</p>
             <p className="text-muted-foreground mb-6">{t('description2')}</p>
-            <Button className="gap-2">
+            <Button className="gap-2" onClick={handleDownload}>
               <Download className="h-4 w-4" />
               {t('downloadResume')}
             </Button>
