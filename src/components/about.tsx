@@ -13,12 +13,12 @@ export default function About() {
   const t = useTranslations('about');
 
   const handleDownload = () => {
-    const link = document.createElement('a')
-    const fileName = lang === 'en' ? 'resume' : 'curriculo'
-    link.href = `/${fileName}.pdf`
-    link.download = `joaovitorkc-${fileName}.pdf`
-    link.click()
-  }
+    const link = document.createElement('a');
+    const fileName = lang === 'en' ? 'resume' : 'curriculo';
+    link.href = `/${fileName}.pdf`;
+    link.download = `joaovitorkc-${fileName}.pdf`;
+    link.click();
+  };
 
   return (
     <section id="about" className="py-20 bg-muted/50">
