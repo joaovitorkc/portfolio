@@ -178,7 +178,7 @@ export default async function CaseStudy({ params }: { params: Promise<Params> })
             <h2 id="case-metrics" className="label mb-8 text-paper/45">
               {t('work.case.metricsLabel')}
             </h2>
-            <div className="grid grid-cols-2 gap-px bg-paper/15 md:grid-cols-3 xl:grid-cols-6">
+            <div className="grid-cells-invert grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
               {project.metrics.map((m) => (
                 <div key={m.label[loc]} className="bg-ink p-5">
                   <p className="display tabular text-step-4 leading-none text-brand">{m.value}</p>

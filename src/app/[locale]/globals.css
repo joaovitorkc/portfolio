@@ -296,6 +296,14 @@
     margin-left: calc(var(--rule) * -1);
   }
 
+  /* Same lattice, for blocks sitting on the inverted ink band. */
+  .grid-cells-invert > * {
+    border-top: var(--rule) solid hsl(var(--paper) / 0.15);
+    border-left: var(--rule) solid hsl(var(--paper) / 0.15);
+    margin-top: calc(var(--rule) * -1);
+    margin-left: calc(var(--rule) * -1);
+  }
+
   /* marquee track */
   .marquee-track {
     display: flex;

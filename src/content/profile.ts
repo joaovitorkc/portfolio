@@ -130,13 +130,13 @@ export const about = {
     pt: [
       'Sou desenvolvedor full stack na Wi Consultoria desde março de 2023, em Caruaru. Comecei mexendo em tudo e acabei encontrando meu lugar onde o problema é grande: sistemas de gestão para secretarias municipais de saúde, hoje em uso em mais de 400 municípios.',
       'Meu dia é TypeScript de ponta a ponta — Next.js e React na frente, Express e Fastify atrás, PostgreSQL modelado e otimizado à mão. Mas o trabalho não para no código: eu também gerencio os projetos em andamento, configuro e endureço as máquinas que rodam as aplicações e cuido do ambiente de produção.',
-      'A parte que eu mais gosto é a que ninguém vê: transformar a regra crua de uma nota técnica do Ministério da Saúde em uma query que responde em milissegundos para 161 telas diferentes.',
+      'A parte que eu mais gosto é a que ninguém vê: transformar a regra crua de uma nota técnica do Ministério da Saúde em uma query que responde em milissegundos para mais de 200 telas diferentes.',
       'Em paralelo, curso Ciência da Computação na UniFavip Wyden. A faculdade me dá o alicerce; a prática me deu a velocidade.',
     ],
     en: [
       'I’ve been a full stack developer at Wi Consultoria since March 2023, in Caruaru, Brazil. I started out touching everything and ended up where the problem is big: management systems for municipal health departments, today in use across more than 400 municipalities.',
       'My day is TypeScript end to end — Next.js and React up front, Express and Fastify behind, PostgreSQL modeled and tuned by hand. But the job doesn’t stop at code: I also run the ongoing projects, configure and harden the machines the applications run on, and own the production environment.',
-      'My favourite part is the part nobody sees: turning the raw rule of a Ministry of Health technical note into a query that answers in milliseconds across 161 different screens.',
+      'My favourite part is the part nobody sees: turning the raw rule of a Ministry of Health technical note into a query that answers in milliseconds across 200+ different screens.',
       'Alongside that I’m studying Computer Science at UniFavip Wyden. College gives me the foundation; the work gave me the speed.',
     ],
   } satisfies I18nList,
@@ -326,8 +326,8 @@ export const stack: StackGroup[] = [
     id: 'front',
     title: { pt: 'Interface', en: 'Interface' },
     note: {
-      pt: '161 telas de relatório me ensinaram que consistência vale mais que criatividade solta.',
-      en: '161 report screens taught me consistency beats loose creativity.',
+      pt: 'Mais de 200 telas de relatório me ensinaram que consistência vale mais que criatividade solta.',
+      en: '200+ report screens taught me consistency beats loose creativity.',
     },
     items: [
       { name: 'React', depth: 'daily' },

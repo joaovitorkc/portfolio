@@ -132,15 +132,15 @@ export const projects: Project[] = [
         },
       },
       {
-        value: '161',
+        value: '200+',
         label: { pt: 'telas em produção', en: 'screens in production' },
         hint: {
-          pt: 'Relatórios, gestão, portal do cidadão e painéis.',
-          en: 'Reports, management, citizen portal and panels.',
+          pt: 'Relatórios, gestão, vigilância, portal do cidadão e painéis.',
+          en: 'Reports, management, surveillance, citizen portal and panels.',
         },
       },
       {
-        value: '47',
+        value: '50+',
         label: { pt: 'módulos de API', en: 'API route modules' },
         hint: {
           pt: 'Cada um com suas rotas, ACL e camada de exportação.',
@@ -148,7 +148,7 @@ export const projects: Project[] = [
         },
       },
       {
-        value: '297',
+        value: '300+',
         label: { pt: 'migrations de banco', en: 'database migrations' },
         hint: {
           pt: 'Schema versionado desde o primeiro dia.',
@@ -156,19 +156,11 @@ export const projects: Project[] = [
         },
       },
       {
-        value: '~405k',
-        label: { pt: 'linhas de TypeScript', en: 'lines of TypeScript' },
+        value: '5+',
+        label: { pt: 'sistemas com case completo', en: 'systems with a full case study' },
         hint: {
-          pt: '≈268 mil no front, ≈137 mil no servidor.',
-          en: '≈268k on the front end, ≈137k on the server.',
-        },
-      },
-      {
-        value: '6',
-        label: { pt: 'produtos no ecossistema', en: 'products in the ecosystem' },
-        hint: {
-          pt: 'R-SUS, Vigilância, BPA Online, Painel, SUS Direto, Nuvem PEC.',
-          en: 'R-SUS, Surveillance, BPA Online, Call Panel, SUS Direto, Nuvem PEC.',
+          pt: 'O problema, a arquitetura, as partes difíceis e o que é meu.',
+          en: 'The problem, the architecture, the hard parts and what’s mine.',
         },
       },
     ],
@@ -184,8 +176,8 @@ export const projects: Project[] = [
     },
 
     approach: {
-      pt: 'Nada de consultar o PEC ao vivo. O sistema extrai, transforma e espelha em tabelas próprias no PostgreSQL, e todo relatório lê do espelho. Isso dá três coisas de graça: o PEC do município nunca sofre carga de leitura pesada, o schema fica sob nosso controle, e a mesma pergunta feita duas vezes dá a mesma resposta. Em cima do espelho, um shell de relatório padronizado — filtro, tabela, exportação — que se repete em 161 telas sem cada uma reinventar a roda.',
-      en: 'No live querying of PEC. The system extracts, transforms and mirrors into its own PostgreSQL tables, and every report reads from the mirror. That buys three things: the city’s PEC never takes heavy read load, the schema is ours to control, and the same question asked twice gives the same answer. On top of the mirror sits one standardised report shell — filters, table, export — repeated across 161 screens instead of each reinventing the wheel.',
+      pt: 'Nada de consultar o PEC ao vivo. O sistema extrai, transforma e espelha em tabelas próprias no PostgreSQL, e todo relatório lê do espelho. Isso dá três coisas de graça: o PEC do município nunca sofre carga de leitura pesada, o schema fica sob nosso controle, e a mesma pergunta feita duas vezes dá a mesma resposta. Em cima do espelho, um shell de relatório padronizado — filtro, tabela, exportação — que se repete em mais de 200 telas sem cada uma reinventar a roda.',
+      en: 'No live querying of PEC. The system extracts, transforms and mirrors into its own PostgreSQL tables, and every report reads from the mirror. That buys three things: the city’s PEC never takes heavy read load, the schema is ours to control, and the same question asked twice gives the same answer. On top of the mirror sits one standardised report shell — filters, table, export — repeated across 200+ screens instead of each reinventing the wheel.',
     },
 
     architecture: [
@@ -220,8 +212,8 @@ export const projects: Project[] = [
         step: '04',
         name: { pt: 'API com ACL por papel', en: 'Role-scoped API' },
         detail: {
-          pt: 'Express + Knex, 47 módulos de rota. Autenticação por JWT em cookie httpOnly e autorização por papel — equipe interna, gestor municipal, profissional. O inquilino vem do código IBGE na URL e é verificado no servidor, nunca confiado no cliente.',
-          en: 'Express + Knex, 47 route modules. JWT auth in an httpOnly cookie and role-based authorization — internal team, city manager, health professional. The tenant comes from the IBGE code in the URL and is verified server-side, never trusted from the client.',
+          pt: 'Express + Knex, mais de 50 módulos de rota. Autenticação por JWT em cookie httpOnly e autorização por papel — equipe interna, gestor municipal, profissional. O inquilino vem do código IBGE na URL e é verificado no servidor, nunca confiado no cliente.',
+          en: 'Express + Knex, 50+ route modules. JWT auth in an httpOnly cookie and role-based authorization — internal team, city manager, health professional. The tenant comes from the IBGE code in the URL and is verified server-side, never trusted from the client.',
         },
         tech: ['Express', 'Knex', 'JWT', 'Zod'],
       },
@@ -329,8 +321,8 @@ export const projects: Project[] = [
       },
       {
         title: {
-          pt: 'Consistência em 161 telas',
-          en: 'Consistency across 161 screens',
+          pt: 'Consistência em mais de 200 telas',
+          en: 'Consistency across 200+ screens',
         },
         body: {
           pt: 'Com essa quantidade de relatório, criatividade por tela é dívida. O shell de relatório e as classificações de listagem existem para que uma tela nova nasça previsível: filtro no mesmo lugar, exportação com o mesmo comportamento, vazio com a mesma cara.',
@@ -370,14 +362,14 @@ export const projects: Project[] = [
         'Domínio antes de código. A parte difícil de saúde pública não é React, é entender a regra que o Estado escreveu.',
         'Espelhar dado em vez de consultar a fonte viva resolveu performance, estabilidade e reprodutibilidade de uma vez.',
         'Uma fonte de verdade por resposta. Duas implementações da mesma regra sempre divergem — a questão é só quando.',
-        'Padrão repetível vale mais que tela bonita quando existem 161 delas.',
+        'Padrão repetível vale mais que tela bonita quando existem mais de 200 delas.',
         'Escrever software que outra pessoa depende para trabalhar é a melhor escola de engenharia que existe.',
       ],
       en: [
         'Domain before code. The hard part of public health isn’t React, it’s understanding the rule the State wrote.',
         'Mirroring data instead of querying the live source solved performance, stability and reproducibility at once.',
         'One source of truth per answer. Two implementations of the same rule always drift — the only question is when.',
-        'A repeatable pattern beats a beautiful screen when there are 161 of them.',
+        'A repeatable pattern beats a beautiful screen when there are 200+ of them.',
         'Writing software someone else depends on to do their job is the best engineering school there is.',
       ],
     },

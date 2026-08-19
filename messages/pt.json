@@ -59,9 +59,9 @@
     "label": "Manifesto"
   },
   "metrics": {
-    "label": "O sistema em números",
+    "label": "O ecossistema em números",
     "title": "Escala do que eu toco todo dia",
-    "note": "Números do sistema em que eu trabalho — contados no código, não estimados.",
+    "note": "Contados no código do ecossistema — R-SUS, Vigilância e portal — e arredondados para baixo.",
     "yearsLabel": "anos de prática",
     "sinceNote": "desde março de 2023"
   },

@@ -80,7 +80,7 @@ function MetricsBand({ project, locale }: { project: Project; locale: Locale }) 
       </div>
 
       <Reveal
-        className="grid grid-cols-2 border-rule border-hairline md:grid-cols-3 xl:grid-cols-6"
+        className="grid-cells grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5"
         stagger={0.07}
         from="bottom"
         distance={20}
@@ -88,7 +88,7 @@ function MetricsBand({ project, locale }: { project: Project; locale: Locale }) 
         {project.metrics.map((m) => (
           <div
             key={m.label[locale]}
-            className="group relative -mr-[1.5px] -mb-[1.5px] border-rule border-hairline bg-paper p-5 transition-colors hover:bg-ink hover:text-paper"
+            className="group relative bg-paper p-5 transition-colors hover:bg-ink hover:text-paper"
           >
             <p className="display text-step-4 leading-none">
               <MetricValue value={m.value} />
