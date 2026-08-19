@@ -8,6 +8,7 @@ import { Command, Moon, Sun, X } from 'lucide-react';
 import { cn } from '@/libs/utils';
 import { chapters, navChapters } from '@/libs/chapters';
 import { profile } from '@/content/profile';
+import { Monogram } from '@/components/brand/monogram';
 import { useUi } from '@/stores/ui.store';
 import { useSmoothScroll } from './smooth-scroll';
 
@@ -79,9 +80,10 @@ export default function Nav() {
             className="group flex items-center gap-3 focus-visible:outline-none"
             aria-label={t('nav.top')}
           >
-            <span className="flex h-9 w-9 items-center justify-center border-rule border-ink bg-ink font-display text-sm font-extrabold tracking-tight text-paper transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
-              {profile.initials}
-            </span>
+            <Monogram
+              plate="ink"
+              className="h-9 w-9 border-rule border-ink transition-opacity group-hover:opacity-80"
+            />
             <span className="hidden flex-col leading-none sm:flex">
               <span className="font-display text-sm font-extrabold uppercase tracking-tight">
                 {profile.name}

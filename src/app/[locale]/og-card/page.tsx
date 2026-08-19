@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { profile } from '@/content/profile';
 import { toLocale } from '@/content/types';
 import { HalftonePortrait } from '@/components/fx/halftone-portrait';
+import { Monogram } from '@/components/brand/monogram';
 
 /**
  * Source artwork for /public/open-graph-image.png.
@@ -35,7 +36,7 @@ export default async function OgCard({ params }: { params: Promise<{ locale: str
       <div className="relative flex flex-1 items-center gap-14 px-16">
         <div className="flex-1">
           <p className="label flex items-center gap-3 text-ink-muted">
-            <span className="h-2 w-2 bg-brand" />
+            <Monogram plate="ink" className="h-6 w-6 shrink-0" />
             {profile.domain}
           </p>
 

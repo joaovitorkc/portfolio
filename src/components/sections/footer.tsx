@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { ArrowUp, ArrowUpRight } from 'lucide-react';
 import { profile } from '@/content/profile';
+import { Monogram } from '@/components/brand/monogram';
 import { toLocale } from '@/content/types';
 import { Marquee, VelocitySkew } from '@/components/fx/marquee';
 import { useSmoothScroll } from '@/components/chrome/smooth-scroll';
@@ -35,9 +36,7 @@ export default function Footer() {
         {/* identity */}
         <div className="col-span-12 md:col-span-5">
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center border-rule border-brand bg-brand font-display text-sm font-extrabold text-brand-foreground">
-              {profile.initials}
-            </span>
+            <Monogram plate="paper" className="h-9 w-9" />
             <span className="flex flex-col leading-none">
               <span className="font-display text-sm font-extrabold uppercase tracking-tight">
                 {profile.name}

@@ -22,7 +22,9 @@
     --ink-muted: 35 8% 32%;
     --ink-faint: 37 6% 52%;
 
-    /* --- brand --- */
+    /* --- brand ---
+       #FF5A1F. Single brand orange, used identically in both themes so the
+       favicon, the monogram and every accent are literally the same colour. */
     --brand: 16 100% 56%;
     --brand-dim: 16 85% 48%;
     --on-brand: 30 13% 6%;
@@ -66,8 +68,9 @@
     --ink-muted: 30 11% 67%;
     --ink-faint: 28 8% 46%;
 
-    --brand: 18 100% 59%;
-    --brand-dim: 17 92% 52%;
+    /* same #FF5A1F — 6.3:1 on the carbon base, so no brightening needed */
+    --brand: 16 100% 56%;
+    --brand-dim: 16 95% 64%;
     --on-brand: 24 30% 6%;
 
     --destructive: 0 70% 55%;

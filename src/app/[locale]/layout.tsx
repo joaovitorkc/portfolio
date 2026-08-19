@@ -102,10 +102,6 @@ export async function generateMetadata({
         'max-video-preview': -1,
       },
     },
-    icons: {
-      icon: '/favicon.ico',
-      apple: '/apple-touch-icon.png',
-    },
     manifest: '/manifest.webmanifest',
     other: {
       'geo.region': 'BR-PE',

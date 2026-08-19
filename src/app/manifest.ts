@@ -16,13 +16,15 @@ export default function manifest(): MetadataRoute.Manifest {
     display: 'browser',
     lang: 'pt-BR',
     dir: 'ltr',
-    background_color: '#f2efe9',
+    background_color: '#1a1a1a',
     theme_color: '#f2efe9',
     icons: [
-      { src: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+      { src: '/brand/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+      { src: '/brand/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+      // Android crops maskable icons to a circle, hence the padded variant.
       {
-        src: '/apple-touch-icon.png',
-        sizes: '180x180',
+        src: '/brand/icon-maskable-512.png',
+        sizes: '512x512',
         type: 'image/png',
         purpose: 'maskable',
       },
