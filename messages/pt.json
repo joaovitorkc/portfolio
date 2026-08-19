@@ -1,14 +1,17 @@
 {
   "metadata": {
-    "title": "João Vitor | Portfolio",
-    "description": "Meu site pessoal mostrando meus projetos e habilidades."
+    "title": "João Vitor — Desenvolvedor Full Stack",
+    "titleTemplate": "%s — João Vitor",
+    "description": "Desenvolvedor full stack em Caruaru, PE. Construo sistemas de gestão em saúde pública usados em mais de 400 municípios: relatórios da atenção primária, vigilância sanitária, BPA e painel de chamadas.",
+    "ogAlt": "João Vitor — Desenvolvedor Full Stack"
   },
   "nav": {
-    "title": "Alterar menu",
-    "about": "Sobre",
-    "projects": "Projetos",
-    "skills": "Habilidades",
-    "contact": "Contato",
+    "menu": "Abrir menu",
+    "close": "Fechar menu",
+    "index": "Índice",
+    "chapters": "Capítulos",
+    "search": "Buscar",
+    "commandHint": "para navegar",
     "theme": {
       "title": "Alternar tema",
       "light": "Claro",
@@ -18,89 +21,212 @@
     "language": {
       "title": "Alternar idioma",
       "english": "Inglês",
-      "portuguese": "Português"
-    }
+      "portuguese": "Português",
+      "short": {
+        "pt": "PT",
+        "en": "EN"
+      }
+    },
+    "skip": "Pular para o conteúdo",
+    "top": "Voltar ao topo"
+  },
+  "chapters": {
+    "cover": "Capa",
+    "manifesto": "Manifesto",
+    "work": "Trabalho",
+    "stack": "Arsenal",
+    "trajectory": "Trajetória",
+    "signals": "Sinais",
+    "offEditor": "Fora do editor",
+    "terminal": "Terminal",
+    "contact": "Contato"
   },
   "hero": {
-    "greeting": "Olá, eu sou",
-    "description": "Desenvolvedor Full Stack especializado em criar experiências digitais excepcionais",
-    "viewWork": "Ver Meus Projetos",
-    "contact": "Entre em Contato"
+    "eyebrow": "Dossiê pessoal",
+    "line1": "João",
+    "line2": "Vitor",
+    "roleLabel": "Função",
+    "basedLabel": "Base",
+    "sinceLabel": "Desde",
+    "scroll": "Role para abrir",
+    "ticker": "Saúde pública · TypeScript · PostgreSQL · Sistemas que não podem cair",
+    "cta": "Ver o trabalho",
+    "ctaSecondary": "Falar comigo",
+    "portraitAlt": "Retrato de João Vitor em meio-tom",
+    "portraitHint": "Passe o mouse no retrato"
   },
-  "about": {
-    "title": "Sobre Mim",
-    "role": "Desenvolvedor Full Stack",
-    "description1": "Sou um desenvolvedor apaixonado trabalhando como desenvolvedor pleno na Wi Consultoria desde 2023. Sou especializado em tecnologias web e gosto de criar aplicações amigáveis.",
-    "description2": "Quando não estou programando, você pode me encontrar explorando novas tecnologias e expandindo meu conhecimento em ciência da computação.",
-    "downloadResume": "Baixar Currículo",
-    "education": {
-      "title": "Educação",
-      "degree": "Ciência da Computação",
-      "university": "UniFavip Wyden, 2025-Presente"
-    },
-    "experience": {
-      "title": "Experiência",
-      "role": "Desenvolvedor Sênior",
-      "company": "Wi Consultoria, 2023-Presente"
-    },
-    "location": {
-      "title": "Localização",
-      "place": "Caruaru, Pernambuco",
-      "country": "Brasil"
-    }
+  "manifesto": {
+    "label": "Manifesto"
   },
-  "projects": {
-    "title": "Alguns dos Meus Projetos",
-    "demo": "Demo",
-    "code": "Código",
-    "cacWiki": {
-      "title": "CAC Wiki",
-      "description": "Projeto educativo escolar simples com foco em biologia."
-    },
-    "wiConsultoria": {
-      "title": "Wi Consultoria",
-      "description": "Landing page para a empresa Wi Consultoria."
-    }
+  "metrics": {
+    "label": "O sistema em números",
+    "title": "Escala do que eu toco todo dia",
+    "note": "Números do sistema em que eu trabalho — contados no código, não estimados.",
+    "yearsLabel": "anos de prática",
+    "sinceNote": "desde março de 2023"
   },
-  "skills": {
-    "title": "Minhas Habilidades",
-    "categories": {
-      "languages": "Linguagens",
-      "backend": "Backend & Bancos de Dados",
-      "frameworks": "Frameworks & Ferramentas"
-    }
+  "work": {
+    "label": "Trabalho",
+    "title": "Um projeto grande vale mais que dez pequenos",
+    "intro": "Cinco sistemas em produção dentro de secretarias municipais de saúde. Todos com código proprietário — então o que eu mostro aqui é como cada um foi construído, qual problema ele resolve e qual parte é minha.",
+    "openCase": "Abrir o case completo",
+    "visitLive": "Ver ao vivo",
+    "privateCode": "Código proprietário",
+    "privateCodeHint": "Sistema privado de cliente — o repositório não é público.",
+    "roleLabel": "Meu papel",
+    "sectorLabel": "Setor",
+    "yearLabel": "Período",
+    "statusLabel": "Status",
+    "status": {
+      "live": "Em produção",
+      "wip": "Em construção",
+      "archived": "Arquivado"
+    },
+    "moreSoon": "Cada card abre um case completo.",
+    "backToIndex": "Voltar ao índice",
+    "case": {
+      "context": "Contexto",
+      "problem": "O problema",
+      "approach": "A abordagem",
+      "architecture": "Arquitetura",
+      "modules": "Módulos",
+      "hardParts": "As partes difíceis",
+      "responsibilities": "O que é meu",
+      "outcome": "Resultado",
+      "learned": "O que eu levei",
+      "stackLabel": "Stack",
+      "metricsLabel": "Números",
+      "next": "Próximo capítulo",
+      "nextProject": "Próximo sistema"
+    },
+    "featuredLabel": "Case principal",
+    "otherTitle": "Os outros sistemas",
+    "otherIntro": "Mesmo ecossistema, problemas diferentes. Cada um tem case próprio.",
+    "openCaseShort": "Abrir case"
+  },
+  "stack": {
+    "label": "Arsenal",
+    "title": "Ferramenta é escolha, não identidade",
+    "intro": "Sem barrinha de porcentagem. Só onde a ferramenta está: em produção todo dia, já entreguei com ela, ou estou estudando agora.",
+    "depth": {
+      "daily": "Produção diária",
+      "working": "Já entreguei",
+      "learning": "Estudando"
+    },
+    "depthLegend": "Profundidade"
+  },
+  "trajectory": {
+    "label": "Trajetória",
+    "title": "Como eu cheguei aqui",
+    "present": "hoje",
+    "certificationsTitle": "Certificações e cursos",
+    "certificationsNote": "Sete certificados. Os que importam estão em cima.",
+    "kind": {
+      "work": "Trabalho",
+      "study": "Estudo",
+      "milestone": "Marco"
+    },
+    "type": {
+      "certificate": "Certificado",
+      "course": "Curso"
+    },
+    "resume": "Baixar currículo",
+    "resumeHint": "PDF · 1 página"
+  },
+  "signals": {
+    "label": "Sinais",
+    "title": "Ao vivo do GitHub",
+    "note": "Buscado direto da API pública do GitHub quando esta página é servida.",
+    "reposLabel": "Repositórios públicos",
+    "followersLabel": "Seguidores",
+    "sinceLabel": "No GitHub desde",
+    "languagesLabel": "Linguagens mais usadas",
+    "recentLabel": "Empurrado recentemente",
+    "updated": "Atualizado",
+    "unavailable": "A API do GitHub não respondeu agora. Os dados voltam no próximo carregamento.",
+    "viewProfile": "Ver perfil no GitHub"
+  },
+  "personal": {
+    "label": "Fora do editor",
+    "title": "A pessoa por trás do commit",
+    "localTime": "Hora local em Caruaru"
+  },
+  "terminal": {
+    "label": "Terminal",
+    "title": "Prefere perguntar você mesmo?",
+    "intro": "Um terminal de verdade, com dados de verdade. Tudo aqui também está escrito acima — isto é atalho, não obstáculo.",
+    "hint": "Digite help e aperte Enter",
+    "inputLabel": "Comando do terminal",
+    "focusHint": "Clique para focar",
+    "notFound": "comando não encontrado. Digite help para ver a lista.",
+    "cleared": "Tela limpa.",
+    "welcome": "joaovitorkc — dossiê interativo. Digite help para começar."
   },
   "contact": {
-    "title": "Entre em Contato",
-    "getInTouch": "Fale Comigo",
-    "description": "Tem um projeto em mente ou quer discutir uma possível colaboração? Sinta-se à vontade para entrar em contato comigo usando o formulário de contato ou através de qualquer um dos canais abaixo.",
-    "email": "Email",
-    "phone": "Telefone",
-    "location": {
-      "title": "Localização",
-      "place": "Caruaru, Pernambuco, Brasil"
-    },
+    "label": "Contato",
+    "title": "Vamos conversar",
+    "intro": "Projeto novo, vaga, ou só uma dúvida sobre como o e-Gestão resolve alguma coisa — pode chamar.",
+    "availability": "Status",
+    "directTitle": "Direto",
+    "formTitle": "Ou escreva aqui",
+    "formNote": "O botão abre seu cliente de e-mail já com a mensagem montada. Nada é enviado sem você conferir.",
+    "copy": "Copiar",
+    "copied": "Copiado",
     "form": {
-      "validation": {
-        "name": "Por favor, insira seu nome",
-        "email": "Por favor, insira um email válido",
-        "subject": "Por favor, insira um assunto",
-        "message": "Por favor, insira uma mensagem"
-      },
       "name": "Nome",
-      "namePlaceholder": "Seu nome",
-      "email": "Email",
-      "emailPlaceholder": "Seu email",
+      "namePlaceholder": "Como devo te chamar",
+      "email": "E-mail",
+      "emailPlaceholder": "seu@email.com",
       "subject": "Assunto",
-      "subjectPlaceholder": "Assunto da mensagem",
+      "subjectPlaceholder": "Sobre o que é",
       "message": "Mensagem",
-      "messagePlaceholder": "Sua mensagem",
-      "send": "Enviar Mensagem",
-      "sending": "Enviando mensagem...",
-      "success": "Mensagem enviada com sucesso!"
+      "messagePlaceholder": "Conte o contexto. Detalhe ajuda.",
+      "send": "Abrir e-mail com isso",
+      "validation": {
+        "name": "Escreva seu nome",
+        "email": "Escreva um e-mail válido",
+        "subject": "Escreva um assunto",
+        "message": "Escreva pelo menos uma frase"
+      },
+      "ready": "E-mail montado — confira e envie."
     }
   },
   "footer": {
-    "rights": "Todos os direitos reservados."
+    "rights": "Todos os direitos reservados.",
+    "builtWith": "Feito com Next.js, TypeScript, Tailwind e GSAP.",
+    "sourceLabel": "Este site é open source",
+    "colophonLabel": "Colofão",
+    "typeLabel": "Tipografia",
+    "backTop": "Topo"
+  },
+  "palette": {
+    "placeholder": "Buscar capítulo, projeto ou ação…",
+    "empty": "Nada encontrado.",
+    "groups": {
+      "chapters": "Capítulos",
+      "projects": "Projetos",
+      "actions": "Ações",
+      "social": "Links"
+    },
+    "actions": {
+      "toggleTheme": "Alternar claro / escuro",
+      "switchLang": "Mudar para inglês",
+      "copyEmail": "Copiar e-mail",
+      "downloadResume": "Baixar currículo",
+      "openTerminal": "Abrir o terminal"
+    },
+    "open": "Abrir busca de comandos",
+    "hint": "Dica: aperte ⌘K a qualquer momento"
+  },
+  "a11y": {
+    "reducedMotionNote": "Animações reduzidas conforme sua preferência de sistema.",
+    "externalLink": "abre em nova aba",
+    "chapterProgress": "Progresso do capítulo"
+  },
+  "notFound": {
+    "label": "Página não encontrada",
+    "title": "Esta página não existe no dossiê.",
+    "body": "O endereço pode ter mudado, ou o link estava errado. Tudo o que existe está no índice abaixo.",
+    "home": "Voltar ao início"
   }
 }

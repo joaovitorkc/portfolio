@@ -2,67 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   DOSSIÊ — warm brutalist design system
+   Light = "paper" (cream stock, ink, orange stamp)
+   Dark  = "carbon" (warm brown-black, sodium orange)
+   Tokens are HSL triplets so Tailwind alpha modifiers work.
+   ============================================================ */
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* --- surfaces --- */
+    --paper: 40 26% 93%;
+    --surface-1: 40 22% 89%;
+    --surface-2: 40 19% 85%;
+    --hairline: 40 15% 76%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* --- ink --- */
+    --ink: 30 13% 6%;
+    --ink-muted: 35 8% 32%;
+    --ink-faint: 37 6% 52%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* --- brand --- */
+    --brand: 16 100% 56%;
+    --brand-dim: 16 85% 48%;
+    --on-brand: 30 13% 6%;
 
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
+    /* --- shadcn semantic aliases (keep ui/ components working) --- */
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: var(--surface-1);
+    --card-foreground: var(--ink);
+    --popover: var(--surface-1);
+    --popover-foreground: var(--ink);
+    --primary: var(--brand);
+    --primary-foreground: var(--on-brand);
+    --secondary: var(--surface-2);
+    --secondary-foreground: var(--ink);
+    --muted: var(--surface-2);
+    --muted-foreground: var(--ink-muted);
+    --accent: var(--surface-2);
+    --accent-foreground: var(--ink);
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 26% 93%;
+    --border: var(--hairline);
+    --input: var(--hairline);
+    --ring: var(--brand);
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --radius: 0px;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-
-    --radius: 0.5rem;
+    /* --- rhythm --- */
+    --rule: 1.5px;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    --chapter-pad: clamp(4.5rem, 12vh, 10rem);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --paper: 24 20% 5%;
+    --surface-1: 23 18% 9%;
+    --surface-2: 27 17% 13%;
+    --hairline: 26 16% 20%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --ink: 33 39% 95%;
+    --ink-muted: 30 11% 67%;
+    --ink-faint: 28 8% 46%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --brand: 18 100% 59%;
+    --brand-dim: 17 92% 52%;
+    --on-brand: 24 30% 6%;
 
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 33 39% 95%;
   }
 }
 
@@ -70,11 +79,277 @@
   * {
     @apply border-border;
   }
+
+  html {
+    /* Lenis owns scrolling; native smooth would fight it */
+    scroll-behavior: auto;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-paper text-ink;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  ::selection {
+    background: hsl(var(--brand));
+    color: hsl(var(--on-brand));
+  }
+
+  /* Visible, on-brand focus — brutalist double ring */
+  :focus-visible {
+    outline: var(--rule) solid hsl(var(--brand));
+    outline-offset: 3px;
+  }
+
+  /* Numbers should never wobble in tables/counters */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Respect the user. Everything decorative stops. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer components {
+  /* ---------- editorial primitives ---------- */
+
+  .dossier-shell {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 96rem;
+    padding-inline: var(--gutter);
+  }
+
+  /* From xl up the index rail lives in the left margin, so content indents to
+     leave the spine its own column instead of colliding with the display type. */
+  @media (min-width: 1280px) {
+    .dossier-shell {
+      padding-left: calc(var(--gutter) + 5.5rem);
+    }
+  }
+
+  /* mono meta label: "01 — CAPÍTULO" */
+  .label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: clamp(0.625rem, 0.68vw, 0.75rem);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* Big editorial display type. Oversized, tight, optically sized. */
+  .display {
+    font-family: var(--font-display), sans-serif;
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+  }
+
+  .serif-italic {
+    font-family: var(--font-serif), Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-transform: none;
+  }
+
+  /* hairline rules that read as printed matter */
+  .rule-t {
+    border-top: var(--rule) solid hsl(var(--hairline));
+  }
+  .rule-b {
+    border-bottom: var(--rule) solid hsl(var(--hairline));
+  }
+  .rule-l {
+    border-left: var(--rule) solid hsl(var(--hairline));
+  }
+  .rule-r {
+    border-right: var(--rule) solid hsl(var(--hairline));
+  }
+  .rule-all {
+    border: var(--rule) solid hsl(var(--hairline));
+  }
+  .rule-ink {
+    border-color: hsl(var(--ink));
+  }
+
+  /* offset "printed" block — no blur, brutalist */
+  .block-print {
+    border: var(--rule) solid hsl(var(--ink));
+    box-shadow: 6px 6px 0 0 hsl(var(--ink));
+  }
+  .block-print-brand {
+    border: var(--rule) solid hsl(var(--ink));
+    box-shadow: 6px 6px 0 0 hsl(var(--brand));
+  }
+
+  /* ---------- text reveal (SplitText targets) ---------- */
+  .split-line {
+    display: block;
+    overflow: hidden;
+  }
+  .split-line > * {
+    display: block;
+    will-change: transform;
+  }
+
+  /* ---------- film grain ---------- */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background-image: var(--grain-url);
+    background-size: 180px 180px;
+    animation: grain-shift 0.6s steps(2) infinite;
+  }
+  .dark .grain {
+    mix-blend-mode: screen;
+    opacity: 0.085;
+  }
+
+  @keyframes grain-shift {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(-2%, 1.5%);
+    }
+    50% {
+      transform: translate(1.5%, -2%);
+    }
+    75% {
+      transform: translate(-1%, -1%);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  /* halftone / risograph dot texture behind hero type */
+  .dots {
+    background-image: radial-gradient(hsl(var(--ink) / 0.22) 1px, transparent 1.2px);
+    background-size: 8px 8px;
+  }
+
+  .hatch {
+    background-image: repeating-linear-gradient(
+      45deg,
+      hsl(var(--ink) / 0.14) 0 1px,
+      transparent 1px 6px
+    );
+  }
+
+  /* Lattice grid: hairlines come from the cells themselves (collapsed with
+     negative margins) rather than from a background showing through gaps —
+     so a ragged last row ends cleanly instead of leaving grey holes. */
+  .grid-cells > * {
+    border-top: var(--rule) solid hsl(var(--hairline));
+    border-left: var(--rule) solid hsl(var(--hairline));
+    margin-top: calc(var(--rule) * -1);
+    margin-left: calc(var(--rule) * -1);
+  }
+
+  /* marquee track */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  /* underline that draws on hover */
+  .link-draw {
+    position: relative;
+    display: inline-block;
+  }
+  .link-draw::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.12em;
+    width: 100%;
+    height: var(--rule);
+    background: hsl(var(--brand));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.42s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .link-draw:hover::after,
+  .link-draw:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* skip link */
+  .skip {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 10000;
+    transform: translateY(-200%);
+    transition: transform 0.2s;
+  }
+  .skip:focus {
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* used by pinned chapters */
+  .will-transform {
+    will-change: transform;
+  }
 }

@@ -1,14 +1,17 @@
 {
   "metadata": {
-    "title": "João Vitor | Portfolio",
-    "description": "Personal portfolio website showcasing my projects and skills."
+    "title": "João Vitor — Full Stack Developer",
+    "titleTemplate": "%s — João Vitor",
+    "description": "Full stack developer in Caruaru, Brazil. I build public healthcare management systems used across 400+ municipalities: primary-care reporting, health surveillance, BPA and a real-time call panel.",
+    "ogAlt": "João Vitor — Full Stack Developer"
   },
   "nav": {
-    "title": "Toggle menu",
-    "about": "About",
-    "projects": "Projects",
-    "skills": "Skills",
-    "contact": "Contact",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "index": "Index",
+    "chapters": "Chapters",
+    "search": "Search",
+    "commandHint": "to navigate",
     "theme": {
       "title": "Toggle theme",
       "light": "Light",
@@ -18,89 +21,212 @@
     "language": {
       "title": "Toggle language",
       "english": "English",
-      "portuguese": "Portuguese"
-    }
+      "portuguese": "Portuguese",
+      "short": {
+        "pt": "PT",
+        "en": "EN"
+      }
+    },
+    "skip": "Skip to content",
+    "top": "Back to top"
+  },
+  "chapters": {
+    "cover": "Cover",
+    "manifesto": "Manifesto",
+    "work": "Work",
+    "stack": "Arsenal",
+    "trajectory": "Trajectory",
+    "signals": "Signals",
+    "offEditor": "Off the editor",
+    "terminal": "Terminal",
+    "contact": "Contact"
   },
   "hero": {
-    "greeting": "Hi, I'm",
-    "description": "Full Stack Developer specializing in building exceptional digital experiences",
-    "viewWork": "View My Work",
-    "contact": "Contact Me"
+    "eyebrow": "Personal dossier",
+    "line1": "João",
+    "line2": "Vitor",
+    "roleLabel": "Role",
+    "basedLabel": "Based in",
+    "sinceLabel": "Since",
+    "scroll": "Scroll to open",
+    "ticker": "Public health · TypeScript · PostgreSQL · Systems that cannot go down",
+    "cta": "See the work",
+    "ctaSecondary": "Get in touch",
+    "portraitAlt": "Halftone portrait of João Vitor",
+    "portraitHint": "Hover the portrait"
   },
-  "about": {
-    "title": "About Me",
-    "role": "Full Stack Developer",
-    "description1": "I'm a passionate developer working as a mid-level (pleno) developer at Wi Consultoria since 2023. I specialize in web technologies and enjoy building user-friendly applications.",
-    "description2": "When I'm not coding, you can find me exploring new technologies and expanding my knowledge in computer science.",
-    "downloadResume": "Download Resume",
-    "education": {
-      "title": "Education",
-      "degree": "Computer Science",
-      "university": "UniFavip Wyden, 2025-Present"
-    },
-    "experience": {
-      "title": "Experience",
-      "role": "Senior Software Developer",
-      "company": "Wi Consultoria, 2023-Present"
-    },
-    "location": {
-      "title": "Location",
-      "place": "Caruaru, Pernambuco",
-      "country": "Brazil"
-    }
+  "manifesto": {
+    "label": "Manifesto"
   },
-  "projects": {
-    "title": "Some of my Projects",
-    "demo": "Demo",
-    "code": "Code",
-    "cacWiki": {
-      "title": "CAC Wiki",
-      "description": "Simple school educational project focusing on biology."
-    },
-    "wiConsultoria": {
-      "title": "Wi Consultoria",
-      "description": "Landing page for the company Wi Consultoria."
-    }
+  "metrics": {
+    "label": "The system in numbers",
+    "title": "The scale of what I touch daily",
+    "note": "Numbers from the system I work on — counted in the code, not estimated.",
+    "yearsLabel": "years of practice",
+    "sinceNote": "since March 2023"
   },
-  "skills": {
-    "title": "My Skills",
-    "categories": {
-      "languages": "Languages",
-      "backend": "Backend & Databases",
-      "frameworks": "Frameworks & Tools"
-    }
+  "work": {
+    "label": "Work",
+    "title": "One large project beats ten small ones",
+    "intro": "Five systems running in production inside municipal health departments. All proprietary code — so what I show here is how each one was built, which problem it solves and which part is mine.",
+    "openCase": "Open the full case study",
+    "visitLive": "View live",
+    "privateCode": "Proprietary code",
+    "privateCodeHint": "Private client system — the repository isn’t public.",
+    "roleLabel": "My role",
+    "sectorLabel": "Sector",
+    "yearLabel": "Period",
+    "statusLabel": "Status",
+    "status": {
+      "live": "In production",
+      "wip": "In progress",
+      "archived": "Archived"
+    },
+    "moreSoon": "Every card opens a full case study.",
+    "backToIndex": "Back to index",
+    "case": {
+      "context": "Context",
+      "problem": "The problem",
+      "approach": "The approach",
+      "architecture": "Architecture",
+      "modules": "Modules",
+      "hardParts": "The hard parts",
+      "responsibilities": "What’s mine",
+      "outcome": "Outcome",
+      "learned": "What I took from it",
+      "stackLabel": "Stack",
+      "metricsLabel": "Numbers",
+      "next": "Next chapter",
+      "nextProject": "Next system"
+    },
+    "featuredLabel": "Lead case study",
+    "otherTitle": "The other systems",
+    "otherIntro": "Same ecosystem, different problems. Each one has its own case study.",
+    "openCaseShort": "Open case"
+  },
+  "stack": {
+    "label": "Arsenal",
+    "title": "A tool is a choice, not an identity",
+    "intro": "No percentage bars. Just where the tool actually sits: in production every day, shipped with it, or studying it right now.",
+    "depth": {
+      "daily": "Daily production",
+      "working": "Shipped with it",
+      "learning": "Studying"
+    },
+    "depthLegend": "Depth"
+  },
+  "trajectory": {
+    "label": "Trajectory",
+    "title": "How I got here",
+    "present": "now",
+    "certificationsTitle": "Certifications and courses",
+    "certificationsNote": "Seven certificates. The ones that matter are on top.",
+    "kind": {
+      "work": "Work",
+      "study": "Study",
+      "milestone": "Milestone"
+    },
+    "type": {
+      "certificate": "Certificate",
+      "course": "Course"
+    },
+    "resume": "Download resume",
+    "resumeHint": "PDF · 1 page"
+  },
+  "signals": {
+    "label": "Signals",
+    "title": "Live from GitHub",
+    "note": "Fetched straight from the public GitHub API when this page is served.",
+    "reposLabel": "Public repositories",
+    "followersLabel": "Followers",
+    "sinceLabel": "On GitHub since",
+    "languagesLabel": "Most used languages",
+    "recentLabel": "Recently pushed",
+    "updated": "Updated",
+    "unavailable": "GitHub’s API didn’t answer just now. Data returns on the next load.",
+    "viewProfile": "View GitHub profile"
+  },
+  "personal": {
+    "label": "Off the editor",
+    "title": "The person behind the commit",
+    "localTime": "Local time in Caruaru"
+  },
+  "terminal": {
+    "label": "Terminal",
+    "title": "Rather ask it yourself?",
+    "intro": "A real terminal, with real data. Everything in here is also written above — this is a shortcut, not a gate.",
+    "hint": "Type help and hit Enter",
+    "inputLabel": "Terminal command",
+    "focusHint": "Click to focus",
+    "notFound": "command not found. Type help for the list.",
+    "cleared": "Screen cleared.",
+    "welcome": "joaovitorkc — interactive dossier. Type help to start."
   },
   "contact": {
-    "title": "Contact Me",
-    "getInTouch": "Get In Touch",
-    "description": "Have a project in mind or want to discuss a potential collaboration? Feel free to reach out to me using the contact form or through any of the channels below.",
-    "email": "Email",
-    "phone": "Phone",
-    "location": {
-      "title": "Location",
-      "place": "Caruaru, Pernambuco, Brazil"
-    },
+    "label": "Contact",
+    "title": "Let’s talk",
+    "intro": "New project, a role, or just a question about how e-Gestão solves something — reach out.",
+    "availability": "Status",
+    "directTitle": "Direct",
+    "formTitle": "Or write here",
+    "formNote": "The button opens your mail client with the message already composed. Nothing is sent without you checking it.",
+    "copy": "Copy",
+    "copied": "Copied",
     "form": {
-      "validation": {
-        "name": "Please enter your name",
-        "email": "Please enter a valid email",
-        "subject": "Please enter a subject",
-        "message": "Please enter a message"
-      },
       "name": "Name",
-      "namePlaceholder": "Your name",
+      "namePlaceholder": "What should I call you",
       "email": "Email",
-      "emailPlaceholder": "Your email",
+      "emailPlaceholder": "you@email.com",
       "subject": "Subject",
-      "subjectPlaceholder": "Message subject",
+      "subjectPlaceholder": "What it’s about",
       "message": "Message",
-      "messagePlaceholder": "Your message",
-      "send": "Send Message",
-      "sending": "Sending...",
-      "success": "Message sent!"
+      "messagePlaceholder": "Give me the context. Detail helps.",
+      "send": "Open email with this",
+      "validation": {
+        "name": "Write your name",
+        "email": "Write a valid email",
+        "subject": "Write a subject",
+        "message": "Write at least one sentence"
+      },
+      "ready": "Email composed — check it and send."
     }
   },
   "footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Next.js, TypeScript, Tailwind and GSAP.",
+    "sourceLabel": "This site is open source",
+    "colophonLabel": "Colophon",
+    "typeLabel": "Typography",
+    "backTop": "Top"
+  },
+  "palette": {
+    "placeholder": "Search a chapter, project or action…",
+    "empty": "Nothing found.",
+    "groups": {
+      "chapters": "Chapters",
+      "projects": "Projects",
+      "actions": "Actions",
+      "social": "Links"
+    },
+    "actions": {
+      "toggleTheme": "Toggle light / dark",
+      "switchLang": "Switch to Portuguese",
+      "copyEmail": "Copy email",
+      "downloadResume": "Download resume",
+      "openTerminal": "Open the terminal"
+    },
+    "open": "Open command search",
+    "hint": "Tip: hit ⌘K any time"
+  },
+  "a11y": {
+    "reducedMotionNote": "Motion reduced according to your system preference.",
+    "externalLink": "opens in a new tab",
+    "chapterProgress": "Chapter progress"
+  },
+  "notFound": {
+    "label": "Page not found",
+    "title": "This page isn’t in the dossier.",
+    "body": "The address may have changed, or the link was wrong. Everything that does exist is in the index below.",
+    "home": "Back to the start"
   }
 }
