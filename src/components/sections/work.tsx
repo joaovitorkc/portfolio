@@ -231,9 +231,17 @@ function ModuleTrack({ project, locale }: { project: Project; locale: Locale }) 
 
       // Desktop only: vertical scroll drives horizontal travel.
       // Touch keeps native horizontal swiping, which is the better interaction there.
+      //
+      // The pinning is CSS `position: sticky`, NOT ScrollTrigger's `pin`. That
+      // matters a lot: `pin: true` wraps the element in a .pin-spacer and injects
+      // ~1400px of padding-bottom *after* hydration, which shoved every section
+      // below it down the page — a single shift worth more than a full viewport,
+      // and the reason field CLS was 1.74. Sticky reserves its space in the
+      // server-rendered CSS, so nothing moves. GSAP now only writes `x`, and a
+      // transform can never cause layout shift.
       const mm = gsap.matchMedia();
       mm.add('(min-width: 768px)', () => {
-        const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 48);
+        const distance = () => Math.max(0, track.scrollWidth - outer.clientWidth + 48);
 
         const tween = gsap.to(track, {
           x: () => -distance(),
@@ -241,10 +249,10 @@ function ModuleTrack({ project, locale }: { project: Project; locale: Locale }) 
           scrollTrigger: {
             trigger: outer,
             start: 'top top',
-            end: () => `+=${distance() + window.innerHeight * 0.5}`,
+            // The scroll distance is the wrapper's own height (set in CSS below),
+            // so travel and available scroll always agree.
+            end: 'bottom bottom',
             scrub: 0.4,
-            pin: true,
-            anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
@@ -267,8 +275,10 @@ function ModuleTrack({ project, locale }: { project: Project; locale: Locale }) 
         <span className="label hidden text-ink-faint md:block">↔</span>
       </div>
 
-      <div ref={outerRef} className="relative md:min-h-[100svh] md:overflow-hidden">
-        <div className="flex md:h-[100svh] md:items-center">
+      {/* Height is the scroll budget for the horizontal travel, declared in CSS so
+          the space exists from first paint. Mobile stays auto-height and swipes. */}
+      <div ref={outerRef} className="relative md:h-[240vh]">
+        <div className="flex md:sticky md:top-0 md:h-[100svh] md:items-center md:overflow-hidden">
           <div
             ref={trackRef}
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 no-scrollbar md:snap-none md:overflow-visible md:pb-0"

@@ -82,6 +82,7 @@ export default function Nav() {
           >
             <Monogram
               plate="ink"
+              label={profile.fullName}
               className="h-9 w-9 border-rule border-ink transition-opacity group-hover:opacity-80"
             />
             <span className="hidden flex-col leading-none sm:flex">

@@ -28,11 +28,14 @@ export const fontSans = Instrument_Sans({
   display: 'swap',
 });
 
-/** Static face — 400 only, but the italic is the point. Used for pull quotes. */
+/**
+ * Static face — 400 only. Italic ONLY: the single consumer is `.serif-italic`,
+ * so shipping the roman meant a second font file nothing on the site rendered.
+ */
 export const fontSerif = Instrument_Serif({
   subsets: ['latin'],
   weight: '400',
-  style: ['normal', 'italic'],
+  style: ['italic'],
   variable: '--font-serif',
   display: 'swap',
 });

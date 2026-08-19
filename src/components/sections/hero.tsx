@@ -11,6 +11,7 @@ import { HalftonePortrait } from '@/components/fx/halftone-portrait';
 import { ParticleName } from '@/components/fx/particle-name';
 import { Marquee } from '@/components/fx/marquee';
 import { Magnetic } from '@/components/fx/magnetic';
+import { Monogram } from '@/components/brand/monogram';
 import { useSmoothScroll } from '@/components/chrome/smooth-scroll';
 
 export default function Hero() {
@@ -161,7 +162,7 @@ export default function Hero() {
               style={{ clipPath: 'inset(0% 0% 0% 0%)' }}
             >
               <HalftonePortrait
-                src="/profile-image.png"
+                src="/profile-portrait.webp"
                 alt={t('hero.portraitAlt')}
                 className="aspect-[4/5] w-full"
                 cell={6}
@@ -200,9 +201,7 @@ export default function Hero() {
           {Array.from({ length: 4 }).map((_, i) => (
             <span key={i} className="flex items-center gap-8 whitespace-nowrap py-3">
               <span className="label">{t('hero.ticker')}</span>
-              <span aria-hidden className="text-step--1">
-                ✳
-              </span>
+              <Monogram plate="none" tone="current" className="h-3 w-3 shrink-0" />
             </span>
           ))}
         </Marquee>

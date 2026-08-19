@@ -59,10 +59,20 @@ function headers(): HeadersInit {
  */
 export async function getGithubSnapshot(): Promise<GithubSnapshot | null> {
   try {
+    // Hard timeout. This runs inside the page render, so without it a slow or
+    // rate-limited GitHub becomes *our* TTFB — the section is a nice-to-have and
+    // must never hold the document hostage.
+    const signal = AbortSignal.timeout(2500);
+
     const [userRes, reposRes] = await Promise.all([
-      fetch(`${API}/users/${HANDLE}`, { headers: headers(), next: { revalidate: REVALIDATE } }),
+      fetch(`${API}/users/${HANDLE}`, {
+        headers: headers(),
+        signal,
+        next: { revalidate: REVALIDATE },
+      }),
       fetch(`${API}/users/${HANDLE}/repos?per_page=100&sort=pushed`, {
         headers: headers(),
+        signal,
         next: { revalidate: REVALIDATE },
       }),
     ]);

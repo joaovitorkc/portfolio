@@ -153,3 +153,63 @@ function Stat({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+
+/**
+ * Streaming placeholder for the chapter above.
+ *
+ * The GitHub call lives inside the page render, so without a Suspense boundary
+ * the whole document waits on api.github.com before the browser sees a single
+ * byte of the hero. With one, the shell streams instantly and this stands in
+ * until the data lands.
+ *
+ * Chapter 05 sits far below the fold, so the height swap when real content
+ * arrives happens off-screen and contributes nothing to CLS.
+ */
+export function SignalsSkeleton() {
+  return (
+    <section id="signals" aria-hidden className="relative bg-surface-1 py-chapter">
+      <div className="dossier-shell">
+        <header className="mb-10 flex items-baseline gap-4 rule-b pb-4 md:mb-16">
+          <span className="label text-brand">05</span>
+          <span className="label text-ink-faint">— — —</span>
+        </header>
+
+        <div className="h-[calc(2*var(--step-5,3rem))] max-w-2xl bg-ink/[0.06]" />
+
+        <div className="grid-cells mt-12 grid grid-cols-1 sm:grid-cols-3">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="bg-paper p-6">
+              <div className="mb-4 h-2 w-24 bg-ink/10" />
+              <div className="h-8 w-20 bg-ink/[0.08]" />
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 grid grid-cols-12 gap-y-12 md:gap-x-10">
+          <div className="col-span-12 lg:col-span-5">
+            <div className="h-2 w-32 rule-b bg-ink/10 pb-3" />
+            <ul className="mt-5 space-y-4">
+              {[0, 1, 2, 3, 4, 5].map((i) => (
+                <li key={i}>
+                  <div className="h-3 w-28 bg-ink/[0.07]" />
+                  <div className="mt-2 h-1.5 w-full bg-hairline" />
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="col-span-12 lg:col-span-7">
+            <div className="h-2 w-40 bg-ink/10" />
+            <ul className="mt-3">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <li key={i} className="rule-b py-4">
+                  <div className="h-3 w-40 bg-ink/[0.07]" />
+                  <div className="mt-2 h-2.5 w-64 max-w-full bg-ink/[0.05]" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -9,7 +9,8 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "og": "node scripts/capture-og.mjs",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "assets": "node scripts/generate-icons.mjs && node scripts/optimize-portrait.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

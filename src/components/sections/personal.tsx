@@ -6,6 +6,7 @@ import { personal, profile } from '@/content/profile';
 import { toLocale, type I18nText } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
 import { Reveal, TextReveal } from '@/components/fx/reveal';
+import { Monogram } from '@/components/brand/monogram';
 
 const isI18n = (v: string | I18nText): v is I18nText => typeof v === 'object';
 
@@ -43,7 +44,7 @@ export default function Personal() {
               <span className="label text-ink-faint transition-colors group-hover:text-paper/55">
                 {card.label[locale]}
               </span>
-              <span className="label text-brand">✳</span>
+              <Monogram plate="none" className="h-3 w-3 shrink-0" />
             </div>
 
             <div className="mt-6">

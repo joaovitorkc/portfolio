@@ -23,9 +23,7 @@ export default function Footer() {
             {Array.from({ length: 3 }).map((_, i) => (
               <span key={i} className="flex items-center gap-10 whitespace-nowrap">
                 <span className="display text-step-6 leading-none">{profile.fullName}</span>
-                <span aria-hidden className="text-brand text-step-4">
-                  ✳
-                </span>
+                <Monogram plate="none" className="h-[0.5em] w-[0.5em] shrink-0 text-step-6" />
               </span>
             ))}
           </Marquee>
@@ -36,7 +34,7 @@ export default function Footer() {
         {/* identity */}
         <div className="col-span-12 md:col-span-5">
           <div className="flex items-center gap-3">
-            <Monogram plate="paper" className="h-9 w-9" />
+            <Monogram plate="paper" label={profile.fullName} className="h-9 w-9" />
             <span className="flex flex-col leading-none">
               <span className="font-display text-sm font-extrabold uppercase tracking-tight">
                 {profile.name}

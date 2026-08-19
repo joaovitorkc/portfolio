@@ -109,7 +109,7 @@ export function personSchema(locale: Locale) {
     mainEntityOfPage: { '@id': `${absoluteUrl(`/${locale}`)}#profilepage` },
     image: {
       '@type': 'ImageObject',
-      url: absoluteUrl('/profile-image.png'),
+      url: absoluteUrl('/profile-photo.jpg'),
       caption: profile.fullName,
     },
     description: profile.headline[locale],

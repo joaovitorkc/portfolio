@@ -22,7 +22,7 @@ import sharp from 'sharp';
 const root = process.cwd();
 
 /** Supplied mark, on a 120×120 artboard. */
-const MARK = 'M66 99L92 47H66L53 21H27L66 99Z';
+const MARK = 'M54 99L28 47H54L67 21H93L54 99Z';
 const ORANGE = '#FF5A1F'; // === --brand
 const PLATE_DARK = '#1A1A1A';
 const PLATE_LIGHT = '#FFFFFF';

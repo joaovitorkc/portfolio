@@ -8,6 +8,7 @@ import { manifesto } from '@/content/profile';
 import { toLocale } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
 import { Reveal, TextReveal } from '@/components/fx/reveal';
+import { Monogram } from '@/components/brand/monogram';
 
 /**
  * The pinned chapter.
@@ -38,13 +39,14 @@ export default function Manifesto() {
         type: 'words',
         autoSplit: true,
         onSplit(self) {
+          // Pinning is CSS `position: sticky` on pinWrap, not ScrollTrigger's
+          // `pin` — same reasoning as the module track: no .pin-spacer, no
+          // post-hydration layout mutation, no CLS. GSAP only scrubs opacity.
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: root,
               start: 'top top',
               end: 'bottom bottom',
-              pin: pinWrap,
-              pinSpacing: false,
               scrub: 0.6,
             },
           });
@@ -77,7 +79,7 @@ export default function Manifesto() {
       }
     >
       <div ref={ref} className="relative mt-14 h-[260vh] md:mt-20">
-        <div data-manifesto-pin className="flex min-h-[100svh] items-center py-10">
+        <div data-manifesto-pin className="sticky top-0 flex min-h-[100svh] items-center py-10">
           <div className="grid w-full grid-cols-12 gap-6">
             <div className="col-span-12 hidden lg:col-span-2 lg:block">
               <span className="label text-ink-faint">
@@ -107,7 +109,7 @@ export default function Manifesto() {
 
       <Reveal>
         <p className="mt-6 flex items-center gap-4 rule-t pt-6 text-step-0 text-ink-muted">
-          <span className="label text-brand">✳</span>
+          <Monogram plate="none" className="h-3.5 w-3.5 shrink-0" />
           {manifesto.close[locale]}
         </p>
       </Reveal>

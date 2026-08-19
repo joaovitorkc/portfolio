@@ -53,7 +53,7 @@ export default async function OgCard({ params }: { params: Promise<{ locale: str
 
         <figure className="relative w-[300px] shrink-0 border-rule border-ink">
           <HalftonePortrait
-            src="/profile-image.png"
+            src="/profile-portrait.webp"
             alt=""
             className="aspect-[4/5] w-full"
             cell={6}

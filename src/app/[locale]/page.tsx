@@ -1,10 +1,11 @@
+import { Suspense } from 'react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Hero from '@/components/sections/hero';
 import Manifesto from '@/components/sections/manifesto';
 import Work from '@/components/sections/work';
 import Stack from '@/components/sections/stack';
 import Trajectory from '@/components/sections/trajectory';
-import Signals from '@/components/sections/signals';
+import Signals, { SignalsSkeleton } from '@/components/sections/signals';
 import Personal from '@/components/sections/personal';
 import Terminal from '@/components/sections/terminal';
 import Contact from '@/components/sections/contact';
@@ -33,8 +34,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <Work />
       <Stack />
       <Trajectory />
-      {/* server component — live GitHub data, cached for an hour */}
-      <Signals />
+      {/* Live GitHub data, cached for an hour. Behind a Suspense boundary so the
+          document streams without waiting on api.github.com. */}
+      <Suspense fallback={<SignalsSkeleton />}>
+        <Signals />
+      </Suspense>
       <Personal />
       <Terminal />
       <Contact />
