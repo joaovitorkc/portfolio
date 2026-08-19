@@ -5,7 +5,16 @@ import { useTheme } from 'next-themes';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/libs/utils';
-import { certifications, personal, profile, stack, timeline } from '@/content/profile';
+import { chapterNum } from '@/libs/chapters';
+import {
+  about,
+  certifications,
+  clientOrgs,
+  orgs,
+  profile,
+  stack,
+  timeline,
+} from '@/content/profile';
 import { projects } from '@/content/projects';
 import { toLocale, type Locale } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
@@ -157,7 +166,7 @@ export default function Terminal() {
   return (
     <Chapter
       id="terminal"
-      num="07"
+      num={chapterNum('terminal')}
       label={t('chapters.terminal')}
       title={
         <div className="grid grid-cols-12 gap-6">
@@ -254,6 +263,11 @@ function buildCommands(locale: Locale): Record<string, () => Line[]> {
     (Date.now() - new Date(profile.careerStart).getTime()) / (1000 * 60 * 60 * 24 * 365.25),
   );
 
+  // Clients, not an employer — read from the content layer so the positioning
+  // can never drift between the page and the terminal.
+  const clientNames = clientOrgs.map((o) => o.name).join(', ');
+  const clientLine = pt ? `clientes: ${clientNames}` : `clients: ${clientNames}`;
+
   const commands: Record<string, () => Line[]> = {
     help: () => [
       brand(pt ? 'comandos disponíveis' : 'available commands'),
@@ -264,6 +278,7 @@ function buildCommands(locale: Locale): Record<string, () => Line[]> {
       out('  open <slug>   ' + (pt ? 'abrir o case completo' : 'open the full case study')),
       out('  xp            ' + (pt ? 'experiência e formação' : 'experience and education')),
       out('  certs         ' + (pt ? 'certificações' : 'certifications')),
+      out('  clients       ' + (pt ? 'quem eu atendo' : 'who I work with')),
       out('  contact       ' + (pt ? 'como me achar' : 'how to reach me')),
       out('  resume        ' + (pt ? 'baixar o currículo' : 'download the resume')),
       out('  where         ' + (pt ? 'localização e fuso' : 'location and timezone')),
@@ -279,16 +294,13 @@ function buildCommands(locale: Locale): Record<string, () => Line[]> {
       brand(profile.headline[locale]),
       dim(
         pt
-          ? `${years} anos de prática · Wi Consultoria desde mar/2023`
-          : `${years} years of practice · Wi Consultoria since Mar 2023`,
+          ? `${years} anos de prática · ${clientLine}`
+          : `${years} years of practice · ${clientLine}`,
       ),
     ],
 
-    about: () => [
-      ...personal.cards.map((c) =>
-        out(`${typeof c.value === 'string' ? c.value : c.value[locale]} — ${c.body[locale]}`),
-      ),
-    ],
+    // The long-form positioning, verbatim from the content layer.
+    about: () => about.paragraphs[locale].flatMap((para) => [out(para), out('')]),
 
     stack: () =>
       stack.flatMap((group) => [
@@ -346,6 +358,18 @@ function buildCommands(locale: Locale): Record<string, () => Line[]> {
       link.click();
       return [out(pt ? 'baixando currículo…' : 'downloading resume…')];
     },
+
+    clients: () =>
+      orgs.flatMap((o) => [
+        brand(
+          `${o.name} — ${
+            o.relation === 'own' ? (pt ? 'minha empresa' : 'my company') : pt ? 'cliente' : 'client'
+          }`,
+        ),
+        out(`  ${o.sector[locale]}`),
+        out(`  ${o.url}`),
+        ...(o.since ? [dim(`  ${pt ? 'desde' : 'since'} ${o.since}`)] : []),
+      ]),
 
     where: () => [
       out(profile.location.label[locale]),

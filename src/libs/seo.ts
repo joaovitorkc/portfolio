@@ -1,4 +1,12 @@
-import { certifications, personal, profile, stack, timeline } from '@/content/profile';
+import {
+  certifications,
+  orgs,
+  ownOrgs,
+  personal,
+  profile,
+  stack,
+  timeline,
+} from '@/content/profile';
 import type { Project } from '@/content/projects';
 import { projects } from '@/content/projects';
 import type { Locale } from '@/content/types';
@@ -19,7 +27,6 @@ import { absoluteUrl, SITE_URL } from './site';
 const ID = {
   person: `${SITE_URL}/#person`,
   website: `${SITE_URL}/#website`,
-  employer: `${SITE_URL}/#wi-consultoria`,
   school: `${SITE_URL}/#unifavip`,
 } as const;
 
@@ -49,17 +56,35 @@ export function languageAlternates(path = '') {
 /* Entities                                                            */
 /* ------------------------------------------------------------------ */
 
-const employer = {
+/**
+ * Organisations, built from the content layer so the page and the graph can
+ * never disagree about who is a client and who isn't.
+ *
+ * Clients are deliberately NOT attached to the Person via `worksFor` — that
+ * property means employment and asserting it would be false. They hang off each
+ * project as `sourceOrganization` ("the Organization on whose behalf the creator
+ * was working"), which is precisely a client relationship.
+ *
+ * His own company uses `memberOf`, which states the association without
+ * implying anyone employs him.
+ */
+const orgId = (id: string) => `${SITE_URL}/#org-${id}`;
+
+const orgNode = (org: (typeof orgs)[number], locale: Locale) => ({
   '@type': 'Organization',
-  '@id': ID.employer,
-  name: 'Wi Consultoria',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: profile.location.city,
-    addressRegion: profile.location.state,
-    addressCountry: 'BR',
-  },
-} as const;
+  '@id': orgId(org.id),
+  name: org.name,
+  url: org.url,
+  sameAs: org.url,
+  description: org.what[locale],
+});
+
+const orgNodes = (locale: Locale) => orgs.map((org) => orgNode(org, locale));
+
+const clientNodeFor = (name: string | undefined) => {
+  const match = orgs.find((org) => org.name === name);
+  return match ? { '@id': orgId(match.id) } : undefined;
+};
 
 const school = {
   '@type': 'CollegeOrUniversity',
@@ -133,8 +158,8 @@ export function personSchema(locale: Locale) {
         longitude: profile.location.coords.lon,
       },
     },
-    worksFor: employer,
     alumniOf: school,
+    memberOf: ownOrgs.map((org) => ({ '@id': orgId(org.id) })),
     hasOccupation: {
       '@type': 'Occupation',
       name: profile.role[locale],
@@ -180,6 +205,7 @@ export function homeSchema(locale: Locale, description: string) {
     '@graph': [
       websiteSchema(locale),
       personSchema(locale),
+      ...orgNodes(locale),
       {
         '@type': 'ProfilePage',
         '@id': `${url}#profilepage`,
@@ -213,6 +239,7 @@ export function projectSchema(project: Project, locale: Locale) {
     '@graph': [
       websiteSchema(locale),
       personSchema(locale),
+      ...orgNodes(locale),
       {
         '@type': 'BreadcrumbList',
         '@id': `${url}#breadcrumbs`,
@@ -258,7 +285,9 @@ export function projectSchema(project: Project, locale: Locale) {
         ...(startYear ? { dateCreated: startYear } : {}),
         // `contributor`, not `author`: this is client work built by a team.
         contributor: { '@id': ID.person },
-        sourceOrganization: employer,
+        ...(clientNodeFor(project.client)
+          ? { sourceOrganization: clientNodeFor(project.client) }
+          : {}),
         keywords: project.tech.join(', '),
         genre: project.sector[locale],
         audience: {

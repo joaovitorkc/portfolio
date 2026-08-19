@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { Download } from 'lucide-react';
 import { cn } from '@/libs/utils';
+import { chapterNum } from '@/libs/chapters';
 import { certifications, profile, timeline } from '@/content/profile';
 import { toLocale, type Locale } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
@@ -41,14 +42,19 @@ export default function Trajectory() {
   return (
     <Chapter
       id="trajectory"
-      num="04"
+      num={chapterNum('trajectory')}
       label={t('chapters.trajectory')}
       title={
         <div className="grid grid-cols-12 items-end gap-6">
-          <TextReveal as="h2" className="display col-span-12 text-step-5 lg:col-span-7">
-            {t('trajectory.title')}
-          </TextReveal>
-          <Reveal className="col-span-12 lg:col-span-5 lg:justify-self-end">
+          <div className="col-span-12 lg:col-span-7">
+            <TextReveal as="h2" className="display text-step-5">
+              {t('trajectory.title')}
+            </TextReveal>
+            <Reveal>
+              <p className="mt-6 max-w-xl text-step-0 text-ink-muted">{t('trajectory.intro')}</p>
+            </Reveal>
+          </div>
+          <Reveal className="col-span-12 lg:col-span-5 lg:justify-self-end lg:self-end">
             <Magnetic>
               <button
                 type="button"
@@ -85,7 +91,14 @@ export default function Trajectory() {
               <div className="col-span-12 md:col-span-9">
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                   <h3 className="display text-step-3 leading-none">{entry.title[locale]}</h3>
-                  <span className="text-step-0 text-brand">{entry.org}</span>
+                  <span className="flex items-baseline gap-2">
+                    {entry.relation && (
+                      <span className="label text-ink-faint">
+                        {t(`trajectory.relation.${entry.relation}`)}
+                      </span>
+                    )}
+                    <span className="text-step-0 text-brand">{entry.org}</span>
+                  </span>
                   {entry.place && <span className="label text-ink-faint">{entry.place}</span>}
                 </div>
 

@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import { cn } from '@/libs/utils';
+import { chapterNum } from '@/libs/chapters';
 import { stack } from '@/content/profile';
 import { toLocale } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
@@ -16,7 +17,7 @@ export default function Stack() {
   return (
     <Chapter
       id="stack"
-      num="03"
+      num={chapterNum('stack')}
       label={t('chapters.stack')}
       title={
         <div className="grid grid-cols-12 gap-6">

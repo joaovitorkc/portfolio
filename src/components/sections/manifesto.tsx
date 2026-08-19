@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { gsap, prefersReducedMotion, registerMotion, SplitText } from '@/libs/motion';
 import { manifesto } from '@/content/profile';
 import { toLocale } from '@/content/types';
+import { chapterNum } from '@/libs/chapters';
 import { Chapter } from '@/components/chrome/chapter';
 import { Reveal, TextReveal } from '@/components/fx/reveal';
 import { Monogram } from '@/components/brand/monogram';
@@ -70,7 +71,7 @@ export default function Manifesto() {
   return (
     <Chapter
       id="manifesto"
-      num="01"
+      num={chapterNum('manifesto')}
       label={t('chapters.manifesto')}
       title={
         <TextReveal as="h2" className="display max-w-4xl text-step-5 text-balance" stagger={0.09}>

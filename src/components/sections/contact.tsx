@@ -17,6 +17,7 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import { cn } from '@/libs/utils';
+import { chapterNum } from '@/libs/chapters';
 import { profile } from '@/content/profile';
 import { toLocale } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
@@ -113,7 +114,7 @@ export default function Contact() {
   return (
     <Chapter
       id="contact"
-      num="08"
+      num={chapterNum('contact')}
       label={t('chapters.contact')}
       tone="surface"
       title={

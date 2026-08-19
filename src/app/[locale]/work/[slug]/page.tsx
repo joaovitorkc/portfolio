@@ -89,6 +89,7 @@ export default async function CaseStudy({ params }: { params: Promise<Params> })
 
   const record = [
     { label: t('work.roleLabel'), value: project.role[loc] },
+    ...(project.client ? [{ label: t('work.clientLabel'), value: project.client }] : []),
     { label: t('work.sectorLabel'), value: project.sector[loc] },
     { label: t('work.yearLabel'), value: project.year[loc] },
     { label: t('work.statusLabel'), value: t(`work.status.${project.status}`) },

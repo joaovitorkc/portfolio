@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { ArrowUpRight, Lock } from 'lucide-react';
 import { cn } from '@/libs/utils';
+import { chapterNum } from '@/libs/chapters';
 import { gsap, prefersReducedMotion, registerMotion } from '@/libs/motion';
 import { featuredProjects, secondaryProjects } from '@/content/projects';
 import { toLocale, type Locale } from '@/content/types';
@@ -23,7 +24,7 @@ export default function Work() {
   return (
     <Chapter
       id="work"
-      num="02"
+      num={chapterNum('work')}
       label={t('chapters.work')}
       tone="surface"
       title={
@@ -119,6 +120,7 @@ function FeaturedCard({ project, locale }: { project: Project; locale: Locale })
 
   const rows = [
     { label: t('work.roleLabel'), value: project.role[locale] },
+    ...(project.client ? [{ label: t('work.clientLabel'), value: project.client }] : []),
     { label: t('work.sectorLabel'), value: project.sector[locale] },
     { label: t('work.yearLabel'), value: project.year[locale] },
     { label: t('work.statusLabel'), value: t(`work.status.${project.status}`), live: true },

@@ -80,11 +80,86 @@ export const profile = {
   /** Career start — used to compute "years of practice" at render time. */
   careerStart: '2023-03-01',
 
+  /** Career start is also when the first client engagement began. */
+
   resume: {
     pt: '/curriculo.pdf',
     en: '/resume.pdf',
   } satisfies I18nText,
 } as const;
+
+/* ------------------------------------------------------------------ */
+/* Organisations — two distinct relationships, never flattened           */
+/* ------------------------------------------------------------------ */
+
+/**
+ * `relation` is the whole point of this structure.
+ *
+ *   'own'    — his own company. Listing it as a client would inflate the client
+ *              count and misrepresent what it is.
+ *   'client' — someone who hired him.
+ *
+ * The section renders these as two tiers for exactly that reason.
+ */
+export type Org = {
+  id: string;
+  name: string;
+  url: string;
+  relation: 'own' | 'client';
+  sector: I18nText;
+  what: I18nText;
+  /** only set where the real date is known — never guessed */
+  since?: string;
+};
+
+export const orgs: Org[] = [
+  {
+    id: 'quiral',
+    name: 'Quiral Labs',
+    url: 'https://www.quirallabs.com.br/',
+    relation: 'own',
+    sector: {
+      pt: 'Software sob medida e impressão 3D',
+      en: 'Custom software and 3D printing',
+    },
+    what: {
+      pt: 'Minha empresa. Software sob medida e impressão 3D — de onde eu assino o que construo.',
+      en: 'My own company. Custom software and 3D printing — where the work I build carries my name.',
+    },
+  },
+  {
+    id: 'wi',
+    name: 'Wi Consultoria',
+    url: 'https://www.wiconsultoria.com.br/',
+    relation: 'client',
+    since: '2023-03',
+    sector: {
+      pt: 'Software para saúde pública',
+      en: 'Public health software',
+    },
+    what: {
+      pt: 'O ecossistema e-Gestão e o e-SUS em nuvem para secretarias municipais de saúde — presente em mais de 400 municípios, em 26 estados.',
+      en: 'The e-Gestão ecosystem and cloud-hosted e-SUS for municipal health departments — live across more than 400 municipalities in 26 states.',
+    },
+  },
+  {
+    id: 'catsuc',
+    name: 'Catsuc Labs',
+    url: 'https://www.catsuc.com/',
+    relation: 'client',
+    sector: {
+      pt: 'Estúdio de software sob medida',
+      en: 'Custom software studio',
+    },
+    what: {
+      pt: 'Plataformas web, aplicativos, sistemas internos e infraestrutura em nuvem. Sete anos de estrada e mais de 40 projetos entregues.',
+      en: 'Web platforms, mobile apps, internal systems and cloud infrastructure. Seven years in, 40+ projects delivered.',
+    },
+  },
+];
+
+export const ownOrgs = orgs.filter((o) => o.relation === 'own');
+export const clientOrgs = orgs.filter((o) => o.relation === 'client');
 
 /* ------------------------------------------------------------------ */
 /* Manifesto — the pinned chapter. Each line reveals on its own.       */
@@ -128,13 +203,13 @@ export const manifesto = {
 export const about = {
   paragraphs: {
     pt: [
-      'Sou desenvolvedor full stack na Wi Consultoria desde março de 2023, em Caruaru. Comecei mexendo em tudo e acabei encontrando meu lugar onde o problema é grande: sistemas de gestão para secretarias municipais de saúde, hoje em uso em mais de 400 municípios.',
+      'Sou desenvolvedor full stack em Caruaru e atendo clientes desde março de 2023. Comecei mexendo em tudo e acabei encontrando meu lugar onde o problema é grande: sistemas de gestão para secretarias municipais de saúde, hoje em uso em mais de 400 municípios. Meu principal cliente é a Wi Consultoria.',
       'Meu dia é TypeScript de ponta a ponta — Next.js e React na frente, Express e Fastify atrás, PostgreSQL modelado e otimizado à mão. Mas o trabalho não para no código: eu também gerencio os projetos em andamento, configuro e endureço as máquinas que rodam as aplicações e cuido do ambiente de produção.',
       'A parte que eu mais gosto é a que ninguém vê: transformar a regra crua de uma nota técnica do Ministério da Saúde em uma query que responde em milissegundos para mais de 200 telas diferentes.',
       'Em paralelo, curso Ciência da Computação na UniFavip Wyden. A faculdade me dá o alicerce; a prática me deu a velocidade.',
     ],
     en: [
-      'I’ve been a full stack developer at Wi Consultoria since March 2023, in Caruaru, Brazil. I started out touching everything and ended up where the problem is big: management systems for municipal health departments, today in use across more than 400 municipalities.',
+      'I’m a full stack developer based in Caruaru, Brazil, working with clients since March 2023. I started out touching everything and ended up where the problem is big: management systems for municipal health departments, today in use across more than 400 municipalities. My main client is Wi Consultoria.',
       'My day is TypeScript end to end — Next.js and React up front, Express and Fastify behind, PostgreSQL modeled and tuned by hand. But the job doesn’t stop at code: I also run the ongoing projects, configure and harden the machines the applications run on, and own the production environment.',
       'My favourite part is the part nobody sees: turning the raw rule of a Ministry of Health technical note into a query that answers in milliseconds across 200+ different screens.',
       'Alongside that I’m studying Computer Science at UniFavip Wyden. College gives me the foundation; the work gave me the speed.',
@@ -153,6 +228,11 @@ export type TimelineEntry = {
   kind: 'work' | 'study' | 'milestone';
   title: I18nText;
   org: string;
+  /**
+   * How he relates to `org`. Matters: 'client' must never render as employment,
+   * on the page or in the structured data.
+   */
+  relation?: 'client' | 'school';
   place?: string;
   detail: I18nText;
   tags?: string[];
@@ -160,43 +240,69 @@ export type TimelineEntry = {
 
 export const timeline: TimelineEntry[] = [
   {
-    id: 'wi',
-    from: '2023-03',
-    to: null,
-    kind: 'work',
-    title: { pt: 'Desenvolvedor Full Stack', en: 'Full Stack Developer' },
-    org: 'Wi Consultoria',
-    place: 'Caruaru, PE',
-    detail: {
-      pt: 'Desenvolvimento e manutenção de sistemas de gestão em saúde pública. Frente e back em TypeScript, modelagem e otimização de PostgreSQL, gestão dos projetos em andamento e configuração e segurança dos servidores de produção.',
-      en: 'Building and maintaining public-health management systems. Front and back in TypeScript, PostgreSQL modeling and tuning, running the ongoing projects, plus configuration and security of the production servers.',
-    },
-    tags: ['TypeScript', 'Next.js', 'React', 'Express', 'Fastify', 'PostgreSQL', 'Redis', 'Linux'],
-  },
-  {
     id: 'wyden',
     from: '2025-01',
     to: null,
     kind: 'study',
     title: { pt: 'Ciência da Computação', en: 'Computer Science' },
     org: 'UniFavip Wyden',
+    relation: 'school',
     place: 'Caruaru, PE',
     detail: {
-      pt: 'Graduação em andamento. Estrutura de dados em C, algoritmos e os fundamentos que a prática não ensina sozinha.',
-      en: 'Degree in progress. Data structures in C, algorithms, and the fundamentals hands-on work alone doesn’t teach.',
+      pt: 'Graduação em andamento. Estrutura de dados em C, algoritmos e complexidade — os fundamentos que a prática usa todo dia sem nomear.',
+      en: 'Degree in progress. Data structures in C, algorithms and complexity — the fundamentals practice leans on daily without ever naming them.',
     },
-    tags: ['C', 'Algoritmos', 'Estrutura de dados'],
+    tags: ['C', 'Estrutura de dados', 'Algoritmos', 'Complexidade'],
+  },
+  {
+    id: 'cloud-security',
+    from: '2025',
+    to: '2025',
+    kind: 'study',
+    title: { pt: 'Nuvem e segurança, formalizadas', en: 'Cloud and security, formalised' },
+    org: 'AWS Academy · Cisco',
+    detail: {
+      pt: 'Arquitetura e fundamentos de nuvem pela AWS Academy, e gestão de ameaças cibernéticas pela Cisco. Eu já subia e endurecia servidor na prática; aqui foi para saber o nome do que eu estava fazendo — e o que eu estava fazendo errado.',
+      en: 'Cloud architecting and cloud foundations through AWS Academy, plus cyber threat management through Cisco. I was already deploying and hardening servers; this was about learning the names for what I was doing — and what I was doing wrong.',
+    },
+    tags: ['AWS', 'Arquitetura em nuvem', 'Segurança', 'Redes'],
+  },
+  {
+    id: 'fullstack-week',
+    from: '2025',
+    to: '2025',
+    kind: 'study',
+    title: { pt: 'Full Stack Week', en: 'Full Stack Week' },
+    org: 'Full Stack Week',
+    detail: {
+      pt: 'Semana intensiva de projeto full stack ponta a ponta. Menos sobre aprender sintaxe e mais sobre ver outra pessoa tomar decisões de arquitetura em tempo real.',
+      en: 'An intensive week building a full stack project end to end. Less about syntax and more about watching someone else make architecture decisions in real time.',
+    },
+    tags: ['Next.js', 'Prisma', 'Arquitetura'],
+  },
+  {
+    id: 'js-deep',
+    from: '2023',
+    to: '2023',
+    kind: 'study',
+    title: { pt: 'JavaScript a fundo', en: 'JavaScript, properly' },
+    org: 'Hashtag Treinamentos',
+    detail: {
+      pt: 'Intensivão de JavaScript no mesmo ano em que peguei o primeiro sistema em produção. Aprender a linguagem enquanto ela já estava rodando para outra pessoa muda o nível de atenção.',
+      en: 'A JavaScript intensive in the same year I took on my first production system. Learning the language while it was already running for someone else changes how closely you pay attention.',
+    },
+    tags: ['JavaScript', 'DOM', 'Assíncrono'],
   },
   {
     id: 'first-code',
     from: '2022',
     to: '2022',
     kind: 'milestone',
-    title: { pt: 'O começo', en: 'Where it started' },
+    title: { pt: 'O começo, por conta', en: 'Where it started, on my own' },
     org: 'Udemy · Rocketseat',
     detail: {
-      pt: 'Dois cursos longos de desenvolvimento web e React, feitos por conta. Foi o suficiente para entrar no mercado no ano seguinte.',
-      en: 'Two long courses on web development and React, done on my own. Enough to get into the industry the following year.',
+      pt: 'Dois cursos longos de desenvolvimento web e React, feitos sozinho, sem ninguém cobrando. Foi o suficiente para entrar no mercado no ano seguinte — e é a parte da história que eu mais defendo.',
+      en: 'Two long courses on web development and React, done alone with nobody checking. Enough to get into the industry the following year — and the part of the story I defend hardest.',
     },
     tags: ['HTML', 'CSS', 'JavaScript', 'React'],
   },

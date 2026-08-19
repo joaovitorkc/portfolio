@@ -39,7 +39,8 @@
     "signals": "Signals",
     "offEditor": "Off the editor",
     "terminal": "Terminal",
-    "contact": "Contact"
+    "contact": "Contact",
+    "clients": "Clients"
   },
   "hero": {
     "eyebrow": "Personal dossier",
@@ -102,7 +103,8 @@
     "featuredLabel": "Lead case study",
     "otherTitle": "The other systems",
     "otherIntro": "Same ecosystem, different problems. Each one has its own case study.",
-    "openCaseShort": "Open case"
+    "openCaseShort": "Open case",
+    "clientLabel": "Client"
   },
   "stack": {
     "label": "Arsenal",
@@ -131,7 +133,12 @@
       "course": "Course"
     },
     "resume": "Download resume",
-    "resumeHint": "PDF · 1 page"
+    "resumeHint": "PDF · 1 page",
+    "relation": {
+      "client": "Client",
+      "school": "Institution"
+    },
+    "intro": "No job titles here — just how I learned. The rail below is the narrative; the certificates at the end are the receipts."
   },
   "signals": {
     "label": "Signals",
@@ -228,5 +235,16 @@
     "title": "This page isn’t in the dossier.",
     "body": "The address may have changed, or the link was wrong. Everything that does exist is in the index below.",
     "home": "Back to the start"
+  },
+  "clients": {
+    "label": "Clients",
+    "title": "A company of my own, and the people who trust me with theirs",
+    "intro": "Two different things, and I don’t blur them: Quiral Labs is my own company. Wi Consultoria and Catsuc Labs are clients — people who hired me to build what can’t fail.",
+    "ownLabel": "My company",
+    "clientLabel": "Client",
+    "clientsTitle": "Who hires me",
+    "count": "{count} clients",
+    "since": "Since",
+    "delivered": "{count} systems delivered"
   }
 }

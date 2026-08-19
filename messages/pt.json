@@ -39,7 +39,8 @@
     "signals": "Sinais",
     "offEditor": "Fora do editor",
     "terminal": "Terminal",
-    "contact": "Contato"
+    "contact": "Contato",
+    "clients": "Clientes"
   },
   "hero": {
     "eyebrow": "Dossiê pessoal",
@@ -102,7 +103,8 @@
     "featuredLabel": "Case principal",
     "otherTitle": "Os outros sistemas",
     "otherIntro": "Mesmo ecossistema, problemas diferentes. Cada um tem case próprio.",
-    "openCaseShort": "Abrir case"
+    "openCaseShort": "Abrir case",
+    "clientLabel": "Cliente"
   },
   "stack": {
     "label": "Arsenal",
@@ -131,7 +133,12 @@
       "course": "Curso"
     },
     "resume": "Baixar currículo",
-    "resumeHint": "PDF · 1 página"
+    "resumeHint": "PDF · 1 página",
+    "relation": {
+      "client": "Cliente",
+      "school": "Instituição"
+    },
+    "intro": "Sem vaga, sem cargo — só o caminho de como eu aprendi. A régua abaixo é a narrativa; os certificados no fim são o comprovante."
   },
   "signals": {
     "label": "Sinais",
@@ -228,5 +235,16 @@
     "title": "Esta página não existe no dossiê.",
     "body": "O endereço pode ter mudado, ou o link estava errado. Tudo o que existe está no índice abaixo.",
     "home": "Voltar ao início"
+  },
+  "clients": {
+    "label": "Clientes",
+    "title": "Uma empresa minha, e quem confia o sistema deles a mim",
+    "intro": "Duas coisas diferentes, e eu não misturo: a Quiral Labs é minha empresa. Wi Consultoria e Catsuc Labs são clientes — gente que me contratou para construir o que não pode falhar.",
+    "ownLabel": "Minha empresa",
+    "clientLabel": "Cliente",
+    "clientsTitle": "Quem me contrata",
+    "count": "{count} clientes",
+    "since": "Desde",
+    "delivered": "{count} sistemas entregues"
   }
 }

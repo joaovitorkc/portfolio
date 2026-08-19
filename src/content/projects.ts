@@ -48,6 +48,8 @@ export type Project = {
   repoUrl?: string;
 
   role: I18nText;
+  /** the client the work was delivered for — never an employer */
+  client?: string;
   /** one paragraph for the home listing */
   summary: I18nText;
 
@@ -91,9 +93,10 @@ export const projects: Project[] = [
     liveUrl: 'https://egestao.esus.com.br',
 
     role: {
-      pt: 'Desenvolvedor full stack · gestão de projeto · banco e infraestrutura',
-      en: 'Full stack developer · project management · database and infrastructure',
+      pt: 'Desenvolvedor full stack · condução do projeto · banco e infraestrutura',
+      en: 'Full stack developer · project delivery · database and infrastructure',
     },
+    client: 'Wi Consultoria',
 
     summary: {
       pt: 'Um portal, vários sistemas: relatórios da atenção primária, Saúde Brasil 360, vigilância sanitária, BPA Online, painel de chamadas na recepção, portal do cidadão e assistente com IA. Multi-inquilino por código IBGE, usado dentro de secretarias municipais de saúde em mais de 400 municípios. É o maior sistema em que eu trabalho — e o que mais me ensinou.',
@@ -397,6 +400,7 @@ export const projects: Project[] = [
       pt: 'Desenvolvedor full stack',
       en: 'Full stack developer',
     },
+    client: 'Wi Consultoria',
 
     summary: {
       pt: 'O sistema que o fiscal usa na rua e o coordenador usa na mesa: cadastro de estabelecimentos, roteiro de inspeção, emissão de licença sanitária e tratamento de reclamação — com documento oficial saindo em PDF no fim do fluxo.',
@@ -572,6 +576,7 @@ export const projects: Project[] = [
       pt: 'Desenvolvedor full stack — extensão, servidor WebSocket e painel',
       en: 'Full stack developer — extension, WebSocket server and panel',
     },
+    client: 'Wi Consultoria',
 
     summary: {
       pt: 'A TV da sala de espera chama o paciente por nome, em voz alta, no segundo em que o profissional clica dentro do próprio e-SUS. Quatro peças conversando — extensão de navegador, servidor WebSocket, painel na TV e API — sem tocar uma linha do código do PEC.',
@@ -746,6 +751,7 @@ export const projects: Project[] = [
     liveUrl: 'https://egestao.esus.com.br/produtos/bpa-online',
 
     role: { pt: 'Desenvolvedor full stack', en: 'Full stack developer' },
+    client: 'Wi Consultoria',
 
     summary: {
       pt: 'Digitação, aprovação, exportação e auditoria do Boletim de Produção Ambulatorial — BPA-C, BPA-I e BPA-S. O ciclo inteiro que a secretaria precisa fechar por competência para o município receber pela produção que realizou.',
@@ -918,6 +924,7 @@ export const projects: Project[] = [
       pt: 'Desenvolvedor full stack — manutenção e correção em sistema legado',
       en: 'Full stack developer — maintenance and fixes on a legacy system',
     },
+    client: 'Wi Consultoria',
 
     summary: {
       pt: 'Sistema de gestão de clínica terapêutica que eu não escrevi e que não pode parar: hóspedes, internamentos, grupos terapêuticos, estoque de medicamentos, financeiro e relatórios. React com Vite na frente, Express com Prisma atrás — e a disciplina de consertar sem reescrever.',

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { personal, profile } from '@/content/profile';
 import { toLocale, type I18nText } from '@/content/types';
+import { chapterNum } from '@/libs/chapters';
 import { Chapter } from '@/components/chrome/chapter';
 import { Reveal, TextReveal } from '@/components/fx/reveal';
 import { Monogram } from '@/components/brand/monogram';
@@ -17,7 +18,7 @@ export default function Personal() {
   return (
     <Chapter
       id="off-editor"
-      num="06"
+      num={chapterNum('offEditor')}
       label={t('chapters.offEditor')}
       title={
         <div className="grid grid-cols-12 items-end gap-6">

@@ -2,6 +2,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { ArrowUpRight, GitBranch } from 'lucide-react';
 import { getGithubSnapshot } from '@/libs/github';
 import { toLocale } from '@/content/types';
+import { chapterNum } from '@/libs/chapters';
 import { Chapter } from '@/components/chrome/chapter';
 import { Reveal, TextReveal } from '@/components/fx/reveal';
 
@@ -26,7 +27,7 @@ export default async function Signals() {
   return (
     <Chapter
       id="signals"
-      num="05"
+      num={chapterNum('signals')}
       label={t('chapters.signals')}
       tone="surface"
       title={

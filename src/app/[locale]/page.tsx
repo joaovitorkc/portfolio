@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Hero from '@/components/sections/hero';
 import Manifesto from '@/components/sections/manifesto';
 import Work from '@/components/sections/work';
+import Clients from '@/components/sections/clients';
 import Stack from '@/components/sections/stack';
 import Trajectory from '@/components/sections/trajectory';
 import Signals, { SignalsSkeleton } from '@/components/sections/signals';
@@ -32,6 +33,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <Hero />
       <Manifesto />
       <Work />
+      <Clients />
       <Stack />
       <Trajectory />
       {/* Live GitHub data, cached for an hour. Behind a Suspense boundary so the
