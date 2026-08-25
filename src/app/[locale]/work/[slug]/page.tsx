@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArrowLeft, ArrowUpRight, Lock } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
-import { getProject, projects } from '@/content/projects';
+import { caseProjects, getProject } from '@/content/projects';
 import { profile } from '@/content/profile';
 import { toLocale } from '@/content/types';
 import { absoluteUrl } from '@/libs/site';
@@ -18,7 +18,7 @@ type Params = { locale: string; slug: string };
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    projects.map((project) => ({ locale, slug: project.slug })),
+    caseProjects.map((project) => ({ locale, slug: project.slug })),
   );
 }
 
@@ -73,25 +73,28 @@ export default async function CaseStudy({ params }: { params: Promise<Params> })
   // without an architecture or modules block never leaves a gap in the sequence.
   let markIndex = 0;
   const nextMark = () => String.fromCharCode(65 + markIndex++);
-  const markContext = nextMark();
-  const markProblem = nextMark();
-  const markApproach = nextMark();
-  const markArchitecture = project.architecture?.length ? nextMark() : null;
-  const markModules = project.modules?.length ? nextMark() : null;
-  const markHardParts = project.hardParts?.length ? nextMark() : null;
-  const markResponsibilities = nextMark();
-  const markOutcome = nextMark();
+  const mark = (present: unknown) => (present ? nextMark() : null);
+  const markContext = mark(project.context);
+  const markProblem = mark(project.problem);
+  const markApproach = mark(project.approach);
+  const markArchitecture = mark(project.architecture?.length);
+  const markModules = mark(project.modules?.length);
+  const markHardParts = mark(project.hardParts?.length);
+  const markResponsibilities = mark(project.responsibilities);
+  const markOutcome = mark(project.outcome);
+
+  const metrics = project.metrics ?? [];
 
   // Sequential links keep every case study two clicks from the others, which
   // matters for crawl depth when the index is a single page.
-  const position = projects.findIndex((p) => p.slug === project.slug);
-  const nextProject = projects[(position + 1) % projects.length];
+  const position = caseProjects.findIndex((p) => p.slug === project.slug);
+  const nextProject = caseProjects[(position + 1) % caseProjects.length];
 
   const record = [
     { label: t('work.roleLabel'), value: project.role[loc] },
     ...(project.client ? [{ label: t('work.clientLabel'), value: project.client }] : []),
     { label: t('work.sectorLabel'), value: project.sector[loc] },
-    { label: t('work.yearLabel'), value: project.year[loc] },
+    ...(project.year ? [{ label: t('work.yearLabel'), value: project.year[loc] }] : []),
     { label: t('work.statusLabel'), value: t(`work.status.${project.status}`) },
   ];
 
@@ -174,49 +177,57 @@ export default async function CaseStudy({ params }: { params: Promise<Params> })
         </header>
 
         {/* ---------------- metrics ---------------- */}
-        <section aria-labelledby="case-metrics" className="bg-ink text-paper">
-          <div className="dossier-shell py-14 md:py-20">
-            <h2 id="case-metrics" className="label mb-8 text-paper/45">
-              {t('work.case.metricsLabel')}
-            </h2>
-            <div className="grid-cells-invert grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
-              {project.metrics.map((m) => (
-                <div key={m.label[loc]} className="bg-ink p-5">
-                  <p className="display tabular text-step-4 leading-none text-brand">{m.value}</p>
-                  <p className="mt-3 text-step--2 font-medium uppercase leading-tight tracking-wide text-paper/75">
-                    {m.label[loc]}
-                  </p>
-                  {m.hint && (
-                    <p className="mt-2 text-step--2 leading-snug text-paper/45">{m.hint[loc]}</p>
-                  )}
-                </div>
-              ))}
+        {metrics.length > 0 ? (
+          <section aria-labelledby="case-metrics" className="bg-ink text-paper">
+            <div className="dossier-shell py-14 md:py-20">
+              <h2 id="case-metrics" className="label mb-8 text-paper/45">
+                {t('work.case.metricsLabel')}
+              </h2>
+              <div className="grid-cells-invert grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+                {metrics.map((m) => (
+                  <div key={m.label[loc]} className="bg-ink p-5">
+                    <p className="display tabular text-step-4 leading-none text-brand">{m.value}</p>
+                    <p className="mt-3 text-step--2 font-medium uppercase leading-tight tracking-wide text-paper/75">
+                      {m.label[loc]}
+                    </p>
+                    {m.hint && (
+                      <p className="mt-2 text-step--2 leading-snug text-paper/45">{m.hint[loc]}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : null}
 
         {/* ---------------- narrative ---------------- */}
         <div className="dossier-shell py-16 md:py-24">
           <div className="grid grid-cols-12 gap-y-14 md:gap-x-10">
-            <Prose
-              id="context"
-              index={markContext}
-              label={t('work.case.context')}
-              body={project.context[loc]}
-            />
-            <Prose
-              id="problem"
-              index={markProblem}
-              label={t('work.case.problem')}
-              body={project.problem[loc]}
-              accent
-            />
-            <Prose
-              id="approach"
-              index={markApproach}
-              label={t('work.case.approach')}
-              body={project.approach[loc]}
-            />
+            {project.context && markContext ? (
+              <Prose
+                id="context"
+                index={markContext}
+                label={t('work.case.context')}
+                body={project.context[loc]}
+              />
+            ) : null}
+            {project.problem && markProblem ? (
+              <Prose
+                id="problem"
+                index={markProblem}
+                label={t('work.case.problem')}
+                body={project.problem[loc]}
+                accent
+              />
+            ) : null}
+            {project.approach && markApproach ? (
+              <Prose
+                id="approach"
+                index={markApproach}
+                label={t('work.case.approach')}
+                body={project.approach[loc]}
+              />
+            ) : null}
           </div>
         </div>
 
@@ -342,44 +353,51 @@ export default async function CaseStudy({ params }: { params: Promise<Params> })
         {/* ---------------- responsibilities + outcome ---------------- */}
         <section className="dossier-shell py-16 md:py-24">
           <div className="grid grid-cols-12 gap-y-14 md:gap-x-10">
-            <div className="col-span-12 lg:col-span-5">
-              <div className="flex items-baseline gap-4 rule-b pb-4">
-                <span className="label text-brand">{markResponsibilities}</span>
-                <h2 className="label text-ink-muted">{t('work.case.responsibilities')}</h2>
-              </div>
-              <ul className="mt-6 space-y-3">
-                {project.responsibilities[loc].map((item) => (
-                  <li key={item} className="flex gap-3 text-step--1 leading-relaxed text-ink-muted">
-                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 bg-brand" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="col-span-12 lg:col-span-7">
-              <div className="flex items-baseline gap-4 rule-b pb-4">
-                <span className="label text-brand">{markOutcome}</span>
-                <h2 className="label text-ink-muted">{t('work.case.outcome')}</h2>
-              </div>
-              <p className="mt-6 text-step-1 leading-snug">{project.outcome[loc]}</p>
-
-              {project.learned ? (
-                <div className="mt-10 border-rule border-ink bg-paper p-6 md:p-8">
-                  <h3 className="label mb-5 text-ink-faint">{t('work.case.learned')}</h3>
-                  <ol className="space-y-4">
-                    {project.learned[loc].map((item, i) => (
-                      <li key={item} className="flex gap-4">
-                        <span className="label mt-1 shrink-0 tabular text-brand">
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <span className="text-step-0 leading-snug">{item}</span>
-                      </li>
-                    ))}
-                  </ol>
+            {project.responsibilities && markResponsibilities ? (
+              <div className="col-span-12 lg:col-span-5">
+                <div className="flex items-baseline gap-4 rule-b pb-4">
+                  <span className="label text-brand">{markResponsibilities}</span>
+                  <h2 className="label text-ink-muted">{t('work.case.responsibilities')}</h2>
                 </div>
-              ) : null}
-            </div>
+                <ul className="mt-6 space-y-3">
+                  {project.responsibilities[loc].map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-3 text-step--1 leading-relaxed text-ink-muted"
+                    >
+                      <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 bg-brand" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {project.outcome && markOutcome ? (
+              <div className="col-span-12 lg:col-span-7">
+                <div className="flex items-baseline gap-4 rule-b pb-4">
+                  <span className="label text-brand">{markOutcome}</span>
+                  <h2 className="label text-ink-muted">{t('work.case.outcome')}</h2>
+                </div>
+                <p className="mt-6 text-step-1 leading-snug">{project.outcome[loc]}</p>
+
+                {project.learned ? (
+                  <div className="mt-10 border-rule border-ink bg-paper p-6 md:p-8">
+                    <h3 className="label mb-5 text-ink-faint">{t('work.case.learned')}</h3>
+                    <ol className="space-y-4">
+                      {project.learned[loc].map((item, i) => (
+                        <li key={item} className="flex gap-4">
+                          <span className="label mt-1 shrink-0 tabular text-brand">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <span className="text-step-0 leading-snug">{item}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </section>
 

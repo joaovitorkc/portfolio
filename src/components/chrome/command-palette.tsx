@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { chapters } from '@/libs/chapters';
 import { profile } from '@/content/profile';
-import { projects } from '@/content/projects';
+import { caseProjects } from '@/content/projects';
 import { toLocale } from '@/content/types';
 import { useUi } from '@/stores/ui.store';
 import { useSmoothScroll } from './smooth-scroll';
@@ -134,7 +134,7 @@ export default function CommandPalette() {
           </Group>
 
           <Group heading={t('palette.groups.projects')}>
-            {projects.map((p) => (
+            {caseProjects.map((p) => (
               <Item key={p.slug} onSelect={() => run(() => router.push(`/work/${p.slug}`))}>
                 <span className="label w-7 text-ink-faint">{p.index}</span>
                 <span>{p.name}</span>
@@ -172,14 +172,7 @@ export default function CommandPalette() {
               {t('palette.actions.copyEmail')}
             </Item>
             <Item
-              onSelect={() =>
-                run(() => {
-                  const link = document.createElement('a');
-                  link.href = profile.resume[locale];
-                  link.download = `joaovitorkc-${locale === 'en' ? 'resume' : 'curriculo'}.pdf`;
-                  link.click();
-                })
-              }
+              onSelect={() => run(() => router.push('/cv'))}
               icon={<FileDown className="h-4 w-4" aria-hidden />}
             >
               {t('palette.actions.downloadResume')}

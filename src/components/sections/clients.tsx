@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { clientOrgs, ownOrgs, type Org } from '@/content/profile';
-import { projects } from '@/content/projects';
+import { projectsForClient } from '@/content/projects';
 import { toLocale, type Locale } from '@/content/types';
 import { chapterNum } from '@/libs/chapters';
 import { Chapter } from '@/components/chrome/chapter';
@@ -115,7 +115,9 @@ export default function Clients() {
 function ClientCard({ org, locale }: { org: Org; locale: Locale }) {
   const t = useTranslations();
   // Wired to the registry: whatever was delivered for this client shows up here.
-  const delivered = projects.filter((p) => p.client === org.name);
+  // Cases link to their page; listed deliveries are named but inert — a chip
+  // that looks clickable and isn't is worse than one that never pretended.
+  const delivered = projectsForClient(org.name);
 
   return (
     <article className="group flex min-h-[20rem] flex-col justify-between p-6 transition-colors hover:bg-ink hover:text-paper md:p-8">
@@ -144,16 +146,24 @@ function ClientCard({ org, locale }: { org: Org; locale: Locale }) {
               {t('clients.delivered', { count: delivered.length })}
             </p>
             <ul className="mb-6 flex flex-wrap gap-1.5">
-              {delivered.map((project) => (
-                <li key={project.slug}>
-                  <Link
-                    href={`/work/${project.slug}`}
-                    className="block border-rule border-hairline px-2.5 py-1 text-step--2 text-ink-muted transition-colors hover:border-brand hover:text-brand group-hover:border-paper/25 group-hover:text-paper/70"
-                  >
-                    {project.name}
-                  </Link>
-                </li>
-              ))}
+              {delivered.map((project) =>
+                project.depth === 'case' ? (
+                  <li key={project.slug}>
+                    <Link
+                      href={`/work/${project.slug}`}
+                      className="block border-rule border-hairline px-2.5 py-1 text-step--2 text-ink-muted transition-colors hover:border-brand hover:text-brand group-hover:border-paper/25 group-hover:text-paper/70"
+                    >
+                      {project.name}
+                    </Link>
+                  </li>
+                ) : (
+                  <li key={project.slug}>
+                    <span className="block border-rule border-dashed border-hairline px-2.5 py-1 text-step--2 text-ink-faint transition-colors group-hover:border-paper/20 group-hover:text-paper/50">
+                      {project.name}
+                    </span>
+                  </li>
+                ),
+              )}
             </ul>
           </>
         )}

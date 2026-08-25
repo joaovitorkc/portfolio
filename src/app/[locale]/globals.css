@@ -364,3 +364,129 @@
     will-change: transform;
   }
 }
+
+/* ============================================================
+   CURRÍCULO — A4, feito para imprimir
+   ============================================================ */
+
+@layer components {
+  /* The CV owns the viewport: suppress the site chrome without touching it.
+     NOTE: target [data-site-header], NOT `header` — the CV has a <header> of
+     its own, and a bare `header` selector silently hid the candidate's name. */
+  body:has(.cv-root) [data-site-header],
+  body:has(.cv-root) .grain,
+  body:has(.cv-root) .skip,
+  body:has(.cv-root) [data-nextjs-toast] {
+    display: none !important;
+  }
+  body:has(.cv-root) {
+    background: #fff;
+    overscroll-behavior: auto;
+  }
+
+  .cv-root {
+    /* A4 at 96dpi = 794 × 1123px. Designing at the real size means what you
+       see on screen is what the PDF gets — no surprise reflow at print time. */
+    --cv-w: 794px;
+    --cv-h: 1123px;
+    --cv-pad: 44px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 16px 96px;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .cv-page {
+    display: flex;
+    flex-direction: column;
+    width: var(--cv-w);
+    min-height: var(--cv-h);
+    max-width: 100%;
+    padding: var(--cv-pad);
+    background: #fff;
+    /* screen-only framing; print drops it below */
+    border: 1.5px solid #e5e2dc;
+  }
+
+  /* Mono-ish section label — the same device the site uses, in the CV's ink. */
+  .cv-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #FF5A1F;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #111;
+  }
+
+  /* Nothing gets sliced in half by the page fold. */
+  .cv-block,
+  .cv-bullet {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cv-controls {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 50;
+    display: flex;
+    gap: 8px;
+  }
+}
+
+@media print {
+  /* Zero page margin: the padding lives inside .cv-page, so the layout is
+     identical on screen and on paper. Browsers add their own header/footer
+     unless the user unchecks it — nothing CSS can do about that. */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: 210mm;
+    background: #fff !important;
+  }
+
+  /* Without this, Chrome strips the ink rules and the orange to save toner. */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .cv-controls,
+  .grain,
+  .skip,
+  [data-site-header] {
+    display: none !important;
+  }
+
+  .cv-root {
+    display: block;
+    gap: 0;
+    padding: 0;
+  }
+
+  .cv-page {
+    width: 210mm;
+    min-height: 297mm;
+    max-width: none;
+    padding: 12mm 13mm;
+    border: 0;
+    break-after: page;
+    page-break-after: always;
+  }
+  .cv-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+}

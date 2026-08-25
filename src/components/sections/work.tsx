@@ -8,7 +8,7 @@ import { ArrowUpRight, Lock } from 'lucide-react';
 import { cn } from '@/libs/utils';
 import { chapterNum } from '@/libs/chapters';
 import { gsap, prefersReducedMotion, registerMotion } from '@/libs/motion';
-import { featuredProjects, secondaryProjects } from '@/content/projects';
+import { featuredProjects, listedProjects, secondaryProjects } from '@/content/projects';
 import { toLocale, type Locale } from '@/content/types';
 import type { Project } from '@/content/projects';
 import { Chapter } from '@/components/chrome/chapter';
@@ -51,6 +51,7 @@ export default function Work() {
       ) : null}
 
       <OtherProjects locale={locale} />
+      <DeliveryLedger locale={locale} />
     </Chapter>
   );
 }
@@ -86,7 +87,7 @@ function MetricsBand({ project, locale }: { project: Project; locale: Locale }) 
         from="bottom"
         distance={20}
       >
-        {project.metrics.map((m) => (
+        {(project.metrics ?? []).map((m) => (
           <div
             key={m.label[locale]}
             className="group relative bg-paper p-5 transition-colors hover:bg-ink hover:text-paper"
@@ -122,7 +123,7 @@ function FeaturedCard({ project, locale }: { project: Project; locale: Locale })
     { label: t('work.roleLabel'), value: project.role[locale] },
     ...(project.client ? [{ label: t('work.clientLabel'), value: project.client }] : []),
     { label: t('work.sectorLabel'), value: project.sector[locale] },
-    { label: t('work.yearLabel'), value: project.year[locale] },
+    ...(project.year ? [{ label: t('work.yearLabel'), value: project.year[locale] }] : []),
     { label: t('work.statusLabel'), value: t(`work.status.${project.status}`), live: true },
   ];
 
@@ -388,6 +389,67 @@ function OtherProjects({ locale }: { locale: Locale }) {
       <p className="mt-5 flex items-center gap-3 label text-ink-faint">
         <span className="text-brand">+</span>
         {t('work.moreSoon')}
+      </p>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Delivery ledger — named and counted, without a page each           */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The second tier of the registry.
+ *
+ * These are real systems in production, but five more full dossiers for the
+ * same ecosystem would read as padding rather than depth. So they are listed:
+ * named, described in one line, attributed to a client, and deliberately not
+ * clickable — a row that looks like a link and isn't is worse than one that
+ * never pretended to be.
+ */
+function DeliveryLedger({ locale }: { locale: Locale }) {
+  const t = useTranslations();
+  if (listedProjects.length === 0) return null;
+
+  return (
+    <div className="mt-16 md:mt-24">
+      <Reveal className="flex flex-wrap items-baseline gap-4 rule-b pb-4">
+        <h3 className="display text-step-2 leading-none">{t('work.listedTitle')}</h3>
+        <span className="h-px flex-1 bg-hairline" />
+        <span className="label text-ink-faint">{t('work.listedIntro')}</span>
+      </Reveal>
+
+      <Reveal className="mt-6" stagger={0.05} distance={16}>
+        <ul>
+          {listedProjects.map((p, i) => (
+            <li
+              key={p.slug}
+              className={cn(
+                'group grid grid-cols-12 items-baseline gap-x-4 gap-y-1.5 py-4 transition-colors hover:bg-ink hover:text-paper md:gap-x-6 md:px-3',
+                i > 0 && 'rule-t',
+              )}
+            >
+              <span className="col-span-2 label text-brand md:col-span-1">{p.index}</span>
+
+              <h4 className="col-span-10 display text-step-1 leading-none md:col-span-3">
+                {p.name}
+              </h4>
+
+              <p className="col-span-12 text-step--1 leading-snug text-ink-muted transition-colors group-hover:text-paper/75 md:col-span-5">
+                {p.kicker[locale]}
+              </p>
+
+              <span className="col-span-12 label text-ink-faint transition-colors group-hover:text-paper/55 md:col-span-3 md:text-right">
+                {p.client}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+
+      <p className="mt-5 flex items-start gap-2.5 text-step--2 text-ink-faint">
+        <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
+        <span>{t('work.listedNote')}</span>
       </p>
     </div>
   );

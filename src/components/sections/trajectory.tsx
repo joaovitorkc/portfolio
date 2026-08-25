@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Download } from 'lucide-react';
 import { cn } from '@/libs/utils';
 import { chapterNum } from '@/libs/chapters';
-import { certifications, profile, timeline } from '@/content/profile';
+import { certifications, timeline } from '@/content/profile';
 import { toLocale, type Locale } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
 import { Reveal, TextReveal } from '@/components/fx/reveal';
@@ -32,12 +32,9 @@ export default function Trajectory() {
   const t = useTranslations();
   const locale = toLocale(useLocale());
 
-  const download = () => {
-    const link = document.createElement('a');
-    link.href = profile.resume[locale];
-    link.download = `joaovitorkc-${locale === 'en' ? 'resume' : 'curriculo'}.pdf`;
-    link.click();
-  };
+  // Opens the generated CV with the print dialog already firing, so one click
+  // still ends in a PDF — just built from live content instead of a stale file.
+  const download = () => window.open(`/${locale}/cv?print=1`, '_blank', 'noopener');
 
   return (
     <Chapter

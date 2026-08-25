@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
-import { projects } from '@/content/projects';
+import { caseProjects } from '@/content/projects';
 import { absoluteUrl, CONTENT_UPDATED } from '@/libs/site';
 import { bcp47 } from '@/libs/seo';
 import type { Locale } from '@/content/types';
@@ -15,7 +15,7 @@ import type { Locale } from '@/content/types';
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths: { path: string; priority: number }[] = [
     { path: '', priority: 1 },
-    ...projects.map((project) => ({ path: `/work/${project.slug}`, priority: 0.8 })),
+    ...caseProjects.map((project) => ({ path: `/work/${project.slug}`, priority: 0.8 })),
   ];
 
   const lastModified = new Date(CONTENT_UPDATED);

@@ -8,7 +8,7 @@ import {
   timeline,
 } from '@/content/profile';
 import type { Project } from '@/content/projects';
-import { projects } from '@/content/projects';
+import { caseProjects } from '@/content/projects';
 import type { Locale } from '@/content/types';
 import { routing } from '@/i18n/routing';
 import { absoluteUrl, SITE_URL } from './site';
@@ -217,7 +217,7 @@ export function homeSchema(locale: Locale, description: string) {
         about: { '@id': ID.person },
         mainEntity: { '@id': ID.person },
         primaryImageOfPage: { '@type': 'ImageObject', url: OG_IMAGE.url },
-        hasPart: projects.map((project) => ({
+        hasPart: caseProjects.map((project) => ({
           '@type': 'CreativeWork',
           '@id': `${absoluteUrl(`/${locale}/work/${project.slug}`)}#project`,
           name: project.name,
@@ -232,7 +232,9 @@ export function homeSchema(locale: Locale, description: string) {
 /** A case study page: breadcrumbs + the system it documents. */
 export function projectSchema(project: Project, locale: Locale) {
   const url = absoluteUrl(`/${locale}/work/${project.slug}`);
-  const startYear = /\d{4}/.exec(project.year[locale])?.[0];
+  // `year` is optional — a project without a confirmed period simply omits
+  // dateCreated rather than shipping a guessed one.
+  const startYear = project.year ? /\d{4}/.exec(project.year[locale])?.[0] : undefined;
 
   return {
     '@context': 'https://schema.org',
@@ -278,7 +280,7 @@ export function projectSchema(project: Project, locale: Locale) {
         name: project.name,
         alternateName: project.kicker[locale],
         description: project.summary[locale],
-        abstract: project.problem[locale],
+        ...(project.problem ? { abstract: project.problem[locale] } : {}),
         url,
         ...(project.liveUrl ? { sameAs: project.liveUrl } : {}),
         inLanguage: 'pt-BR',
@@ -290,11 +292,9 @@ export function projectSchema(project: Project, locale: Locale) {
           : {}),
         keywords: project.tech.join(', '),
         genre: project.sector[locale],
-        audience: {
-          '@type': 'Audience',
-          audienceType:
-            locale === 'pt' ? 'Secretarias municipais de saúde' : 'Municipal health departments',
-        },
+        // Audience is derived, not hardcoded: the health systems are used by
+        // municipal departments, the consumer products are not.
+        audience: { '@type': 'Audience', audienceType: project.sector[locale] },
       },
     ],
   };

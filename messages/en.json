@@ -69,7 +69,7 @@
   "work": {
     "label": "Work",
     "title": "One large project beats ten small ones",
-    "intro": "Five systems running in production inside municipal health departments. All proprietary code — so what I show here is how each one was built, which problem it solves and which part is mine.",
+    "intro": "Ten systems in production for two clients: the public healthcare ecosystem running across more than 400 municipalities, and consumer products where the hard part is integrity. All of them proprietary code — so what I show here is how each one was built, which problem it solves and which part is mine.",
     "openCase": "Open the full case study",
     "visitLive": "View live",
     "privateCode": "Proprietary code",
@@ -83,7 +83,7 @@
       "wip": "In progress",
       "archived": "Archived"
     },
-    "moreSoon": "Every card opens a full case study.",
+    "moreSoon": "Each card opens a full case.",
     "backToIndex": "Back to index",
     "case": {
       "context": "Context",
@@ -101,10 +101,13 @@
       "nextProject": "Next system"
     },
     "featuredLabel": "Lead case study",
-    "otherTitle": "The other systems",
-    "otherIntro": "Same ecosystem, different problems. Each one has its own case study.",
+    "otherTitle": "The other cases",
+    "otherIntro": "Different domains, the same demand. Each has its own case.",
     "openCaseShort": "Open case",
-    "clientLabel": "Client"
+    "clientLabel": "Client",
+    "listedTitle": "Also in production",
+    "listedIntro": "Real deliveries, no case page",
+    "listedNote": "Systems in production that I built or maintain, listed without a dossier of their own: five more dossiers from the same ecosystem would read as repetition, not depth. If you want the detail on any of them, ask."
   },
   "stack": {
     "label": "Arsenal",
@@ -245,6 +248,26 @@
     "clientsTitle": "Who hires me",
     "count": "{count} clients",
     "since": "Since",
-    "delivered": "{count} systems delivered"
+    "delivered": "{count} deliveries"
+  },
+  "cv": {
+    "metaTitle": "Résumé — João Vitor Cavalcanti da Silva",
+    "metaDescription": "Résumé of João Vitor Cavalcanti da Silva, full stack developer. Generated from the site, always current.",
+    "save": "Save as PDF",
+    "back": "Back to site",
+    "summary": "Summary",
+    "impact": "Impact",
+    "experience": "Experience",
+    "client": "Client",
+    "present": "present",
+    "stackLabel": "Stack",
+    "systems": "Systems in production",
+    "systemsNote": "Proprietary client code. Full write-ups of the main ones at joaovitorkc.com.br.",
+    "stackTitle": "Technical skills",
+    "education": "Education",
+    "certifications": "Certifications and courses",
+    "clients": "Company and clients",
+    "ownCompany": "own company",
+    "languages": "Languages"
   }
 }

@@ -69,7 +69,7 @@
   "work": {
     "label": "Trabalho",
     "title": "Um projeto grande vale mais que dez pequenos",
-    "intro": "Cinco sistemas em produção dentro de secretarias municipais de saúde. Todos com código proprietário — então o que eu mostro aqui é como cada um foi construído, qual problema ele resolve e qual parte é minha.",
+    "intro": "Dez sistemas em produção para dois clientes: o ecossistema de saúde pública que roda em mais de 400 municípios, e produtos de consumo onde a parte difícil é integridade. Todos com código proprietário — então o que eu mostro aqui é como cada um foi construído, qual problema ele resolve e qual parte é minha.",
     "openCase": "Abrir o case completo",
     "visitLive": "Ver ao vivo",
     "privateCode": "Código proprietário",
@@ -101,10 +101,13 @@
       "nextProject": "Próximo sistema"
     },
     "featuredLabel": "Case principal",
-    "otherTitle": "Os outros sistemas",
-    "otherIntro": "Mesmo ecossistema, problemas diferentes. Cada um tem case próprio.",
+    "otherTitle": "Os outros cases",
+    "otherIntro": "Domínios diferentes, a mesma exigência. Cada um tem case próprio.",
     "openCaseShort": "Abrir case",
-    "clientLabel": "Cliente"
+    "clientLabel": "Cliente",
+    "listedTitle": "Também em produção",
+    "listedIntro": "Entregas reais, sem case próprio",
+    "listedNote": "Sistemas em produção que eu construí ou mantenho, listados sem dossiê próprio: cinco dossiês a mais do mesmo ecossistema viraria repetição, não profundidade. Se você quer o detalhe de algum deles, pergunta."
   },
   "stack": {
     "label": "Arsenal",
@@ -245,6 +248,26 @@
     "clientsTitle": "Quem me contrata",
     "count": "{count} clientes",
     "since": "Desde",
-    "delivered": "{count} sistemas entregues"
+    "delivered": "{count} entregas"
+  },
+  "cv": {
+    "metaTitle": "Currículo — João Vitor Cavalcanti da Silva",
+    "metaDescription": "Currículo de João Vitor Cavalcanti da Silva, desenvolvedor full stack. Gerado a partir do site, sempre atualizado.",
+    "save": "Salvar em PDF",
+    "back": "Voltar ao site",
+    "summary": "Resumo",
+    "impact": "Impacto",
+    "experience": "Experiência",
+    "client": "Cliente",
+    "present": "presente",
+    "stackLabel": "Stack",
+    "systems": "Sistemas em produção",
+    "systemsNote": "Código proprietário de cliente. Detalhamento completo dos principais em joaovitorkc.com.br.",
+    "stackTitle": "Competências técnicas",
+    "education": "Formação",
+    "certifications": "Certificações e cursos",
+    "clients": "Empresa e clientes",
+    "ownCompany": "empresa própria",
+    "languages": "Idiomas"
   }
 }

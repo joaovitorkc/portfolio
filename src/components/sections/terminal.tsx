@@ -13,9 +13,10 @@ import {
   orgs,
   profile,
   stack,
+  stackName,
   timeline,
 } from '@/content/profile';
-import { projects } from '@/content/projects';
+import { caseProjects, getProject, projects } from '@/content/projects';
 import { toLocale, type Locale } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
 import { Reveal, TextReveal } from '@/components/fx/reveal';
@@ -98,7 +99,7 @@ export default function Terminal() {
 
       if (name === 'open') {
         const slug = args[0];
-        const project = projects.find((p) => p.slug === slug);
+        const project = getProject(slug);
         if (project) {
           next.push({ kind: 'out', text: `→ /work/${project.slug}` });
           setLines((prev) => [...prev, ...next]);
@@ -109,8 +110,8 @@ export default function Terminal() {
           kind: 'dim',
           text:
             locale === 'pt'
-              ? `use: open <slug> · disponíveis: ${projects.map((p) => p.slug).join(', ')}`
-              : `usage: open <slug> · available: ${projects.map((p) => p.slug).join(', ')}`,
+              ? `use: open <slug> · disponíveis: ${caseProjects.map((p) => p.slug).join(', ')}`
+              : `usage: open <slug> · available: ${caseProjects.map((p) => p.slug).join(', ')}`,
         });
         setLines((prev) => [...prev, ...next]);
         return;
@@ -307,15 +308,18 @@ function buildCommands(locale: Locale): Record<string, () => Line[]> {
         brand(group.title[locale].toUpperCase()),
         ...group.items.map((item) =>
           out(
-            `  ${item.depth === 'daily' ? '■■■' : item.depth === 'working' ? '■■□' : '■□□'}  ${item.name}`,
+            `  ${item.depth === 'daily' ? '■■■' : item.depth === 'working' ? '■■□' : '■□□'}  ${stackName(item, locale)}`,
           ),
         ),
       ]),
 
+    // Everything delivered, in registry order. Only the case studies advertise
+    // `open` — offering it for a project without a page would be a dead command.
     work: () =>
       projects.flatMap((p) => [
         brand(`${p.index} · ${p.name} — ${p.kicker[locale]}`),
         out(`  ${p.summary[locale]}`),
+        p.client ? dim(`  ${pt ? 'cliente' : 'client'}: ${p.client}`) : dim('  —'),
         out(`  stack: ${p.tech.slice(0, 8).join(', ')}…`),
         p.liveUrl ? out(`  live:  ${p.liveUrl}`) : dim('  live:  —'),
         p.codeVisibility === 'private'
@@ -325,7 +329,11 @@ function buildCommands(locale: Locale): Record<string, () => Line[]> {
                 : '  code: proprietary (no public repo)',
             )
           : out('  code:  ' + (p.repoUrl ?? '—')),
-        dim(pt ? `  → open ${p.slug}` : `  → open ${p.slug}`),
+        p.depth === 'case'
+          ? dim(`  → open ${p.slug}`)
+          : dim(
+              pt ? '  → entrega listada (sem case próprio)' : '  → listed delivery (no case page)',
+            ),
       ]),
 
     xp: () =>
@@ -352,11 +360,8 @@ function buildCommands(locale: Locale): Record<string, () => Line[]> {
     ],
 
     resume: () => {
-      const link = document.createElement('a');
-      link.href = profile.resume[locale];
-      link.download = `joaovitorkc-${locale === 'en' ? 'resume' : 'curriculo'}.pdf`;
-      link.click();
-      return [out(pt ? 'baixando currículo…' : 'downloading resume…')];
+      window.open(`/${locale}/cv?print=1`, '_blank', 'noopener');
+      return [out(pt ? 'gerando currículo…' : 'generating resume…')];
     },
 
     clients: () =>

@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { cn } from '@/libs/utils';
 import { chapterNum } from '@/libs/chapters';
-import { stack } from '@/content/profile';
+import { stack, stackName } from '@/content/profile';
 import { toLocale } from '@/content/types';
 import { Chapter } from '@/components/chrome/chapter';
 import { Reveal, TextReveal } from '@/components/fx/reveal';
@@ -63,7 +63,9 @@ export default function Stack() {
                     key={item.name}
                     className="group/item flex items-center justify-between gap-2 px-3 py-3 transition-colors hover:bg-ink hover:text-paper"
                   >
-                    <span className="text-step--1 font-medium leading-tight">{item.name}</span>
+                    <span className="text-step--1 font-medium leading-tight">
+                      {stackName(item, locale)}
+                    </span>
                     <DepthMark depth={item.depth} className="shrink-0" />
                   </li>
                 ))}

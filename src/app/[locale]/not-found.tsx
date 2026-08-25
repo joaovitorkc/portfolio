@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { chapters } from '@/libs/chapters';
-import { projects } from '@/content/projects';
+import { caseProjects } from '@/content/projects';
 import Footer from '@/components/sections/footer';
 
 /** A 404 must never be indexed, and must never be a dead end. */
@@ -75,7 +75,7 @@ export default async function NotFound() {
             <nav aria-label={t('palette.groups.projects')}>
               <h2 className="label mb-4 text-ink-faint">{t('palette.groups.projects')}</h2>
               <ul className="flex flex-wrap gap-x-5 gap-y-2">
-                {projects.map((project) => (
+                {caseProjects.map((project) => (
                   <li key={project.slug}>
                     <Link
                       href={`/work/${project.slug}`}

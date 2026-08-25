@@ -191,8 +191,8 @@ export const manifesto = {
   } satisfies I18nList,
 
   close: {
-    pt: 'Três anos nisso. Cinco sistemas em produção. Nenhum dia entediante.',
-    en: 'Three years of it. Five systems in production. Not one boring day.',
+    pt: 'Três anos nisso. Dez sistemas em produção. Nenhum dia entediante.',
+    en: 'Three years of it. Ten systems in production. Not one boring day.',
   } satisfies I18nText,
 };
 
@@ -399,9 +399,19 @@ export const certifications: Certification[] = [
 
 export type StackItem = {
   name: string;
+  /**
+   * English name, for the few entries that are Portuguese phrases rather than
+   * product names. Product names ("Next.js", "Ollama") never need this — but
+   * "Engenharia de contexto" printed in an English CV reads as an oversight.
+   */
+  nameEn?: string;
   /** daily = in production every day · working = shipped with it · learning = actively studying */
   depth: 'daily' | 'working' | 'learning';
 };
+
+/** The stack item's name in the reader's language. */
+export const stackName = (item: StackItem, locale: 'pt' | 'en') =>
+  locale === 'en' && item.nameEn ? item.nameEn : item.name;
 
 export type StackGroup = {
   id: string;
@@ -460,7 +470,7 @@ export const stack: StackGroup[] = [
       { name: 'Fastify', depth: 'daily' },
       { name: 'Knex', depth: 'daily' },
       { name: 'Prisma', depth: 'working' },
-      { name: 'Bull · filas', depth: 'daily' },
+      { name: 'Bull · filas', nameEn: 'Bull · queues', depth: 'daily' },
       { name: 'WebSocket · Socket.IO', depth: 'daily' },
       { name: 'REST', depth: 'daily' },
       { name: 'Puppeteer', depth: 'working' },
@@ -489,14 +499,14 @@ export const stack: StackGroup[] = [
       en: 'Not hype: I built the agent harness that orchestrates development across ten products here, and shipped a RAG assistant into production inside a healthcare system.',
     },
     items: [
-      { name: 'Harness de agentes', depth: 'daily' },
+      { name: 'Harness de agentes', nameEn: 'Agent harness', depth: 'daily' },
       { name: 'Claude Code', depth: 'daily' },
       { name: 'Cursor · Composer', depth: 'daily' },
-      { name: 'Engenharia de contexto', depth: 'daily' },
+      { name: 'Engenharia de contexto', nameEn: 'Context engineering', depth: 'daily' },
       { name: 'RAG', depth: 'working' },
-      { name: 'LLM auto-hospedado · Ollama', depth: 'working' },
+      { name: 'LLM auto-hospedado · Ollama', nameEn: 'Self-hosted LLM · Ollama', depth: 'working' },
       { name: 'MCP', depth: 'learning' },
-      { name: 'Automação de processo', depth: 'working' },
+      { name: 'Automação de processo', nameEn: 'Process automation', depth: 'working' },
     ],
   },
   {
@@ -518,6 +528,133 @@ export const stack: StackGroup[] = [
     ],
   },
 ];
+
+/* ------------------------------------------------------------------ */
+/* Currículo — conteúdo próprio, orientado a impacto                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A CV is not a shorter portfolio.
+ *
+ * The site sells with narrative; a CV is skimmed in about 30 seconds by
+ * someone comparing candidates. So this block is written differently:
+ * every bullet leads with what changed, not with what was used. Tools go at
+ * the end of the line, never at the start.
+ *
+ * Everything here is verifiable — counted in the code or public on the
+ * clients' own sites.
+ */
+export type CvRole = {
+  id: string;
+  title: I18nText;
+  org: string;
+  /** client engagement, never employment */
+  relation: 'client';
+  /** omit when the real period isn't confirmed — never print a guessed date */
+  from?: string;
+  to?: string | null;
+  place: I18nText;
+  /** achievement-first lines. Impact, then mechanism. */
+  bullets: I18nList;
+  stack: string[];
+};
+
+export const cv = {
+  /** Sits under the name. Must earn the next 20 seconds of attention. */
+  summary: {
+    pt: 'Desenvolvedor full stack. Construo e mantenho o ecossistema de saúde pública que hoje roda em mais de 400 municípios brasileiros, em 26 estados — da modelagem do banco e do pipeline de dados até a interface, o servidor de produção e a condução do projeto. Também entrego produtos de consumo onde a parte difícil é integridade: vaga limitada, pagamento e sorteio que precisa ser auditável. TypeScript de ponta a ponta.',
+    en: 'Full stack developer. I build and maintain the public healthcare ecosystem now running across more than 400 Brazilian municipalities in 26 states — from database modeling and the data pipeline through to the interface, the production servers and project delivery. I also ship consumer products where the hard part is integrity: finite seats, payments, and draws that have to be auditable. TypeScript end to end.',
+  } satisfies I18nText,
+
+  /** The numbers an analyst can check. Five is the limit before it reads as noise. */
+  impact: [
+    { value: '400+', label: { pt: 'municípios atendidos', en: 'municipalities served' } },
+    { value: '26', label: { pt: 'estados', en: 'states' } },
+    { value: '200+', label: { pt: 'telas em produção', en: 'screens in production' } },
+    { value: '50+', label: { pt: 'módulos de API', en: 'API modules' } },
+    { value: '300+', label: { pt: 'migrations de banco', en: 'database migrations' } },
+  ],
+
+  roles: [
+    {
+      id: 'wi',
+      title: {
+        pt: 'Desenvolvedor Full Stack · Sistemas de saúde pública',
+        en: 'Full Stack Developer · Public health systems',
+      },
+      org: 'Wi Consultoria',
+      relation: 'client',
+      from: '2023-03',
+      to: null,
+      place: { pt: 'Caruaru, PE', en: 'Caruaru, PE' },
+      bullets: {
+        pt: [
+          'Construo e mantenho o ecossistema e-Gestão — sete sistemas sob um portal único (R-SUS, SUS Direto, Visa, BPA Online, Painel de Chamadas e assistente com IA), em uso diário dentro de secretarias municipais de saúde de mais de 400 municípios, em 26 estados. Conduzo os projetos em andamento: priorização, escopo e organização da entrega.',
+          'Projetei o pipeline que extrai as bases locais do e-SUS APS, transforma e materializa em tabelas espelho no PostgreSQL, com fila observável em Bull/Redis. Tirou a carga de leitura do prontuário do município e tornou todo relatório reprodutível.',
+          'Implementei o isolamento multi-inquilino por código IBGE com resolução e verificação no servidor — requisito não negociável para dado de saúde de centenas de municípios na mesma instalação.',
+          'Eliminei uma classe inteira de bug migrando a geração de PDF de um gerador legado em outra linguagem para uma rota de impressão capturada por Puppeteer: a tela e o documento passaram a ter uma única fonte de verdade.',
+          'Integrei chamada de paciente em tempo real ao prontuário federal sem alterar uma linha dele — extensão de navegador, servidor Fastify com WebSocket em pub/sub e a TV da recepção com síntese de voz.',
+          'Modelagem e otimização de query em PostgreSQL, schema versionado em mais de 300 migrations, e o deploy endurecido em Linux, Nginx e PM2 com a API separada do worker de fila.',
+        ],
+        en: [
+          'I build and maintain the e-Gestão ecosystem — seven systems under a single portal (R-SUS, SUS Direto, Visa, BPA Online, Call Panel and an AI assistant), in daily use inside municipal health departments across more than 400 municipalities in 26 states. I run the ongoing projects: prioritisation, scope and delivery organisation.',
+          'Designed the pipeline that extracts local e-SUS APS databases, transforms and materialises them into PostgreSQL mirror tables, with an observable Bull/Redis queue. It took read load off the city’s health record and made every report reproducible.',
+          'Implemented multi-tenant isolation by municipal IBGE code, resolved and verified server-side — a non-negotiable requirement for health data from hundreds of cities on one installation.',
+          'Removed an entire class of bug by migrating PDF generation from a legacy generator in another language to a print route captured with Puppeteer: screen and document now share a single source of truth.',
+          'Integrated real-time patient calling into the federal health record without changing a line of it — a browser extension, a Fastify WebSocket pub/sub server, and the reception TV with speech synthesis.',
+          'PostgreSQL modeling and query tuning, a schema versioned across 300+ migrations, and hardened deployment on Linux, Nginx and PM2 with the API separated from the queue worker.',
+        ],
+      },
+      stack: [
+        'TypeScript',
+        'Next.js',
+        'React',
+        'Express',
+        'Fastify',
+        'PostgreSQL',
+        'Redis',
+        'Bull',
+        'Socket.IO',
+        'Puppeteer',
+        'Linux',
+        'Nginx',
+      ],
+    },
+    {
+      id: 'catsuc',
+      title: {
+        pt: 'Desenvolvedor Full Stack · Produtos web',
+        en: 'Full Stack Developer · Web products',
+      },
+      org: 'Catsuc Labs',
+      relation: 'client',
+      // No `from`/`to`: the real period isn't confirmed, and the CV renders no
+      // date span rather than printing a guessed one.
+      to: null,
+      place: { pt: 'Remoto', en: 'Remote' },
+      bullets: {
+        pt: [
+          'Sistema de roleta por cotas: cada ficha comprada é uma posição numerada, garantida por restrição única e reserva transacional — o banco recusa a venda duplicada em vez de a aplicação torcer para a corrida não acontecer.',
+          'Confirmação de pagamento idempotente por chave, tratando reentrega de webhook como o caso esperado, e sorteio de disparo único com semente e resultado persistidos para poder ser reconstruído depois.',
+          'Bolão de futebol com prazo verificado no servidor (nunca no relógio do cliente) e apuração como função pura de palpite, resultado e regra do campeonato — o que tornou o recálculo seguro quando um resultado oficial foi corrigido.',
+          'Dodreams: modelagem de um domínio subjetivo em um núcleo pequeno com campos opcionais e etapas livres, com progresso derivado das etapas concluídas em vez de editável pelo usuário.',
+        ],
+        en: [
+          'Quota-based roulette system: each chip purchased is a numbered seat, guaranteed by a unique constraint and a transactional reservation — the database refuses the double sale instead of the application hoping the race never happens.',
+          'Idempotent payment confirmation keyed per event, treating webhook redelivery as the expected case, and a fire-once draw with seed and result persisted so it can be reconstructed afterwards.',
+          'A football pool with deadlines enforced server-side (never on the client clock) and scoring as a pure function of prediction, result and tournament rule — which made recomputation safe when an official result was corrected.',
+          'Dodreams: modeling a subjective domain as a small core with optional fields and free-form steps, with progress derived from completed steps rather than editable by the user.',
+        ],
+      },
+      stack: ['TypeScript', 'Next.js', 'React', 'Node.js', 'PostgreSQL', 'Prisma', 'Redis'],
+    },
+  ] satisfies CvRole[],
+
+  languages: [
+    { name: { pt: 'Português', en: 'Portuguese' }, level: { pt: 'Nativo', en: 'Native' } },
+    { name: { pt: 'Inglês', en: 'English' }, level: { pt: 'Intermediário', en: 'Intermediate' } },
+  ],
+};
 
 /* ------------------------------------------------------------------ */
 /* The personal chapter                                                */
