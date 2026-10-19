@@ -16,8 +16,8 @@ export const profile = {
   url: SITE_URL,
 
   role: {
-    pt: 'Desenvolvedor Full Stack',
-    en: 'Full Stack Developer',
+    pt: 'Engenheiro de Software Sênior',
+    en: 'Senior Software Engineer',
   } satisfies I18nText,
 
   /** The one-line positioning. This is the sentence people remember. */
@@ -27,16 +27,15 @@ export const profile = {
   } satisfies I18nText,
 
   location: {
-    city: 'Caruaru',
+    city: 'Recife',
     state: 'PE',
     stateFull: 'Pernambuco',
     country: { pt: 'Brasil', en: 'Brazil' } satisfies I18nText,
     label: {
-      pt: 'Caruaru, Pernambuco — Brasil',
-      en: 'Caruaru, Pernambuco — Brazil',
+      pt: 'Recife, Pernambuco — Brasil',
+      en: 'Recife, Pernambuco — Brazil',
     } satisfies I18nText,
-    /** agreste pernambucano */
-    coords: { lat: -8.2837, lon: -35.976 },
+    coords: { lat: -8.0476, lon: -34.877 },
     timezone: 'America/Recife',
     utc: 'UTC−3',
   },
@@ -78,7 +77,7 @@ export const profile = {
   },
 
   /** Career start — used to compute "years of practice" at render time. */
-  careerStart: '2023-03-01',
+  careerStart: '2023-04-01',
 
   /** Career start is also when the first client engagement began. */
 
@@ -132,7 +131,7 @@ export const orgs: Org[] = [
     name: 'Wi Consultoria',
     url: 'https://www.wiconsultoria.com.br/',
     relation: 'client',
-    since: '2023-03',
+    since: '2023-04',
     sector: {
       pt: 'Software para saúde pública',
       en: 'Public health software',
@@ -203,13 +202,13 @@ export const manifesto = {
 export const about = {
   paragraphs: {
     pt: [
-      'Sou desenvolvedor full stack em Caruaru e atendo clientes desde março de 2023. Comecei mexendo em tudo e acabei encontrando meu lugar onde o problema é grande: sistemas de gestão para secretarias municipais de saúde, hoje em uso em mais de 400 municípios. Meu principal cliente é a Wi Consultoria.',
+      'Sou engenheiro de software sênior em Recife. Desde abril de 2026 assino o trabalho pela Quiral Labs, meu estúdio. O contrato com a Wi Consultoria vem de abril de 2023: sistemas de gestão para secretarias municipais de saúde, hoje em uso em mais de 400 municípios.',
       'Meu dia é TypeScript de ponta a ponta — Next.js e React na frente, Express e Fastify atrás, PostgreSQL modelado e otimizado à mão. Mas o trabalho não para no código: eu também gerencio os projetos em andamento, configuro e endureço as máquinas que rodam as aplicações e cuido do ambiente de produção.',
       'A parte que eu mais gosto é a que ninguém vê: transformar a regra crua de uma nota técnica do Ministério da Saúde em uma query que responde em milissegundos para mais de 200 telas diferentes.',
       'Em paralelo, curso Ciência da Computação na UniFavip Wyden. A faculdade me dá o alicerce; a prática me deu a velocidade.',
     ],
     en: [
-      'I’m a full stack developer based in Caruaru, Brazil, working with clients since March 2023. I started out touching everything and ended up where the problem is big: management systems for municipal health departments, today in use across more than 400 municipalities. My main client is Wi Consultoria.',
+      'I’m a senior software engineer based in Recife, Brazil. Since April 2026 the work carries the name of Quiral Labs, my studio. The contract with Wi Consultoria goes back to April 2023: management systems for municipal health departments, in use across more than 400 municipalities.',
       'My day is TypeScript end to end — Next.js and React up front, Express and Fastify behind, PostgreSQL modeled and tuned by hand. But the job doesn’t stop at code: I also run the ongoing projects, configure and harden the machines the applications run on, and own the production environment.',
       'My favourite part is the part nobody sees: turning the raw rule of a Ministry of Health technical note into a query that answers in milliseconds across 200+ different screens.',
       'Alongside that I’m studying Computer Science at UniFavip Wyden. College gives me the foundation; the work gave me the speed.',
@@ -349,6 +348,16 @@ export const certifications: Certification[] = [
     title: {
       pt: 'Gestão de Ameaças Cibernéticas',
       en: 'Cyber Threat Management',
+    },
+  },
+  {
+    id: 'aws-hackathon',
+    year: '2025',
+    issuer: 'AWS Hackathon Nordeste',
+    kind: 'certificate',
+    title: {
+      pt: '1º lugar (equipe)',
+      en: '1st place (team)',
     },
   },
   {
@@ -548,111 +557,150 @@ export type CvRole = {
   id: string;
   title: I18nText;
   org: string;
-  /** client engagement, never employment */
-  relation: 'client';
+  /** How the engagement is labelled. Never printed as a guessed employment. */
+  arrangement: I18nText;
   /** omit when the real period isn't confirmed — never print a guessed date */
   from?: string;
   to?: string | null;
   place: I18nText;
-  /** achievement-first lines. Impact, then mechanism. */
+  /** One line of context for a company a foreign recruiter has never heard of. */
+  context: I18nText;
+  /** Past-tense, one result per line. Same numbers as the LinkedIn profile. */
   bullets: I18nList;
   stack: string[];
 };
 
 export const cv = {
-  /** Sits under the name. Must earn the next 20 seconds of attention. */
-  summary: {
-    pt: 'Desenvolvedor full stack. Construo e mantenho o ecossistema de saúde pública que hoje roda em mais de 400 municípios brasileiros, em 26 estados — da modelagem do banco e do pipeline de dados até a interface, o servidor de produção e a condução do projeto. Também entrego produtos de consumo onde a parte difícil é integridade: vaga limitada, pagamento e sorteio que precisa ser auditável. TypeScript de ponta a ponta.',
-    en: 'Full stack developer. I build and maintain the public healthcare ecosystem now running across more than 400 Brazilian municipalities in 26 states — from database modeling and the data pipeline through to the interface, the production servers and project delivery. I also ship consumer products where the hard part is integrity: finite seats, payments, and draws that have to be auditable. TypeScript end to end.',
+  /**
+   * Same title as the site hero and the LinkedIn headline.
+   */
+  title: {
+    pt: 'Engenheiro de Software Sênior',
+    en: 'Senior Software Engineer',
   } satisfies I18nText,
 
-  /** The numbers an analyst can check. Five is the limit before it reads as noise. */
-  impact: [
-    { value: '400+', label: { pt: 'municípios atendidos', en: 'municipalities served' } },
-    { value: '26', label: { pt: 'estados', en: 'states' } },
-    { value: '200+', label: { pt: 'telas em produção', en: 'screens in production' } },
-    { value: '50+', label: { pt: 'módulos de API', en: 'API modules' } },
-    { value: '300+', label: { pt: 'migrations de banco', en: 'database migrations' } },
+  summary: {
+    pt: 'Engenheiro de software sênior. Desde 2023 entrega sistemas em produção para a saúde pública brasileira: o produto, o pipeline de dados e os servidores Linux em que isso roda. TypeScript, Node.js, React, Next.js e PostgreSQL. A plataforma de relatórios está em uso diário em mais de 400 municípios, com mais de 10 mil usuários ativos por mês.',
+    en: 'Senior software engineer. Since 2023, shipping production systems for Brazilian public healthcare: the product, the data pipelines and the Linux servers they run on. TypeScript, Node.js, React, Next.js and PostgreSQL. The reporting platform is in daily use across 400+ municipalities, with 10k+ monthly active users.',
+  } satisfies I18nText,
+
+  /**
+   * Recruiter list. The site stack stays broader; this is what a search for
+   * the target role should find, in the same order as the LinkedIn top skills.
+   */
+  skills: [
+    {
+      title: { pt: 'Linguagem', en: 'Languages' },
+      items: ['TypeScript', 'JavaScript', 'SQL', 'Bash'],
+    },
+    {
+      title: { pt: 'Interface', en: 'Interface' },
+      items: ['React', 'Next.js', 'Tailwind CSS'],
+    },
+    {
+      title: { pt: 'Servidor', en: 'Server' },
+      items: ['Node.js', 'Express', 'Fastify', 'Knex', 'Bull', 'REST', 'WebSocket'],
+    },
+    {
+      title: { pt: 'Dados', en: 'Data' },
+      items: ['PostgreSQL', 'Redis'],
+    },
+    {
+      title: { pt: 'Infra', en: 'Infra' },
+      items: [
+        'Linux',
+        'Nginx',
+        'PM2',
+        'Ansible',
+        'WireGuard',
+        'Amazon Web Services (AWS) S3',
+        'Git',
+        'CI/CD',
+      ],
+    },
   ],
+
+  /** Shown on the CV only. Courses (Udemy and the like) stay on the site. */
+  certificationIds: ['aws-arch', 'aws-found', 'cisco-cyber', 'aws-hackathon'],
+
+  education: {
+    pt: 'Bacharelado em Ciência da Computação, em andamento.',
+    en: "Bachelor's degree in Computer Science, in progress.",
+  } satisfies I18nText,
 
   roles: [
     {
-      id: 'wi',
+      id: 'quiral',
       title: {
-        pt: 'Desenvolvedor Full Stack · Sistemas de saúde pública',
-        en: 'Full Stack Developer · Public health systems',
+        pt: 'Fundador e engenheiro de software sênior',
+        en: 'Founder & Senior Software Engineer',
       },
-      org: 'Wi Consultoria',
-      relation: 'client',
-      from: '2023-03',
+      org: 'Quiral Labs',
+      arrangement: { pt: 'Autônomo', en: 'Self-employed' },
+      from: '2026-04',
       to: null,
-      place: { pt: 'Caruaru, PE', en: 'Caruaru, PE' },
+      place: { pt: 'Recife, Brasil · Remoto', en: 'Recife, Brazil · Remote' },
+      context: {
+        pt: 'Estúdio de engenharia. Contratos de infraestrutura e backend para empresas de software.',
+        en: 'Engineering studio. Infrastructure and backend contracts for software companies.',
+      },
       bullets: {
         pt: [
-          'Construo e mantenho o ecossistema e-Gestão — sete sistemas sob um portal único (R-SUS, SUS Direto, Visa, BPA Online, Painel de Chamadas e assistente com IA), em uso diário dentro de secretarias municipais de saúde de mais de 400 municípios, em 26 estados. Conduzo os projetos em andamento: priorização, escopo e organização da entrega.',
-          'Projetei o pipeline que extrai as bases locais do e-SUS APS, transforma e materializa em tabelas espelho no PostgreSQL, com fila observável em Bull/Redis. Tirou a carga de leitura do prontuário do município e tornou todo relatório reprodutível.',
-          'Implementei o isolamento multi-inquilino por código IBGE com resolução e verificação no servidor — requisito não negociável para dado de saúde de centenas de municípios na mesma instalação.',
-          'Eliminei uma classe inteira de bug migrando a geração de PDF de um gerador legado em outra linguagem para uma rota de impressão capturada por Puppeteer: a tela e o documento passaram a ter uma única fonte de verdade.',
-          'Integrei chamada de paciente em tempo real ao prontuário federal sem alterar uma linha dele — extensão de navegador, servidor Fastify com WebSocket em pub/sub e a TV da recepção com síntese de voz.',
-          'Modelagem e otimização de query em PostgreSQL, schema versionado em mais de 300 migrations, e o deploy endurecido em Linux, Nginx e PM2 com a API separada do worker de fila.',
+          'Reduziu o custo de hospedagem de um cliente de saúde em cerca de US$ 72 mil por ano, ao mover mais de 300 servidores municipais para VPS cerca de 10 vezes mais baratas, com todo o tráfego em túneis WireGuard.',
+          'Construiu o painel dessa frota: inventário, provisionamento com Ansible (firewall, NAT, WireGuard, nginx) e um agente de saúde em mais de 300 máquinas, com monitores que reerguem um túnel caído em segundos.',
+          'Construiu o backup automático de cada base municipal para armazenamento compatível com S3, com upload multipart e retenção de 3 dias e 3 meses.',
+          'Dobrou a velocidade da sincronização noturna que carrega milhões de linhas por município, de mais de 300 bases remotas para um único PostgreSQL, com streams em Node.js e filas Bull/Redis.',
         ],
         en: [
-          'I build and maintain the e-Gestão ecosystem — seven systems under a single portal (R-SUS, SUS Direto, Visa, BPA Online, Call Panel and an AI assistant), in daily use inside municipal health departments across more than 400 municipalities in 26 states. I run the ongoing projects: prioritisation, scope and delivery organisation.',
-          'Designed the pipeline that extracts local e-SUS APS databases, transforms and materialises them into PostgreSQL mirror tables, with an observable Bull/Redis queue. It took read load off the city’s health record and made every report reproducible.',
-          'Implemented multi-tenant isolation by municipal IBGE code, resolved and verified server-side — a non-negotiable requirement for health data from hundreds of cities on one installation.',
-          'Removed an entire class of bug by migrating PDF generation from a legacy generator in another language to a print route captured with Puppeteer: screen and document now share a single source of truth.',
-          'Integrated real-time patient calling into the federal health record without changing a line of it — a browser extension, a Fastify WebSocket pub/sub server, and the reception TV with speech synthesis.',
-          'PostgreSQL modeling and query tuning, a schema versioned across 300+ migrations, and hardened deployment on Linux, Nginx and PM2 with the API separated from the queue worker.',
+          'Cut a healthcare client’s hosting cost by about US$72k a year, moving 300+ municipal servers onto VPSs about 10x cheaper per machine, with all traffic through WireGuard tunnels.',
+          'Built the control plane for that fleet: inventory, Ansible provisioning (firewall, NAT, WireGuard, nginx) and a health agent on 300+ machines, plus monitors that restore a dropped tunnel within seconds.',
+          'Built automated backups of every municipal database to S3-compatible storage, with multipart uploads and a 3-day / 3-month retention policy.',
+          'Doubled the speed of the nightly sync that loads millions of rows per municipality from 300+ remote databases into one PostgreSQL warehouse, using Node.js streams and Bull/Redis queues.',
         ],
       },
-      stack: [
-        'TypeScript',
-        'Next.js',
-        'React',
-        'Express',
-        'Fastify',
-        'PostgreSQL',
-        'Redis',
-        'Bull',
-        'Socket.IO',
-        'Puppeteer',
-        'Linux',
-        'Nginx',
-      ],
+      stack: ['TypeScript', 'Next.js', 'Fastify', 'PostgreSQL', 'Redis', 'Ansible', 'WireGuard'],
     },
     {
-      id: 'catsuc',
+      id: 'wi',
       title: {
-        pt: 'Desenvolvedor Full Stack · Produtos web',
-        en: 'Full Stack Developer · Web products',
+        pt: 'Engenheiro de software sênior',
+        en: 'Senior Software Engineer',
       },
-      org: 'Catsuc Labs',
-      relation: 'client',
-      // No `from`/`to`: the real period isn't confirmed, and the CV renders no
-      // date span rather than printing a guessed one.
+      org: 'Wi Consultoria',
+      arrangement: { pt: 'Contrato', en: 'Contract' },
+      from: '2023-04',
       to: null,
-      place: { pt: 'Remoto', en: 'Remote' },
+      place: { pt: 'Recife, Brasil · Remoto', en: 'Recife, Brazil · Remote' },
+      context: {
+        pt: 'Software de gestão para secretarias municipais de saúde no SUS.',
+        en: 'Management software for municipal health departments in Brazil’s public health system.',
+      },
       bullets: {
         pt: [
-          'Sistema de roleta por cotas: cada ficha comprada é uma posição numerada, garantida por restrição única e reserva transacional — o banco recusa a venda duplicada em vez de a aplicação torcer para a corrida não acontecer.',
-          'Confirmação de pagamento idempotente por chave, tratando reentrega de webhook como o caso esperado, e sorteio de disparo único com semente e resultado persistidos para poder ser reconstruído depois.',
-          'Bolão de futebol com prazo verificado no servidor (nunca no relógio do cliente) e apuração como função pura de palpite, resultado e regra do campeonato — o que tornou o recálculo seguro quando um resultado oficial foi corrigido.',
-          'Dodreams: modelagem de um domínio subjetivo em um núcleo pequeno com campos opcionais e etapas livres, com progresso derivado das etapas concluídas em vez de editável pelo usuário.',
+          'Construiu a plataforma de relatórios da atenção primária usada em mais de 400 municípios (mais de 10 mil usuários ativos por mês): um inquilino por cidade, exportação em PDF e CSV, e telas de chamada de paciente em tempo real. Next.js, React, Express, Knex, PostgreSQL, Socket.IO.',
+          'Entregou campanhas de WhatsApp em filas Bull/Redis e um painel de uso: ranking de funcionalidades, coortes e conversão de deep link.',
+          'Aumentou os cliques orgânicos em 47x (+4.648%) e as impressões em 7x (+592%) em três meses no site público, com renderização no servidor, JSON-LD e sitemap.',
+          'Manteve as publicações sem derrubar o serviço: canário no nginx em dois servidores (PM2), workers com trava de líder e jobs que recuperam sincronizações travadas.',
+          'Montou o fluxo de engenharia em mais de 15 repositórios, de modo que mudança vinda de agente de código só entra depois que os testes passam.',
         ],
         en: [
-          'Quota-based roulette system: each chip purchased is a numbered seat, guaranteed by a unique constraint and a transactional reservation — the database refuses the double sale instead of the application hoping the race never happens.',
-          'Idempotent payment confirmation keyed per event, treating webhook redelivery as the expected case, and a fire-once draw with seed and result persisted so it can be reconstructed afterwards.',
-          'A football pool with deadlines enforced server-side (never on the client clock) and scoring as a pure function of prediction, result and tournament rule — which made recomputation safe when an official result was corrected.',
-          'Dodreams: modeling a subjective domain as a small core with optional fields and free-form steps, with progress derived from completed steps rather than editable by the user.',
+          'Built the primary-care reporting platform used in 400+ municipalities (10k+ monthly active users): one tenant per city, PDF and CSV exports, and real-time patient call screens. Next.js, React, Express, Knex, PostgreSQL, Socket.IO.',
+          'Shipped WhatsApp campaigns on Bull/Redis queues and an engagement dashboard of feature usage, cohorts and deep-link conversion.',
+          'Grew organic search clicks 47x (+4,648%) and impressions 7x (+592%) in three months on the public site, with server-side rendering, JSON-LD and a sitemap.',
+          'Kept production up through deploys: nginx canary across two app servers (PM2), leader-locked workers, and jobs that recover stuck syncs.',
+          'Set up the engineering workflow across 15+ repositories so changes from coding agents land only after the tests pass.',
         ],
       },
-      stack: ['TypeScript', 'Next.js', 'React', 'Node.js', 'PostgreSQL', 'Prisma', 'Redis'],
+      stack: ['TypeScript', 'Next.js', 'React', 'Express', 'PostgreSQL', 'Knex', 'Bull', 'Socket.IO'],
     },
   ] satisfies CvRole[],
 
   languages: [
     { name: { pt: 'Português', en: 'Portuguese' }, level: { pt: 'Nativo', en: 'Native' } },
-    { name: { pt: 'Inglês', en: 'English' }, level: { pt: 'Intermediário', en: 'Intermediate' } },
+    {
+      name: { pt: 'Inglês', en: 'English' },
+      level: { pt: 'Intermediário', en: 'Intermediate' },
+    },
   ],
 };
 
@@ -668,12 +716,12 @@ export const personal = {
 
   cards: [
     {
-      id: 'caruaru',
+      id: 'recife',
       label: { pt: 'Base', en: 'Based in' },
-      value: 'Caruaru, PE',
+      value: 'Recife, PE',
       body: {
-        pt: 'Agreste de Pernambuco, capital do forró. Dá pra construir software sério a 130 km do litoral — e eu prefiro assim.',
-        en: 'The agreste of Pernambuco, capital of forró. You can build serious software 130 km inland — and I prefer it that way.',
+        pt: 'Capital de Pernambuco. O trabalho é remoto; a base é aqui.',
+        en: 'Capital of Pernambuco. The work is remote; this is home base.',
       },
     },
     {

@@ -396,7 +396,7 @@
     align-items: center;
     gap: 24px;
     padding: 24px 16px 96px;
-    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   .cv-page {
@@ -411,16 +411,13 @@
     border: 1.5px solid #e5e2dc;
   }
 
-  /* Mono-ish section label — the same device the site uses, in the CV's ink. */
   .cv-label {
-    font-family: var(--font-mono), ui-monospace, monospace;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    color: #FF5A1F;
-    padding-bottom: 4px;
-    border-bottom: 1.5px solid #111;
+    color: #111;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #111;
   }
 
   /* Nothing gets sliced in half by the page fold. */
@@ -478,9 +475,9 @@
 
   .cv-page {
     width: 210mm;
-    min-height: 297mm;
+    min-height: 0;
     max-width: none;
-    padding: 12mm 13mm;
+    padding: 9mm 12mm;
     border: 0;
     break-after: page;
     page-break-after: always;

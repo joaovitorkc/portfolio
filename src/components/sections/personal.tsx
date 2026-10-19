@@ -80,7 +80,7 @@ export default function Personal() {
   );
 }
 
-/** Live clock in Caruaru. Renders nothing until mounted to avoid hydration drift. */
+/** Live clock in Recife. Renders nothing until mounted to avoid hydration drift. */
 function LocalClock({ label }: { label: string }) {
   const [now, setNow] = useState<string | null>(null);
 

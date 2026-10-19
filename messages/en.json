@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "title": "João Vitor — Full Stack Developer",
+    "title": "João Vitor — Senior Software Engineer",
     "titleTemplate": "%s — João Vitor",
-    "description": "Full stack developer in Caruaru, Brazil. I build public healthcare management systems used across 400+ municipalities: primary-care reporting, health surveillance, BPA and a real-time call panel.",
-    "ogAlt": "João Vitor — Full Stack Developer"
+    "description": "Senior software engineer in Recife, Brazil. I build public healthcare management systems used across 400+ municipalities: primary-care reporting, health surveillance, BPA and a real-time call panel.",
+    "ogAlt": "João Vitor — Senior Software Engineer"
   },
   "nav": {
     "menu": "Open menu",
@@ -64,7 +64,7 @@
     "title": "The scale of what I touch daily",
     "note": "Counted in the ecosystem’s code — R-SUS, Surveillance and the portal — and rounded down.",
     "yearsLabel": "years of practice",
-    "sinceNote": "since March 2023"
+    "sinceNote": "since April 2023"
   },
   "work": {
     "label": "Work",
@@ -125,7 +125,7 @@
     "title": "How I got here",
     "present": "now",
     "certificationsTitle": "Certifications and courses",
-    "certificationsNote": "Seven certificates. The ones that matter are on top.",
+    "certificationsNote": "Eight certificates. The ones that matter are on top.",
     "kind": {
       "work": "Work",
       "study": "Study",
@@ -159,7 +159,7 @@
   "personal": {
     "label": "Off the editor",
     "title": "The person behind the commit",
-    "localTime": "Local time in Caruaru"
+    "localTime": "Local time in Recife"
   },
   "terminal": {
     "label": "Terminal",
@@ -252,7 +252,7 @@
   },
   "cv": {
     "metaTitle": "Résumé — João Vitor Cavalcanti da Silva",
-    "metaDescription": "Résumé of João Vitor Cavalcanti da Silva, full stack developer. Generated from the site, always current.",
+    "metaDescription": "Résumé of João Vitor Cavalcanti da Silva, senior software engineer. Generated from the site, always current.",
     "save": "Save as PDF",
     "back": "Back to site",
     "summary": "Summary",
@@ -265,7 +265,7 @@
     "systemsNote": "Proprietary client code. Full write-ups of the main ones at joaovitorkc.com.br.",
     "stackTitle": "Technical skills",
     "education": "Education",
-    "certifications": "Certifications and courses",
+    "certifications": "Certifications",
     "clients": "Company and clients",
     "ownCompany": "own company",
     "languages": "Languages"

@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "title": "João Vitor — Desenvolvedor Full Stack",
+    "title": "João Vitor — Engenheiro de Software Sênior",
     "titleTemplate": "%s — João Vitor",
-    "description": "Desenvolvedor full stack em Caruaru, PE. Construo sistemas de gestão em saúde pública usados em mais de 400 municípios: relatórios da atenção primária, vigilância sanitária, BPA e painel de chamadas.",
-    "ogAlt": "João Vitor — Desenvolvedor Full Stack"
+    "description": "Engenheiro de software sênior em Recife, PE. Construo sistemas de gestão em saúde pública usados em mais de 400 municípios: relatórios da atenção primária, vigilância sanitária, BPA e painel de chamadas.",
+    "ogAlt": "João Vitor — Engenheiro de Software Sênior"
   },
   "nav": {
     "menu": "Abrir menu",
@@ -64,7 +64,7 @@
     "title": "Escala do que eu toco todo dia",
     "note": "Contados no código do ecossistema — R-SUS, Vigilância e portal — e arredondados para baixo.",
     "yearsLabel": "anos de prática",
-    "sinceNote": "desde março de 2023"
+    "sinceNote": "desde abril de 2023"
   },
   "work": {
     "label": "Trabalho",
@@ -125,7 +125,7 @@
     "title": "Como eu cheguei aqui",
     "present": "hoje",
     "certificationsTitle": "Certificações e cursos",
-    "certificationsNote": "Sete certificados. Os que importam estão em cima.",
+    "certificationsNote": "Oito certificados. Os que importam estão em cima.",
     "kind": {
       "work": "Trabalho",
       "study": "Estudo",
@@ -159,7 +159,7 @@
   "personal": {
     "label": "Fora do editor",
     "title": "A pessoa por trás do commit",
-    "localTime": "Hora local em Caruaru"
+    "localTime": "Hora local em Recife"
   },
   "terminal": {
     "label": "Terminal",
@@ -252,7 +252,7 @@
   },
   "cv": {
     "metaTitle": "Currículo — João Vitor Cavalcanti da Silva",
-    "metaDescription": "Currículo de João Vitor Cavalcanti da Silva, desenvolvedor full stack. Gerado a partir do site, sempre atualizado.",
+    "metaDescription": "Currículo de João Vitor Cavalcanti da Silva, engenheiro de software sênior. Gerado a partir do site, sempre atualizado.",
     "save": "Salvar em PDF",
     "back": "Voltar ao site",
     "summary": "Resumo",
@@ -265,7 +265,7 @@
     "systemsNote": "Código proprietário de cliente. Detalhamento completo dos principais em joaovitorkc.com.br.",
     "stackTitle": "Competências técnicas",
     "education": "Formação",
-    "certifications": "Certificações e cursos",
+    "certifications": "Certificações",
     "clients": "Empresa e clientes",
     "ownCompany": "empresa própria",
     "languages": "Idiomas"
