@@ -691,7 +691,16 @@ export const cv = {
           'Set up the engineering workflow across 15+ repositories so changes from coding agents land only after the tests pass.',
         ],
       },
-      stack: ['TypeScript', 'Next.js', 'React', 'Express', 'PostgreSQL', 'Knex', 'Bull', 'Socket.IO'],
+      stack: [
+        'TypeScript',
+        'Next.js',
+        'React',
+        'Express',
+        'PostgreSQL',
+        'Knex',
+        'Bull',
+        'Socket.IO',
+      ],
     },
   ] satisfies CvRole[],
 

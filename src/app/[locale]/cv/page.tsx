@@ -119,7 +119,6 @@ export default async function Cv({ params }: { params: Promise<{ locale: string 
                   </li>
                 ))}
               </ul>
-
             </div>
           ))}
         </section>
@@ -179,7 +178,6 @@ export default async function Cv({ params }: { params: Promise<{ locale: string 
             ))}
           </ul>
         </section>
-
       </article>
     </div>
   );
