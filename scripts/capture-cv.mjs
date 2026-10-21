@@ -12,15 +12,23 @@
  * and the orange survive, and the text stays real selectable text — which is
  * what applicant tracking systems parse.
  */
-import { writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import puppeteer from 'puppeteer';
 
 const baseUrl = (process.argv[2] ?? 'http://localhost:3000').replace(/\/$/, '');
 
+// Nome com o nome da pessoa (é o que o recrutador vê ao baixar). Os nomes antigos
+// continuam sendo gerados para não quebrar links já enviados.
 const targets = [
-  { locale: 'pt', out: 'public/curriculo.pdf' },
-  { locale: 'en', out: 'public/resume.pdf' },
+  {
+    locale: 'pt',
+    out: ['public/JoaoVitorCavalcanti-Curriculo.pdf', 'public/curriculo.pdf'],
+  },
+  {
+    locale: 'en',
+    out: ['public/JoaoVitorCavalcanti-Resume.pdf', 'public/resume.pdf'],
+  },
 ];
 
 const browser = await puppeteer.launch({
@@ -50,8 +58,15 @@ try {
       margin: { top: '0', right: '0', bottom: '0', left: '0' },
     });
 
-    await writeFile(resolve(process.cwd(), out), pdf);
-    console.log(`✓ ${out}  ${pages} página(s)  ${Math.round(pdf.length / 1024)} KB  ← ${url}`);
+    for (const file of out) await writeFile(resolve(process.cwd(), file), pdf);
+
+    // Os mesmos dados do PDF, para o robô de candidaturas adaptar por vaga (fora de public/).
+    const data = await page.$eval('#cv-data', (el) => el.textContent);
+    await mkdir(resolve(process.cwd(), 'scripts/out'), { recursive: true });
+    await writeFile(resolve(process.cwd(), `scripts/out/cv-${locale}.json`), data);
+    console.log(
+      `✓ ${out.join(' + ')}  ${pages} página(s)  ${Math.round(pdf.length / 1024)} KB  ← ${url}`,
+    );
     await page.close();
   }
 } finally {

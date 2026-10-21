@@ -82,8 +82,8 @@ export const profile = {
   /** Career start is also when the first client engagement began. */
 
   resume: {
-    pt: '/curriculo.pdf',
-    en: '/resume.pdf',
+    pt: '/JoaoVitorCavalcanti-Curriculo.pdf',
+    en: '/JoaoVitorCavalcanti-Resume.pdf',
   } satisfies I18nText,
 } as const;
 
@@ -258,7 +258,10 @@ export const timeline: TimelineEntry[] = [
     from: '2025',
     to: '2025',
     kind: 'study',
-    title: { pt: 'Nuvem e segurança, formalizadas', en: 'Cloud and security, formalised' },
+    title: {
+      pt: 'Nuvem e segurança, formalizadas',
+      en: 'Cloud and security, formalised',
+    },
     org: 'AWS Academy · Cisco',
     detail: {
       pt: 'Arquitetura e fundamentos de nuvem pela AWS Academy, e gestão de ameaças cibernéticas pela Cisco. Eu já subia e endurecia servidor na prática; aqui foi para saber o nome do que eu estava fazendo — e o que eu estava fazendo errado.',
@@ -511,11 +514,23 @@ export const stack: StackGroup[] = [
       { name: 'Harness de agentes', nameEn: 'Agent harness', depth: 'daily' },
       { name: 'Claude Code', depth: 'daily' },
       { name: 'Cursor · Composer', depth: 'daily' },
-      { name: 'Engenharia de contexto', nameEn: 'Context engineering', depth: 'daily' },
+      {
+        name: 'Engenharia de contexto',
+        nameEn: 'Context engineering',
+        depth: 'daily',
+      },
       { name: 'RAG', depth: 'working' },
-      { name: 'LLM auto-hospedado · Ollama', nameEn: 'Self-hosted LLM · Ollama', depth: 'working' },
+      {
+        name: 'LLM auto-hospedado · Ollama',
+        nameEn: 'Self-hosted LLM · Ollama',
+        depth: 'working',
+      },
       { name: 'MCP', depth: 'learning' },
-      { name: 'Automação de processo', nameEn: 'Process automation', depth: 'working' },
+      {
+        name: 'Automação de processo',
+        nameEn: 'Process automation',
+        depth: 'working',
+      },
     ],
   },
   {
@@ -572,16 +587,23 @@ export type CvRole = {
 
 export const cv = {
   /**
-   * Same title as the site hero and the LinkedIn headline.
+   * Headline under the name: role | main stack | 3–4 complementary techs.
+   * The first six-second pass has to tell Node from Java from Go.
    */
   title: {
-    pt: 'Engenheiro de Software Sênior',
-    en: 'Senior Software Engineer',
+    pt: 'Engenheiro de Software Sênior | Node.js e TypeScript | React, Next.js, PostgreSQL, AWS',
+    en: 'Senior Software Engineer | Node.js & TypeScript | React, Next.js, PostgreSQL, AWS',
+  } satisfies I18nText,
+
+  /** Next to the location on the contact line. */
+  availability: {
+    pt: 'Remoto · UTC−3, mesmo horário útil da costa leste dos EUA',
+    en: 'Open to remote · UTC−3, overlaps US Eastern hours',
   } satisfies I18nText,
 
   summary: {
-    pt: 'Engenheiro de software sênior. Desde 2023 entrega sistemas em produção para a saúde pública brasileira: o produto, o pipeline de dados e os servidores Linux em que isso roda. TypeScript, Node.js, React, Next.js e PostgreSQL. A plataforma de relatórios está em uso diário em mais de 400 municípios, com mais de 10 mil usuários ativos por mês.',
-    en: 'Senior software engineer. Since 2023, shipping production systems for Brazilian public healthcare: the product, the data pipelines and the Linux servers they run on. TypeScript, Node.js, React, Next.js and PostgreSQL. The reporting platform is in daily use across 400+ municipalities, with 10k+ monthly active users.',
+    pt: 'Engenheiro de software sênior. Desde 2023 entrega sistemas em produção para a saúde pública brasileira: o produto, o pipeline de dados e os servidores Linux em que isso roda. TypeScript, Node.js, React, Next.js e PostgreSQL. A plataforma de relatórios está em uso diário em mais de 400 municípios, com mais de 10 mil usuários ativos por mês. Busco posições sênior de backend, infraestrutura ou full stack em times distribuídos, remotas, como contractor ou full-time.',
+    en: 'Senior software engineer. Since 2023, shipping production systems for Brazilian public healthcare: the product, the data pipelines and the Linux servers they run on. TypeScript, Node.js, React, Next.js and PostgreSQL. The reporting platform is in daily use across 400+ municipalities, with 10k+ monthly active users. Looking for senior backend, infrastructure or full-stack roles on distributed teams, remote, as a contractor or full-time.',
   } satisfies I18nText,
 
   /**
@@ -647,18 +669,31 @@ export const cv = {
       bullets: {
         pt: [
           'Reduziu o custo de hospedagem de um cliente de saúde em cerca de US$ 72 mil por ano, ao mover mais de 300 servidores municipais para VPS cerca de 10 vezes mais baratas, com todo o tráfego em túneis WireGuard.',
-          'Construiu o painel dessa frota: inventário, provisionamento com Ansible (firewall, NAT, WireGuard, nginx) e um agente de saúde em mais de 300 máquinas, com monitores que reerguem um túnel caído em segundos.',
-          'Construiu o backup automático de cada base municipal para armazenamento compatível com S3, com upload multipart e retenção de 3 dias e 3 meses.',
+          'Manteve a frota de mais de 300 servidores alcançável: um túnel caído volta em segundos, com um painel de controle que reúne inventário, provisionamento com Ansible e um agente de saúde em cada máquina.',
+          'Deixou cada base municipal restaurável a partir dos últimos 3 dias ou dos últimos 3 meses, com backup automático para armazenamento compatível com S3 e upload multipart.',
           'Dobrou a velocidade da sincronização noturna que carrega milhões de linhas por município, de mais de 300 bases remotas para um único PostgreSQL, com streams em Node.js e filas Bull/Redis.',
         ],
         en: [
           'Cut a healthcare client’s hosting cost by about US$72k a year, moving 300+ municipal servers onto VPSs about 10x cheaper per machine, with all traffic through WireGuard tunnels.',
-          'Built the control plane for that fleet: inventory, Ansible provisioning (firewall, NAT, WireGuard, nginx) and a health agent on 300+ machines, plus monitors that restore a dropped tunnel within seconds.',
-          'Built automated backups of every municipal database to S3-compatible storage, with multipart uploads and a 3-day / 3-month retention policy.',
+          'Kept that 300+ server fleet reachable: a dropped tunnel comes back within seconds, backed by a control plane with inventory, Ansible provisioning and a health agent on every host.',
+          'Made every municipal database restorable from the last 3 days or the last 3 months, with automated multipart backups to S3-compatible storage.',
           'Doubled the speed of the nightly sync that loads millions of rows per municipality from 300+ remote databases into one PostgreSQL warehouse, using Node.js streams and Bull/Redis queues.',
         ],
       },
-      stack: ['TypeScript', 'Next.js', 'Fastify', 'PostgreSQL', 'Redis', 'Ansible', 'WireGuard'],
+      stack: [
+        'TypeScript',
+        'Node.js',
+        'Next.js',
+        'Fastify',
+        'PostgreSQL',
+        'Redis',
+        'BullMQ',
+        'Ansible',
+        'WireGuard',
+        'Nginx',
+        'AWS S3',
+        'Bash',
+      ],
     },
     {
       id: 'wi',
@@ -678,14 +713,14 @@ export const cv = {
       bullets: {
         pt: [
           'Construiu a plataforma de relatórios da atenção primária usada em mais de 400 municípios (mais de 10 mil usuários ativos por mês): um inquilino por cidade, exportação em PDF e CSV, e telas de chamada de paciente em tempo real. Next.js, React, Express, Knex, PostgreSQL, Socket.IO.',
-          'Entregou campanhas de WhatsApp em filas Bull/Redis e um painel de uso: ranking de funcionalidades, coortes e conversão de deep link.',
+          'Mostrou às secretarias de saúde quais funcionalidades as equipes usam de fato (ranking de uso, coortes e conversão de deep link) e alcançou essas equipes com campanhas automáticas de WhatsApp, em filas Bull/Redis.',
           'Aumentou os cliques orgânicos em 47x (+4.648%) e as impressões em 7x (+592%) em três meses no site público, com renderização no servidor, JSON-LD e sitemap.',
           'Manteve as publicações sem derrubar o serviço: canário no nginx em dois servidores (PM2), workers com trava de líder e jobs que recuperam sincronizações travadas.',
           'Montou o fluxo de engenharia em mais de 15 repositórios, de modo que mudança vinda de agente de código só entra depois que os testes passam.',
         ],
         en: [
           'Built the primary-care reporting platform used in 400+ municipalities (10k+ monthly active users): one tenant per city, PDF and CSV exports, and real-time patient call screens. Next.js, React, Express, Knex, PostgreSQL, Socket.IO.',
-          'Shipped WhatsApp campaigns on Bull/Redis queues and an engagement dashboard of feature usage, cohorts and deep-link conversion.',
+          'Showed health departments which features their teams actually use (usage ranking, cohorts, deep-link conversion) and reached those teams with automated WhatsApp campaigns on Bull/Redis queues.',
           'Grew organic search clicks 47x (+4,648%) and impressions 7x (+592%) in three months on the public site, with server-side rendering, JSON-LD and a sitemap.',
           'Kept production up through deploys: nginx canary across two app servers (PM2), leader-locked workers, and jobs that recover stuck syncs.',
           'Set up the engineering workflow across 15+ repositories so changes from coding agents land only after the tests pass.',
@@ -693,22 +728,35 @@ export const cv = {
       },
       stack: [
         'TypeScript',
+        'Node.js',
         'Next.js',
         'React',
         'Express',
         'PostgreSQL',
         'Knex',
         'Bull',
+        'Redis',
         'Socket.IO',
+        'Nginx',
+        'PM2',
       ],
     },
   ] satisfies CvRole[],
 
   languages: [
-    { name: { pt: 'Português', en: 'Portuguese' }, level: { pt: 'Nativo', en: 'Native' } },
+    {
+      name: { pt: 'Português', en: 'Portuguese' },
+      level: {
+        pt: 'Nativo ou bilíngue',
+        en: 'Native or bilingual proficiency',
+      },
+    },
     {
       name: { pt: 'Inglês', en: 'English' },
-      level: { pt: 'Intermediário', en: 'Intermediate' },
+      level: {
+        pt: 'Profissional (fluência de trabalho)',
+        en: 'Professional working proficiency',
+      },
     },
   ],
 };
@@ -765,8 +813,8 @@ export const personal = {
       label: { pt: 'Idiomas', en: 'Languages' },
       value: { pt: 'Português · Inglês', en: 'Portuguese · English' },
       body: {
-        pt: 'Português nativo. Inglês intermediário — leio documentação, spec e RFC sem tradutor.',
-        en: 'Native Portuguese. Intermediate English — I read docs, specs and RFCs without a translator.',
+        pt: 'Português nativo. Inglês profissional — trabalho com documentação, spec e reuniões em inglês.',
+        en: 'Native Portuguese. Professional working English — docs, specs and meetings in English.',
       },
     },
   ],

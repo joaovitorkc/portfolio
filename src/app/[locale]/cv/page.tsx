@@ -39,7 +39,10 @@ const monthLabel = (value: string, locale: Locale, present: string) => {
   const [year, month] = value.split('-');
   if (!month) return year;
   return new Date(Number(year), Number(month) - 1, 1)
-    .toLocaleDateString(locale === 'pt' ? 'pt-BR' : 'en-US', { month: 'short', year: 'numeric' })
+    .toLocaleDateString(locale === 'pt' ? 'pt-BR' : 'en-US', {
+      month: 'short',
+      year: 'numeric',
+    })
     .replace('.', '')
     .replace(' de ', ' ');
 };
@@ -61,6 +64,7 @@ export default async function Cv({ params }: { params: Promise<{ locale: string 
 
   const contacts = [
     profile.location.label[loc],
+    cv.availability[loc],
     profile.contact.email,
     profile.contact.phoneDisplay,
     linkedin ? 'linkedin.com/in/joaovitorkc' : null,
@@ -68,9 +72,49 @@ export default async function Cv({ params }: { params: Promise<{ locale: string 
     profile.domain,
   ].filter((item): item is string => Boolean(item));
 
+  const period = (from?: string, to?: string | null) =>
+    from
+      ? `${monthLabel(from, loc, t('present'))} — ${to ? monthLabel(to, loc, t('present')) : t('present')}`
+      : '';
+
+  // Same content as the printed page, as data: capture-cv.mjs saves it next to the PDF so the
+  // job-application robot tailors from this CV instead of keeping its own copy.
+  const data = {
+    locale: loc,
+    name: profile.fullName,
+    title: cv.title[loc],
+    contacts,
+    summary: cv.summary[loc],
+    roles: cv.roles.map((role) => ({
+      id: role.id,
+      title: role.title[loc],
+      period: period(role.from, role.to),
+      org: `${role.org} · ${role.arrangement[loc]} · ${role.place[loc]}`,
+      context: role.context[loc],
+      bullets: role.bullets[loc],
+      skills: role.stack,
+    })),
+    skills: cv.skills.map((group) => ({ title: group.title[loc], items: group.items })),
+    education: studies.map((entry) => ({
+      title: entry.title[loc],
+      period: period(entry.from, entry.to),
+      org: entry.org,
+      note: cv.education[loc],
+    })),
+    certifications: shownCertifications.map(
+      (cert) => `${cert.year} ${cert.title[loc]} — ${cert.issuer}`,
+    ),
+    languages: cv.languages.map((lang) => `${lang.name[loc]} — ${lang.level[loc]}`),
+  };
+
   return (
     <div className="cv-root bg-white text-[#111]">
       <PrintButton label={t('save')} backLabel={t('back')} />
+      <script
+        type="application/json"
+        id="cv-data"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }}
+      />
 
       <article className="cv-page">
         <header className="border-b border-[#111] pb-3">
@@ -119,6 +163,9 @@ export default async function Cv({ params }: { params: Promise<{ locale: string 
                   </li>
                 ))}
               </ul>
+              <p className="mt-1 text-[10.5px] leading-[1.35] text-[#222]">
+                <span className="font-semibold">{t('skills')}:</span> {role.stack.join(', ')}
+              </p>
             </div>
           ))}
         </section>
